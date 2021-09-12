@@ -1,0 +1,11 @@
+<svg id="Component_20_1" data-name="Component 20 – 1" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25">
+  <g id="suitcase_2_" data-name="suitcase (2)" transform="translate(0 -2)">
+    <path id="Path_52" data-name="Path 52" d="M15,6.5a1,1,0,0,1-1-1V4H10V5.5a1,1,0,0,1-2,0V4a2,2,0,0,1,2-2h4a2,2,0,0,1,2,2V5.5A1,1,0,0,1,15,6.5Z" fill="#455a64"/>
+    <path id="Path_53" data-name="Path 53" d="M12.24,13.96,12,14l-.24-.04L0,10.04v9.21A2.748,2.748,0,0,0,2.75,22h18.5A2.748,2.748,0,0,0,24,19.25V10.04Z" fill="#607d8b"/>
+    <path id="Path_54" data-name="Path 54" d="M24,7.75v2.29L12.24,13.96,12,14l-.24-.04L0,10.04V7.75A2.748,2.748,0,0,1,2.75,5h18.5A2.748,2.748,0,0,1,24,7.75Z" fill="#78909c"/>
+    <path id="Path_55" data-name="Path 55" d="M12,2H10A2,2,0,0,0,8,4V5h2V4h2Z" fill="#3c4e57"/>
+    <path id="Path_56" data-name="Path 56" d="M0,10.04v9.21A2.748,2.748,0,0,0,2.75,22H12V14l-.24-.04Z" fill="#546d79"/>
+    <path id="Path_57" data-name="Path 57" d="M12,5H2.75A2.748,2.748,0,0,0,0,7.75v2.29l11.76,3.92L12,14Z" fill="#687d88"/>
+  </g>
+  <text id="W" transform="translate(1 19)" fill="#1f0dce" font-size="20" font-family="BrushScriptStd, Brush Script Std" style="mix-blend-mode: darken;isolation: isolate"><tspan x="0" y="0">W</tspan></text>
+</svg>
