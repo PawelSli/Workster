@@ -1,11 +1,17 @@
 import IonRangeSlider from 'react-ion-slider';
 import {useEffect} from "react";
 import $ from 'jquery';
+import CreatableMultiSearch from "./CreatableMultiSearch";
 
 
 export default function MainPage() {
     window.$ = $;
 
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' },
+    ];
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -27,17 +33,7 @@ export default function MainPage() {
                         </div>
                     </div>
                     <div className="col-md-3 pt-3">
-                        <div className="form-group">
-                            <select className="js-example-basic-multiple" name="states[]"
-                                    multiple="multiple"
-                                    placeholder="Enter a location">
-                                <option value="AL">Paris</option>
-                                <option value="WY">London</option>
-                                <option value="WY">New York</option>
-                                <option value="WY">Wahington</option>
-                                <option value="WY">Cracow</option>
-                            </select>
-                        </div>
+                        <CreatableMultiSearch valueOptions={options}/>
                     </div>
                     <div className="col-md-1 pt-3 ">
                         <button type="button" className="btn btn-primary btn-block my-button-class">Search</button>
@@ -62,27 +58,12 @@ export default function MainPage() {
                     </div>
                     <div className="col-md-3 pt-3">
                         <div className="form-group">
-                            <select className="js-example-basic-multiple " name="states[]"
-                                    multiple="multiple"
-                                    placeholder="Enter a type of job">
-                                <option value="AL">IT</option>
-                                <option value="WY">Finance</option>
-                                <option value="WY">Transport</option>
-                                <option value="WY">Food delivery</option>
-                            </select>
+                            <CreatableMultiSearch valueOptions={options}/>
                         </div>
                     </div>
                     <div className="col-md-3 pt-3">
                         <div className="form-group">
-                            <select className="js-example-basic-multiple" name="states[]"
-                                    multiple="multiple"
-                                    placeholder="Enter a location">
-                                <option value="AL">Paris</option>
-                                <option value="WY">London</option>
-                                <option value="WY">New York</option>
-                                <option value="WY">Wahington</option>
-                                <option value="WY">Cracow</option>
-                            </select>
+                            <CreatableMultiSearch valueOptions={options}/>
                         </div>
                     </div>
                     <div className="col-md-2 pt-3">
