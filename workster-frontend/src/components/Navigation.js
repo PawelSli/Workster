@@ -8,7 +8,7 @@ export default function Navigation() {
             <div className="container-fluid">
                 <a className="navbar-brand logo" id="nav-logo" href="#">
                     <img className="nav-icon" src={logo} alt=""/>orkster
-            </a>
+                </a>
                 <button data-bs-toggle="collapse" className="navbar-toggler bg-light" data-bs-target="#navcol-1">
                     <span className="visually-hidden">Toggle navigation</span><span className="navbar-toggler-icon"/>
                 </button>

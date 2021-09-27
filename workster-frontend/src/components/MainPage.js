@@ -8,19 +8,20 @@ export default function MainPage() {
     window.$ = $;
 
     const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
+        {value: 'chocolate', label: 'Chocolate'},
+        {value: 'strawberry', label: 'Strawberry'},
+        {value: 'vanilla', label: 'Vanilla'},
     ];
 
     useEffect(() => {
         const script = document.createElement('script');
-        script.innerHTML="$('#demo_1').ionRangeSlider({type: 'double',grid: true,min: 0,max: 1000,from: 200,to: 800,prefix: '$'})"
+        script.innerHTML = "$('#demo_1').ionRangeSlider({type: 'double',grid: true,min: 0,max: 1000,from: 200,to: 800,prefix: '$'})"
         document.body.appendChild(script);
         return () => {
             document.body.removeChild(script);
         }
-    }, [])
+    }, []);
+
     return (
         <main className="page landing-page">
             <div className="container-fluid bg-light">
@@ -69,106 +70,6 @@ export default function MainPage() {
                     <div className="col-md-2 pt-3">
                         <label className="form-check-label" htmlFor="flexCheckDefault">Remote job</label>
                         <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                    </div>
-                </div>
-            </div>
-            <div className="container-fluid">
-                <div className="modal fade" role="dialog" tabIndex="-1" id="signup">
-                    <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4>Sign In</h4>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
-                            </div>
-                            <div className="modal-body">
-                                <form>
-                                    <div className="form-group mb-3">
-                                        <div className="input-group"><span className="text-primary input-group-text">
-                                            <i className="fa fa-envelope-o"/></span>
-                                            <input className="form-control" type="email" required="" placeholder="Email"/>
-                                        </div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <div className="input-group">
-                                            <span className="text-primary input-group-text">
-                                                <i className="fa fa-lock"/>
-                                            </span>
-                                            <input className="form-control" type="password" required=""
-                                                   placeholder="Password"/>
-                                        </div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <button className="btn btn-primary btn-lg" style={{width:100+'%'}}
-                                                type="button">Log in
-                                        </button>
-                                    </div>
-                                </form>
-                                <hr style={{background: "red"}}/>
-                                <p className="text-center">Or&nbsp;<a className="text-decoration-none" href="#">Forget
-                                    password</a></p>
-                                <p className="text-center">Don't have an account? &nbsp;<a
-                                    className="text-decoration-none" href="#" data-bs-dismiss="modal"
-                                    data-bs-toggle="modal" data-bs-target="#signin">Sign Up</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="modal fade" role="dialog" tabIndex="-1" id="signin">
-                    <div className="modal-dialog modal-sm modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4>Sign Up Now</h4>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
-                            </div>
-                            <div className="modal-body">
-                                <div className="text-center">
-                                    <button className="btn btn-primary text-start" style={{width:100+'%'}} type="button">
-                                        <i className="fa fa-facebook"/>&nbsp; Continue with Facebook
-                                    </button>
-                                </div>
-                                <div className="text-center mt-2">
-                                    <button className="btn btn-light text-start border-dark" style={{width:100+'%'}}
-                                            type="button"><i className="fa fa-google"></i>&nbsp; Continue with Google
-                                    </button>
-                                </div>
-                                <form className="mt-4">
-                                    <div className="form-group mb-3">
-                                        <div className="input-group"><span className="text-primary input-group-text">
-                                            <i className="fa fa-user-o"/></span><input className="form-control"
-                                                                                       type="text" required=""
-                                                                                       placeholder="Full Name"/></div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <div className="input-group"><span className="text-primary input-group-text"><i
-                                            className="fa fa-envelope-o"></i></span><input className="form-control"
-                                                                                           type="email" required=""
-                                                                                           placeholder="Email"/></div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <div className="input-group"><span className="text-primary input-group-text"><i
-                                            className="fa fa-lock"></i></span><input className="form-control"
-                                                                                     type="password" required=""
-                                                                                     placeholder="Password"/></div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <div className="form-check"><input className="form-check-input" type="checkbox"
-                                                                           id="formCheck-1" required=""
-                                                                           checked=""/><label
-                                            className="form-check-label" htmlFor="formCheck-1">I agree all the terms and
-                                            conditions.</label></div>
-                                    </div>
-                                    <div className="form-group mb-3">
-                                        <button className="btn btn-primary btn-lg" style={{width:100+'%'}}
-                                                type="button">Sign Up
-                                        </button>
-                                    </div>
-                                </form>
-                                <hr style={{background: "red"}}/>
-                                <p className="text-center">Already have an Account?&nbsp;<a
-                                    className="text-decoration-none" href="#" data-bs-dismiss="modal"
-                                    data-bs-toggle="modal" data-bs-target="#signup">Log In</a></p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
