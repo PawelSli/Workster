@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation";
 import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
+import JobOfferPage from "./components/JobOfferPage"
 import history from "./hooks/history";
 
 import './App.css';
@@ -25,6 +26,7 @@ function App() {
                     <Route exact path="/" component={MainPage}/>
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/register" component={RegisterPage}/>
+                    <Route exact path="/job-offer" component={JobOfferPage}/>
                 </Switch>
             </Router>
         </>
