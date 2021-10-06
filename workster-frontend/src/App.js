@@ -6,6 +6,7 @@ import MainPage from "./components/MainPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import JobOfferPage from "./components/JobOfferPage"
+import ApplyForJobPage from "./components/ApplyForJobPage"
 import history from "./hooks/history";
 
 import './App.css';
@@ -15,6 +16,7 @@ import './assets/styles/profile.css';
 import './assets/styles/navigation.css';
 import './assets/styles/login-form.css';
 import './assets/styles/registration-form.css';
+import './assets/styles/job-application.css'
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
+                    <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
                 </Switch>
             </Router>
         </>
