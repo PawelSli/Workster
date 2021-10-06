@@ -1,13 +1,13 @@
 import {Route, Switch} from "react-router";
 import {Router} from 'react-router-dom';
 import React from "react";
-import Navigation from "./components/Navigation";
-import MainPage from "./components/MainPage";
-import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
-import JobOfferPage from "./components/JobOfferPage"
-import ApplyForJobPage from "./components/ApplyForJobPage"
-import ContactUs from "./components/ContactUs"
+import Navigation from "./components/reusable/Navigation";
+import MainPage from "./components/pages/MainPage";
+import LoginPage from "./components/pages/LoginPage";
+import RegisterPage from "./components/pages/RegisterPage";
+import JobOfferPage from "./components/pages/JobOfferPage"
+import ApplyForJobPage from "./components/pages/ApplyForJobPage"
+import ContactUs from "./components/pages/ContactUs"
 import history from "./hooks/history";
 
 import './App.css';
