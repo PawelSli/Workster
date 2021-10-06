@@ -1,7 +1,7 @@
 import IonRangeSlider from 'react-ion-slider';
 import {useEffect} from "react";
 import $ from 'jquery';
-import CreatableMultiSearch from "./CreatableMultiSearch";
+import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 
 export default function JobOfferPage() {
     window.$ = $;

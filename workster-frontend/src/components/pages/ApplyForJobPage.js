@@ -1,4 +1,4 @@
-import CreatableMultiSearch from "./CreatableMultiSearch";
+import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import {Editor} from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
 

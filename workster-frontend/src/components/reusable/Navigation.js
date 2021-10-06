@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from '../assets/img/logo.svg';
+import logo from '../../assets/img/logo.svg';
 
 export default function Navigation() {
     return (
