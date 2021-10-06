@@ -7,6 +7,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import JobOfferPage from "./components/JobOfferPage"
 import ApplyForJobPage from "./components/ApplyForJobPage"
+import ContactUs from "./components/ContactUs"
 import history from "./hooks/history";
 
 import './App.css';
@@ -30,6 +31,7 @@ function App() {
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
                     <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
+                    <Route exact path="/contact-us" component={ContactUs}/>
                 </Switch>
             </Router>
         </>
