@@ -8,6 +8,7 @@ import RegisterPage from "./components/pages/RegisterPage";
 import JobOfferPage from "./components/pages/JobOfferPage"
 import ApplyForJobPage from "./components/pages/ApplyForJobPage"
 import ContactUs from "./components/pages/ContactUs"
+import Pricing from "./components/pages/Pricing"
 import history from "./hooks/history";
 
 import './App.css';
@@ -18,6 +19,7 @@ import './assets/styles/navigation.css';
 import './assets/styles/login-form.css';
 import './assets/styles/registration-form.css';
 import './assets/styles/job-application.css'
+import './assets/styles/pricing.css'
 
 function App() {
 
@@ -32,6 +34,7 @@ function App() {
                     <Route exact path="/job-offer" component={JobOfferPage}/>
                     <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
+                    <Route exact path="/pricing" component={Pricing}/>
                 </Switch>
             </Router>
         </>
