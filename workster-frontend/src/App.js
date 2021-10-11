@@ -7,6 +7,7 @@ import LoginPage from "./components/pages/LoginPage";
 import RegisterPage from "./components/pages/RegisterPage";
 import JobOfferPage from "./components/pages/JobOfferPage"
 import ApplyForJobPage from "./components/pages/ApplyForJobPage"
+import AddJobDescription from "./components/pages/AddJobDescription";
 import ContactUs from "./components/pages/ContactUs"
 import Pricing from "./components/pages/Pricing"
 import history from "./hooks/history";
@@ -33,6 +34,7 @@ function App() {
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
                     <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
+                    <Route exact path="/add-job-description" component={AddJobDescription}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
                     <Route exact path="/pricing" component={Pricing}/>
                 </Switch>
