@@ -21,6 +21,8 @@ import './assets/styles/login-form.css';
 import './assets/styles/registration-form.css';
 import './assets/styles/job-application.css'
 import './assets/styles/pricing.css'
+import AddJobBasicDescription from "./components/pages/AddJobBasicDescription";
+import JobOffer from "./components/pages/JobOffer";
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
                     <Route exact path="/add-job-description" component={AddJobDescription}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
                     <Route exact path="/pricing" component={Pricing}/>
+                    <Route exact path="/add-job-offer" component={AddJobBasicDescription} />
+                    <Route exact path="/job-offer-add" component={JobOffer}/>
                 </Switch>
             </Router>
         </>
