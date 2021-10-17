@@ -4,7 +4,7 @@ import logo from '../../assets/img/logo.svg';
 
 export default function Navigation() {
     return (
-        <nav className="navbar navbar-light navbar-expand-md sticky-top bg-dark">
+        <nav className="navbar navbar-light navbar-expand-md bg-dark">
             <div className="container-fluid">
                 <a className="navbar-brand logo" id="nav-logo" href="#">
                     <img className="nav-icon" src={logo} alt=""/>orkster
