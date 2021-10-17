@@ -7,3 +7,10 @@
   color: rgb(125,125,125);
 }
 
+.float-right-profile{
+  text-align: right;
+}
+
+.first-navigation{
+  height: 10vh;
+}
