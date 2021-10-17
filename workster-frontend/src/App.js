@@ -45,7 +45,7 @@ function App() {
                     <Route exact path="/pricing" component={Pricing}/>
                     <Route exact path="/add-job-offer" component={AddJobBasicDescription} />
                     <Route exact path="/job-offer-add" component={JobOffer}/>
-                    <Route exact path="/profile" component={Profile}/>
+                    <Route exact path="/profile/*" component={Profile}/>
                 </Switch>
             </Router>
         </>
