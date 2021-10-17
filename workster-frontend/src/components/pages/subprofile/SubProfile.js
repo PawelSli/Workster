@@ -1,6 +1,7 @@
 import MainProfile from "./MainProfile";
 import EditProfile from "./EditProfile";
 import React from "react";
+import UserFiles from "./UserFiles";
 
 export default function SubProfile() {
 
@@ -9,6 +10,8 @@ export default function SubProfile() {
         return <MainProfile/>
     }else if(url.includes("edit-profile") || url.includes("edit-profile#")){
         return <EditProfile/>
+    }else if(url.includes("files") || url.includes("files#")){
+        return <UserFiles/>
     }
     return (<div/>)
 }
