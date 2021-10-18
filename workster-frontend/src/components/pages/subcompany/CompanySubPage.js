@@ -2,6 +2,7 @@ import CompanyDescription from "./CompanyDescription";
 import React from "react";
 import Pricing from "../Pricing";
 import CompanyJobs from "./CompanyJobs";
+import CompanyRecruiters from "./CompanyRecruiters";
 
 export default function CompanySubPage({subPage}) {
 
@@ -13,7 +14,7 @@ export default function CompanySubPage({subPage}) {
         case 2:
             return <CompanyDescription/>
         case 3:
-            return <CompanyDescription/>
+            return <CompanyRecruiters/>
         case 4:
             return <Pricing/>
         default:

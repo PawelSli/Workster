@@ -3,6 +3,8 @@ import {useEffect} from "react";
 import $ from 'jquery';
 import CreatableMultiSearch from "../../reusable/CreatableMultiSearch";
 import "../../../assets/styles/company-jobs.css"
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faTimesCircle, faDownload, faMapMarkerAlt, faMoneyBill, faHome} from '@fortawesome/free-solid-svg-icons'
 
 export default function CompanyJob() {
     window.$ = $;
@@ -76,7 +78,7 @@ export default function CompanyJob() {
             <div className="container py-5">
 
                 <div className="row">
-                    <div className="col-11 mx-auto">
+                    <div className="col-12 col-md-11 mx-auto">
 
                         <ul className="list-group shadow">
 
@@ -92,8 +94,10 @@ export default function CompanyJob() {
                                         <small>01.01.2021</small>
                                     </div>
                                     <small>
-                                        <i className="fas fa-map-marker-alt"></i> Warsaw
-                                        <i className="fas fa-money-bill location-style"></i> 10.000$-20.000$
+                                        <i className="fas fa-map-marker-alt"></i>Warsaw
+                                        <br/>
+                                        <i className="fas fa-money-bill location-style"></i>10.000$-20.000$
+                                        <br />
                                         <i className="fas fa-home location-style"></i>
                                         Remote job
                                     </small>
@@ -128,10 +132,9 @@ export default function CompanyJob() {
                                         <small>10.10.2010</small>
                                     </div>
                                     <small>
-                                        <i className="fas fa-map-marker-alt"></i> Paris
-                                        <i className="fas fa-money-bill location-style"></i> 15.000$-17.000$
-                                        <i className="fas fa-home location-style"></i>
-                                        Remote job
+                                        <FontAwesomeIcon icon={faMapMarkerAlt}/> Paris
+                                        <FontAwesomeIcon icon={faMoneyBill}/> 15.000$-17.000$
+                                        <FontAwesomeIcon icon={faHome}/>Remote job
                                     </small>
                                 </div>
                             </li>
