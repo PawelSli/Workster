@@ -37,9 +37,8 @@ export default function Company() {
                                         <ul className="navbar-nav">
                                             <li className="nav-item"><a className="nav-link active text-black" onClick={()=>setSubPage(0)} href="#">Description</a></li>
                                             <li className="nav-item"><a className="nav-link text-black" onClick={()=>setSubPage(1)} href="#" >Job offers</a></li>
-                                            <li className="nav-item"><a className="nav-link text-black" onClick={()=>setSubPage(2)} href="#">Recruiters</a></li>
-                                            <li className="nav-item"><a className="nav-link text-info"  onClick={()=>setSubPage(3)} href="#">Edit description</a></li>
-                                            <li className="nav-item"><a className="nav-link text-info" onClick={()=>setSubPage(4)}  href="#">Manage users</a></li>
+                                            <li className="nav-item"><a className="nav-link text-info"  onClick={()=>setSubPage(2)} href="#">Edit description</a></li>
+                                            <li className="nav-item"><a className="nav-link text-info" onClick={()=>setSubPage(3)}  href="#">Manage users</a></li>
                                         </ul>
                                     </div>
                                 </div>
