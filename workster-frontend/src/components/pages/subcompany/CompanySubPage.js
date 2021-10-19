@@ -1,8 +1,8 @@
-import CompanyDescription from "./CompanyDescription";
 import React from "react";
-import Pricing from "../Pricing";
-import CompanyJobs from "./CompanyJobs";
+import FavouriteJobOffers from "../submyjoboffers/FavouriteJobOffers";
 import CompanyRecruiters from "./CompanyRecruiters";
+import CompanyDescription from "./CompanyDescription";
+import CompanyJobs from "./CompanyJobs";
 
 export default function CompanySubPage({subPage}) {
 
@@ -12,11 +12,7 @@ export default function CompanySubPage({subPage}) {
         case 1:
             return <CompanyJobs/>
         case 2:
-            return <CompanyDescription/>
-        case 3:
             return <CompanyRecruiters/>
-        case 4:
-            return <Pricing/>
         default:
             <div/>
     }
