@@ -30,6 +30,7 @@ import Company from "./components/pages/Company";
 import MainProfile from "./components/pages/subprofile/MainProfile";
 import FavouriteJobOffers from "./components/pages/submyjoboffers/FavouriteJobOffers";
 import PostedJobOffers from "./components/pages/submyjoboffers/PostedJobOffers";
+import JobRequests from "./components/pages/JobRequests";
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
                     <Route exact path="/company" component={Company}/>
                     <Route exact path="/favourite-job-offers" component={FavouriteJobOffers}/>
                     <Route exact path="/posted-job-offers" component={PostedJobOffers}/>
+                    <Route exact path="/job-requests" component={JobRequests}/>
                 </Switch>
             </Router>
         </>

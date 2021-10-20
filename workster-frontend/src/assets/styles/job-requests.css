@@ -1,0 +1,21 @@
+.job-desc-form-form-header {
+    /*background: green;*/
+    max-width: 60%;
+    resize: none;
+}
+
+.job-offer-icons{
+    margin-left: 0px;
+}
+
+.text-decoration-files{
+    text-decoration: none!important;
+}
+
+.input-name-of-applicant{
+    width: 30%;
+}
+
+.input-key-words{
+    width: 70%;
+}
