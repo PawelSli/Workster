@@ -43,12 +43,12 @@ export default function Navigation() {
                         <li className="nav-item"><a className="nav-link active" href="#">
                             <button className="btn btn-outline-primary swing animated" type="button"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#signup">Log In
+                                    data-bs-target="/signin">Log In
                             </button>
                         </a></li>
                         <li className="nav-item"><a className="nav-link active" href="#">
                             <button className="btn btn-primary swing animated" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#signin">Sign Up
+                                    data-bs-target="/register">Sign Up
                             </button>
                         </a></li>
                     </ul>
