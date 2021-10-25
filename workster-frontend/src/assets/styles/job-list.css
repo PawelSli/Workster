@@ -47,3 +47,8 @@
 #flexCheckDefault{
   margin-left: 10px;
 }
+
+.spinner-class{
+  width: 13em;
+  height: 13em;
+}
