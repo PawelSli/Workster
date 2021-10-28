@@ -9,10 +9,10 @@ export default function Company() {
 
     return (
         <main>
-            <div className="container clearfix ">
-                <div className="row">
-                    <div className="col-12 col-md-10 jumbotron">
-                        <div className="card d-flex flex-row company-start d-flex justify-content-center">
+            <div className="container clearfix  ">
+                <div className="row mt-2 ">
+                    <div className="col-12 col-md-10 jumbotron  ">
+                        <div className="card d-flex flex-row company-start d-flex justify-content-center shadow-lg mb-1">
                             <div className="company-image d-flex justify-content-center">
                                 <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Generic placeholder image"
                                      className="img-fluid"/>
@@ -24,9 +24,9 @@ export default function Company() {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-12 col-md-10">
-                        <div className="card">
-                            <nav className="navbar navbar-light navbar-expand-md bg-secondary">
+                    <div className="col-12 col-md-10  ">
+                        <div className="card ">
+                            <nav className="navbar navbar-light navbar-expand-md bg-dark shadow-lg">
                                 <div className="container-fluid">
                                     <button data-bs-toggle="collapse" className="navbar-toggler bg-light"
                                             data-bs-target="#navcol-3">
@@ -35,10 +35,10 @@ export default function Company() {
                                     </button>
                                     <div className="collapse navbar-collapse" id="navcol-3">
                                         <ul className="navbar-nav">
-                                            <li className="nav-item"><a className="nav-link active text-black" onClick={()=>setSubPage(0)} href="#">Description</a></li>
-                                            <li className="nav-item"><a className="nav-link text-black" onClick={()=>setSubPage(1)} href="#" >Job offers</a></li>
-                                            <li className="nav-item"><a className="nav-link text-info"  onClick={()=>setSubPage(2)} href="#">Edit description</a></li>
-                                            <li className="nav-item"><a className="nav-link text-info" onClick={()=>setSubPage(3)}  href="#">Manage users</a></li>
+                                            <li className="nav-item"><a className="nav-link active text-white" onClick={()=>setSubPage(0)} href="#">Description</a></li>
+                                            <li className="nav-item"><a className="nav-link text-white" onClick={()=>setSubPage(1)} href="#" >Job offers</a></li>
+                                            <li className="nav-item"><a className="nav-link text-white"  onClick={()=>setSubPage(2)} href="#">Edit description</a></li>
+                                            <li className="nav-item"><a className="nav-link text-white" onClick={()=>setSubPage(3)}  href="#">Manage users</a></li>
                                         </ul>
                                     </div>
                                 </div>

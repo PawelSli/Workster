@@ -1,7 +1,16 @@
 import IonRangeSlider from 'react-ion-slider';
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import $ from 'jquery';
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ImageIcon from '@mui/icons-material/Image';
+import WorkIcon from '@mui/icons-material/Work';
+import ListItemText from "@mui/material/ListItemText";
+import {Event, HomeWork, LocationOn, Payment} from "@mui/icons-material";
+import "../../assets/styles/my-job-offer.css"
 
 export default function JobOfferPage() {
     window.$ = $;
@@ -22,110 +31,94 @@ export default function JobOfferPage() {
     }, []);
 
     return (
-        <main className="page landing-page">
-            <div className="container-fluid bg-light">
-                <div className="row align-items-center justify-content-left">
-                    <div className="col-md-3 pt-3">
-                        <div className="form-group">
-                            <input type="email" className="form-control" id="exampleInputEmail1"
-                                   aria-describedby="emailHelp"
-                                   placeholder="Type name of a job"/>
-                        </div>
+        <main className="  ">
+            <div className="row mt-2 d-flex justify-content-center ">
+                <div className="col-12 col-md-8 card d-flex flex-row shadow-lg  p-2">
+                    <div className="col-4 col-lg-2 d-flex justify-content-start">
+                        <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Generic placeholder image"
+                             className="company-image  "/>
                     </div>
-                    <div className="col-md-3 pt-3">
-                        <CreatableMultiSearch valueOptions={options}/>
-                    </div>
-                    <div className="col-md-1 pt-3 ">
-                        <button type="button" className="btn btn-primary btn-block my-button-class">Search</button>
-                    </div>
-                    <div className="col-md-2 pt-3 ">
-                        <button type="button" className="btn btn-secondary btn-block "
-                                data-bs-toggle="collapse" href="#collapseExample">
-                            <i className="fas fa-chevron-down"/>
-                            More filters
-                        </button>
-
+                    <div className="col-8 col-md-10 d-flex align-items-center p-0">
+                        <p className="display-5 margin-company-title">Atos Poland Global Services Sp. z o.o.</p>
                     </div>
                 </div>
             </div>
-            <div id="collapseExample" className="container-fluid bg-light">
-                <div className="row align-items-center justify-content-center">
-                    <div className="col-md-4 pt-3">
-                        <div className="form-group ">
-                            <label htmlFor="double-slider">Salary</label>
-                            <input type="text" className="js-range-slider" id="demo_1" name="my_range" value=""/>
-                        </div>
+            <div className="row mt-2 d-flex justify-content-center">
+                <div className="col-12 col-md-8 card d-flex flex-column shadow-lg p-4">
+                    <h4 className="display-6 m-company mt-1 text-center">Junior Java Developer</h4>
+                    <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <LocationOn />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary="Location" secondary="Cracow, Lesser Poland, Poland" />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <Payment />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary="Salary" secondary="10 000 $ monthly" />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <HomeWork />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary="Remote job"  />
+                        </ListItem>
+                        <ListItem>
+                            <ListItemAvatar>
+                                <Avatar>
+                                    <Event />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText primary="Published" secondary="01.02.2022"  />
+                        </ListItem>
+                    </List>
+                    <div className="d-flex flex-row  mt-2 ">
+                        <button type="button" className="btn btn-dark  ">Apply for a job</button>
+                        <button type="button" className="btn btn-secondary  apply-buttons ">Save a post</button>
                     </div>
-                    <div className="col-md-3 pt-3">
-                        <div className="form-group">
-                            <CreatableMultiSearch valueOptions={options}/>
-                        </div>
-                    </div>
-                    <div className="col-md-3 pt-3">
-                        <div className="form-group">
-                            <CreatableMultiSearch valueOptions={options}/>
-                        </div>
-                    </div>
-                    <div className="col-md-2 pt-3">
-                        <label className="form-check-label" htmlFor="flexCheckDefault">Remote job</label>
-                        <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-                    </div>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-lg-8 mx-auto shadow ">
-                    <div className="mt-2 image-wrapper">
+                    <div className="mt-4">
+                        At Transporeon we embrace transformation and change in total sync with one another. We rethink, reinvent and rework ideas from one moment to the next – as many times as is necessary to get the job done right. That’s how we respond to the new challenges that we face each and every day. And regardless of whether you are just starting your career or are already a pro – we believe you can be the transformation. Are you ready?
 
-                        <a className="image-wrapper image-zoom cboxElement" href="#">
-                            <img src="https://via.placeholder.com/700x250/FF69B4/000000" alt="Photo of Blog"
-                                 className="margin-auto job-desc-img"></img>
-                            <div className="image-overlay"></div>
-                        </a>
-                    </div>
-                    <h4 className="display-6 m-company mt-1">Junior Java Developer</h4>
-                    <h5 className="lead m-company mt-1">Brown Brothers Harriman</h5>
 
-                    <h6 className="text-muted mt-4"><i className="fas fa-map-marker-alt location-style"></i>Location:
-                        Warsaw</h6>
-                    <h6 className="text-muted "><i className="fas fa-industry location-style"></i>Branch: Information
-                        Technology</h6>
-                    <h6 className="text-muted "><i className="fas fa-money-bill location-style"></i>Salary: 10.000 -
-                        12.500 $</h6>
-                    <h6 className="text-muted "><i className="fas fa-home location-style"></i> Remote</h6>
-                    <div className="d-flex flex-row  mt-2">
-                        <button type="button" className="btn btn-dark  apply-button">Apply for a job</button>
-                        <button type="button" className="btn btn-secondary  apply-button ">Save a post</button>
-                    </div>
+                        You are ready, if you ...
 
-                    <p className="h5 text-center mt-5">Job requirements</p>
-                    <ul>
-                        <li>Phasellus iaculis neque</li>
-                        <li>Purus sodales ultricies</li>
-                        <li>Vestibulum laoreet porttitor sem</li>
-                        <li>Ac tristique libero volutpat at</li>
-                    </ul>
-                    <p className="h5 text-center mt-5">What we offer</p>
-                    <ul>
-                        <li>Young, dynamic team</li>
-                        <li>High salary</li>
-                        <li>Tuesdays with fruits</li>
-                        <li>Possibility to communicate with best developers in this branch in the country</li>
-                    </ul>
-                    <p className="h5 text-center mt-5">About a company</p>
-                    Brown Brothers Harriman & Co. (BBH) is the oldest and one of the largest private investment banks in
-                    the United States.[3][4] In 1931, the merger of Brown Brothers & Co. (founded in 1818) and Harriman
-                    Brothers & Co. formed the current BBH.
 
-                    Brown Brothers Harriman is also notable for the number of influential American politicians,
-                    government appointees, and Cabinet members who have worked at the company, such as W. Averell
-                    Harriman, Prescott Bush, Robert A. Lovett, Richard W. Fisher, Robert Roosa, and Alan Greenspan.
-                    <p className="h5 text-center mt-5">Tags:</p>
-                    <div className="badges-class">
-                        <span className="badge bg-primary">Java</span>
-                        <span className="badge bg-primary">Python</span>
-                        <span className="badge bg-primary">IT</span>
-                        <span className="badge bg-primary">Warsaw</span>
-                        <span className="badge bg-primary">Programmer</span>
+                        are willing to participate on our mission to digitize logistics world by bringing modern solutions to the users, which significantly improve their daily work
+                        have the ability to transfer ideas or customer wishes into solutions and features
+                        the stubbornness not to give up till it works and you can be proud of your work
+                        have at least first professional experience in full-stack software development
+                        can bring one year of experience in following technologies: Java, Spring Boot, Hibernate, SQL Database
+                        enjoy a combination of a team work with individual responsibility for given tasks
+                        like working in an international team speaking English on daily basis, Polish is as well spoken within the offices
+                        prefer a hybrid working model with the combination of office time and remote work
+
+                        Team Snow is ready and waiting with ...
+
+
+                        responsibility for the Rate Management application within Transporeon platform. Rate Management uses defined criteria to find the most suitable forwarding agent and calculates the transport prices for a transport. For this purpose, customers can flexibly define their rate structures and store associated rates in the system. In addition, users can perform pricing based on various transport parameters within the user interface.
+                        cross-functional team working in an agile way using Jira as a project management tool
+                        the possibility to participate on meaningful projects in close cooperation with colleagues from product management, other software development teams, UX/UI and quality management
+                        security of a permanent contract within successful IT company with the chance to develop our own product
+                        friendly recruitment process which gives you the chance to get to know us as well as to show your attitude and your coding skills
+
+                        Some tech-stack information for you ...
+
+
+                        Back- end: Java 11, Framework: Spring, Spring-Boot
+                        Front-end: Angular 11
+                        Database: PostgreSQL, Database framework: Hibernate
+                        Project management tool: JIRA
+                        Version control tool: Git
+                        Build management tool: Jenkins
+                        Docker
                     </div>
                 </div>
             </div>

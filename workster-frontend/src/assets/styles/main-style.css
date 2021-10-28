@@ -1,3 +1,16 @@
 body{
     background-color: rgb(246, 246, 246);
 }
+
+.landing-page{
+    background-color: rgb(246, 246, 246);
+}
+
+.icons-job-offers{
+    margin-left: 1em;
+    margin-right: 0.5em;
+}
+
+.first-icon-job-offer{
+    margin-right: 0.5em;
+}
