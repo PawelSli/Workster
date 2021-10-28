@@ -4,6 +4,8 @@ import $ from 'jquery';
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import axios from 'axios'
 import "../../assets/styles/main-style.css"
+import {faHome, faMapMarkerAlt, faMoneyBill, faSearchPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function MainPage() {
     window.$ = $;
@@ -69,7 +71,7 @@ export default function MainPage() {
 
                             <ul className="list-group shadow-lg">
 
-                                <li className="list-group-item d-flex flex-reverse ">
+                                <li className="list-group-item d-flex flex-reverse bg-success">
                                     <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Generic placeholder image"
                                          className="logo-size"/>
                                     <div className="job-desc d-flex flex-column justify-content-between">
@@ -81,10 +83,9 @@ export default function MainPage() {
                                             <small>01.01.2021</small>
                                         </div>
                                         <small>
-                                            <i className="fas fa-map-marker-alt"></i> Warsaw
-                                            <i className="fas fa-money-bill location-style"></i> 10.000$-20.000$
-                                            <i className="fas fa-home location-style"></i>
-                                            Remote job
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
                                         </small>
                                     </div>
                                 </li>
@@ -100,12 +101,13 @@ export default function MainPage() {
                                             <small>02.11.1998</small>
                                         </div>
                                         <small>
-                                            <i className="fas fa-map-marker-alt"></i> London
-                                            <i className="fas fa-money-bill location-style"></i> 5.000$
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
                                         </small>
                                     </div>
                                 </li>
-                                <li className="list-group-item d-flex flex-reverse ">
+                                <li className="list-group-item d-flex flex-reverse bg-success">
                                     <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Generic placeholder image"
                                          className="logo-size"/>
                                     <div className="job-desc d-flex flex-column justify-content-between">
@@ -117,10 +119,9 @@ export default function MainPage() {
                                             <small>10.10.2010</small>
                                         </div>
                                         <small>
-                                            <i className="fas fa-map-marker-alt"></i> Paris
-                                            <i className="fas fa-money-bill location-style"></i> 15.000$-17.000$
-                                            <i className="fas fa-home location-style"></i>
-                                            Remote job
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
                                         </small>
                                     </div>
                                 </li>
@@ -137,10 +138,104 @@ export default function MainPage() {
                                             <small>12.12.2012</small>
                                         </div>
                                         <small>
-                                            <i className="fas fa-map-marker-alt"></i> New York
-                                            <i className="fas fa-money-bill location-style"></i> 5.000$
-                                            <i className="fas fa-home location-style"></i>
-                                            Remote job
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
+                                        </small>
+                                    </div>
+                                </li>
+                                <li className="list-group-item d-flex flex-reverse ">
+                                    <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`}
+                                         alt="Generic placeholder image" className="logo-size"/>
+                                    <div className="job-desc d-flex flex-column justify-content-between">
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div>
+                                                <h5 className="font-weight-bold m-company">Business Analytyst in Global
+                                                    Team</h5>
+                                                <small>Volvo Group</small>
+                                            </div>
+                                            <small>12.12.2012</small>
+                                        </div>
+                                        <small>
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
+                                        </small>
+                                    </div>
+                                </li>
+                                <li className="list-group-item d-flex flex-reverse ">
+                                    <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`}
+                                         alt="Generic placeholder image" className="logo-size"/>
+                                    <div className="job-desc d-flex flex-column justify-content-between">
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div>
+                                                <h5 className="font-weight-bold m-company">Business Analytyst in Global
+                                                    Team</h5>
+                                                <small>Volvo Group</small>
+                                            </div>
+                                            <small>12.12.2012</small>
+                                        </div>
+                                        <small>
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
+                                        </small>
+                                    </div>
+                                </li>
+                                <li className="list-group-item d-flex flex-reverse ">
+                                    <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`}
+                                         alt="Generic placeholder image" className="logo-size"/>
+                                    <div className="job-desc d-flex flex-column justify-content-between">
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div>
+                                                <h5 className="font-weight-bold m-company">Business Analytyst in Global
+                                                    Team</h5>
+                                                <small>Volvo Group</small>
+                                            </div>
+                                            <small>12.12.2012</small>
+                                        </div>
+                                        <small>
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
+                                        </small>
+                                    </div>
+                                </li>
+                                <li className="list-group-item d-flex flex-reverse ">
+                                    <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`}
+                                         alt="Generic placeholder image" className="logo-size"/>
+                                    <div className="job-desc d-flex flex-column justify-content-between">
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div>
+                                                <h5 className="font-weight-bold m-company">Business Analytyst in Global
+                                                    Team</h5>
+                                                <small>Volvo Group</small>
+                                            </div>
+                                            <small>12.12.2012</small>
+                                        </div>
+                                        <small>
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
+                                        </small>
+                                    </div>
+                                </li>
+                                <li className="list-group-item d-flex flex-reverse ">
+                                    <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`}
+                                         alt="Generic placeholder image" className="logo-size"/>
+                                    <div className="job-desc d-flex flex-column justify-content-between">
+                                        <div className="d-flex flex-row justify-content-between">
+                                            <div>
+                                                <h5 className="font-weight-bold m-company">Business Analytyst in Global
+                                                    Team</h5>
+                                                <small>Volvo Group</small>
+                                            </div>
+                                            <small>12.12.2012</small>
+                                        </div>
+                                        <small>
+                                            <FontAwesomeIcon className="first-icon-job-offer" icon={faMapMarkerAlt}/>Warsaw
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faMoneyBill}/>10.000$-20.000$
+                                            <FontAwesomeIcon className="icons-job-offers" icon={faHome}/>Remote
                                         </small>
                                     </div>
                                 </li>
