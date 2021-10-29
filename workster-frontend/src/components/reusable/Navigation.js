@@ -10,7 +10,7 @@ export default function Navigation() {
     return (
         <nav className="navbar navbar-light navbar-expand-md bg-dark sticky-top">
             <div className="container-fluid">
-                <a className="navbar-brand logo" id="nav-logo" href="#">
+                <a className="navbar-brand logo" href="/" id="nav-logo" >
                     <img className="nav-icon" src={logo} alt=""/>orkster
                 </a>
                 <button data-bs-toggle="collapse" className="navbar-toggler bg-light" data-bs-target="#navcol-1">
@@ -22,9 +22,9 @@ export default function Navigation() {
                             <a className="nav-link active link-navbar" href="#" onClick={() => setJobOfferDropdown(!jobOfferDropdown)}>My job offers</a>
                             <div className={`dropdown-menu ${jobOfferDropdown ? 'show' : ''}`}
                                  aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Favourite job offers</a>
-                                <a className="dropdown-item" href="#">Applied job offers</a>
-                                <a className="dropdown-item" href="#">My job offers</a>
+                                <a className="dropdown-item" href="/favourite-job-offers">Favourite job offers</a>
+                                <a className="dropdown-item" href="/applied-job-offers">Applied job offers</a>
+                                <a className="dropdown-item" href="/posted-job-offers">My job offers</a>
                             </div>
                         </li>
                         <li className="nav-item"><a className="nav-link link-navbar" href="#">Company</a></li>
