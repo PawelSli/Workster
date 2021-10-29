@@ -7,10 +7,85 @@ body{
 }
 
 .icons-job-offers{
-    margin-left: 1em;
-    margin-right: 0.5em;
+    min-width: 2em;
 }
 
 .first-icon-job-offer{
     margin-right: 0.5em;
 }
+
+.text-hidden{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.title-section{
+    width: 80%;
+}
+
+.date-section{
+    width: 20%;
+}
+
+@media only screen and (min-width: 992px) {
+    .date-section{
+       padding-right: -5em;
+        margin-right: -5rem;
+    }
+}
+
+.image-card-job-list{
+    width: 5em
+}
+
+.icon-new-job-offers{
+    margin-right: 0.2em;
+}
+
+.all-icons-after-first-job-offers{
+    margin-left: 1em;
+}
+
+.img-job-offers{
+    min-width: 4em;
+}
+
+.settings-icon-bars-job-offers{
+    margin-right: -4.8em;
+    color: black;
+}
+
+.dropdown-menu-element{
+    transform: translate(-10%,0);
+}
+
+@media (max-width: 1199px) {
+
+    .dropdown-menu-element{
+        transform: translate(-30%,0);
+    }
+
+}
+
+@media (max-width: 991px) {
+
+    .dropdown-menu-element{
+        transform: translate(-40%,0);
+    }
+
+}
+
+
+@media (max-width: 767px) {
+    .settings-icon-bars-job-offers{
+        margin-right: -3.2em;
+    }
+
+    .dropdown-menu-element{
+        transform: translate(-55%,0);
+    }
+
+}
+
+
