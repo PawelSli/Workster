@@ -2,7 +2,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faCalendar, faHome, faMapMarkerAlt, faMoneyBill} from "@fortawesome/free-solid-svg-icons";
 import React, {useState} from "react";
 
-export default function JobOfferListElement({image,title,company,location,cash,remote,date,favourite,applied}) {
+export default function JobOfferListElement({image, title, company, location, cash, remote, date, favourite, applied, posted}) {
 
     const [addDropdownElementAction, setAddDropdownElementAction] = useState(false);
 
@@ -37,13 +37,29 @@ export default function JobOfferListElement({image,title,company,location,cash,r
                     </div>
                 </div>
                 <div className="col-1  text-end dropdown ">
-                    <a href="#" className="nav-link " role="button" onClick={() => setAddDropdownElementAction(!addDropdownElementAction)}>
+                    <a href="#" className="nav-link " role="button"
+                       onClick={() => setAddDropdownElementAction(!addDropdownElementAction)}>
                         <FontAwesomeIcon className="settings-icon-bars-job-offers " icon={faBars}/>
                     </a>
-                    <div className={`dropdown-menu dropdown-menu-element ${addDropdownElementAction ? 'show' : ''}`} aria-labelledby="dropdownMenuLink">
-                        {favourite ? <a className="dropdown-item " href="#">Add to favourites</a> : <a className="dropdown-item " href="#">Remove from favourites</a>}
-                        {applied ? <div className="dropdown-divider"/> : <div/> }
-                        {applied ? <a className="dropdown-item " href="#">Apply for a job</a> : <div/> }
+                    <div className={`dropdown-menu dropdown-menu-element ${addDropdownElementAction ? 'show' : ''}`}
+                         aria-labelledby="dropdownMenuLink">
+                        {posted ?
+                            <div>
+                                <a className="dropdown-item " href="#">See applications</a>
+                                <div className="dropdown-divider"/>
+                                <a className="dropdown-item " href="#">Remove job offer</a>
+                            </div>
+                            :
+                            applied ?
+                                <a className="dropdown-item " href="#">See your application</a>
+                                :
+                                <div>
+                                    {!favourite ? <a className="dropdown-item " href="#">Add to favourites</a> :
+                                        <a className="dropdown-item " href="#">Remove from favourites</a>}
+                                    {!applied ? <div className="dropdown-divider"/> : <div/>}
+                                    {!applied ? <a className="dropdown-item " href="#">Apply for a job</a> : <div/>}
+                                </div>
+                        }
                     </div>
                 </div>
             </div>

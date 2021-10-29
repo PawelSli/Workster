@@ -18,7 +18,7 @@ export default function FavouriteJobOffers() {
                 </div>
                 <div className="container  ">
                     <div className="row d-flex justify-content-center ">
-                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022"/>
+                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022" favourite="fs"/>
                         <JobOfferListElement image="sabre.jpg" title="Junior Java Developer" company="Sabre" location="Cracow, Mazowieckie, Poland" cash="15.000 $" remote="remote" date="16.02.2017"/>
                         <JobOfferListElement image="microsoft.png" title="Junior .NET Developer" company="Sabre" location="London, Great Britain" cash="20.000 $" remote="remote" date="10.01.2019"/>
                         <JobOfferListElement image="ibm.jpg" title="Senior Remote DevOps" company="IBM" location="Boston, USA" cash="23.000 $" remote="remote" date="13.05.2022"/>
