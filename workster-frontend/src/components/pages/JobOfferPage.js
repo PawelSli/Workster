@@ -11,6 +11,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import ListItemText from "@mui/material/ListItemText";
 import {Event, HomeWork, LocationOn, Payment} from "@mui/icons-material";
 import "../../assets/styles/my-job-offer.css"
+import CompanyHeader from "../reusable/CompanyHeader";
 
 export default function JobOfferPage() {
     window.$ = $;
@@ -32,17 +33,7 @@ export default function JobOfferPage() {
 
     return (
         <main className="  ">
-            <div className="row mt-2 d-flex justify-content-center ">
-                <div className="col-12 col-md-8 card d-flex flex-row shadow-lg  p-2">
-                    <div className="col-4 col-lg-2 d-flex justify-content-start">
-                        <img src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Generic placeholder image"
-                             className="company-image  "/>
-                    </div>
-                    <div className="col-8 col-md-10 d-flex align-items-center p-0">
-                        <p className="display-5 margin-company-title">Atos Poland Global Services Sp. z o.o.</p>
-                    </div>
-                </div>
-            </div>
+            <CompanyHeader image="star-sky.jpg" name="Atos Poland Global Services Sp. z o.o."/>
             <div className="row mt-2 d-flex justify-content-center">
                 <div className="col-12 col-md-8 card d-flex flex-column shadow-lg p-4">
                     <h4 className="display-6 m-company mt-1 text-center">Junior Java Developer</h4>
