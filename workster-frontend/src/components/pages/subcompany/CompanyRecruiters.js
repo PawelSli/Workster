@@ -13,8 +13,8 @@ export default function CompanyRecruiters() {
 
     return (
         <div className="row p-2">
-            <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+            <div className="col-6 col-md-4 col-xl-3 mt-2 ">
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -32,7 +32,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -50,7 +50,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -68,7 +68,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -86,7 +86,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -104,7 +104,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
@@ -122,7 +122,7 @@ export default function CompanyRecruiters() {
                 </div>
             </div>
             <div className="col-6 col-md-4 col-xl-3 mt-2">
-                <div className="card" >
+                <div className="card shadow-lg" >
                     <img className="card-img-top img-fluid user-photo-company" src={`${process.env.PUBLIC_URL}/star-sky.jpg`} alt="Card image cap"/>
                     <div className="card-body">
                         <h5 className="card-title">John Kowalski</h5>
