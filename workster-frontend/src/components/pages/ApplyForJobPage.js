@@ -1,7 +1,7 @@
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import {Editor} from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
-import "../../assets/styles/add-job-ffer.css"
+import "../../assets/styles/add-job-offer.css"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {useState} from "react";
 
