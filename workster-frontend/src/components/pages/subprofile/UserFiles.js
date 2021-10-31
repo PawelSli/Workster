@@ -8,17 +8,15 @@ export default function UserFiles() {
         <div className="content">
             <div className="container">
                 <div className="row">
-                    <div className="col-12">
-                        <div className="card-box">
+                    <div className="col-12 mt-4">
+                        <div className="card-box shadow-lg">
                             <div className="row">
-                                <div className="col-lg-6 col-xl-6">
-                                    <h4 className="header-title m-b-30">My Files</h4>
-                                </div>
+                                <p className="text-center h4">My files</p>
                             </div>
 
-                            <div className="row">
-                                <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box">
+                            <div className="row mt-2 ">
+                                <div className="col-lg-3 col-xl-2 ">
+                                    <div className="file-man-box bg-secondary">
                                         <a href="" className="file-close">
                                             <FontAwesomeIcon icon={faTimesCircle}/>
                                         </a>
@@ -33,9 +31,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/bmp.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -46,9 +44,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/psd.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -59,9 +57,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/avi.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -72,7 +70,7 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
                                         <div className="file-img-box"><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/cad.svg"
@@ -85,9 +83,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/txt.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -100,9 +98,9 @@ export default function UserFiles() {
                             </div>
                             <div className="row">
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/eps.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -113,9 +111,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/dll.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -126,9 +124,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/sql.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -139,9 +137,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/zip.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -152,9 +150,9 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
-                                        <div className="file-img-box"><img
+                                        <div className="file-img-box "><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/ps.svg"
                                             alt="icon"></img></div>
                                         <a href="#" className="file-download"><FontAwesomeIcon icon={faDownload}/></a>
@@ -165,7 +163,7 @@ export default function UserFiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col-xl-2">
-                                    <div className="file-man-box"><a href="" className="file-close"><FontAwesomeIcon
+                                    <div className="file-man-box bg-secondary"><a href="" className="file-close"><FontAwesomeIcon
                                         icon={faTimesCircle}/></a>
                                         <div className="file-img-box"><img
                                             src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/png.svg"
