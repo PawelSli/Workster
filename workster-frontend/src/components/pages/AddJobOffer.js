@@ -4,7 +4,7 @@ import {Editor} from "react-draft-wysiwyg";
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import {EditorState} from "draft-js";
 import CreatableSingleSearch from "../reusable/CreatableSingleSearch";
-import "../../assets/styles/add-job-ffer.css"
+import "../../assets/styles/add-job-offer.css"
 
 export default function AddJobOffer() {
 
