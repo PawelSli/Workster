@@ -5,6 +5,7 @@ import logo from '../../assets/img/logo.svg';
 export default function Navigation() {
 
     const [addDropdown, setAddDropdown] = useState(false);
+    const [adminDropdown, setAdminDropdown] = useState(false);
     const [jobOfferDropdown, setJobOfferDropdown] = useState(false);
 
     return (
@@ -33,9 +34,17 @@ export default function Navigation() {
                             <a className="nav-link link-navbar" href="#" onClick={() => setAddDropdown(!addDropdown)}>Add...</a>
                             <div className={`dropdown-menu ${addDropdown ? 'show' : ''}`}
                                  aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">... job offer</a>
+                                <a className="dropdown-item" href="/job-offer-add">... job offer</a>
                                 <a className="dropdown-item" href="#">... company</a>
                                 <a className="dropdown-item" href="#">... file</a>
+                            </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link link-navbar" href="#" onClick={() => setAdminDropdown(!adminDropdown)}>Admin panel</a>
+                            <div className={`dropdown-menu ${adminDropdown ? 'show' : ''}`}
+                                 aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item" href="#">Delete user</a>
+                                <a className="dropdown-item" href="#">Delete company</a>
                             </div>
                         </li>
                     </ul>

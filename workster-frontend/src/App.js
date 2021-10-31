@@ -34,6 +34,8 @@ import JobRequests from "./components/pages/JobRequests";
 import AppliedJobOffers from "./components/pages/submyjoboffers/AppliedJobOffers";
 import EditExperience from "./components/pages/EditExperience";
 import EditEducation from "./components/pages/EditEducation";
+import DeleteUser from "./components/pages/DeleteUser";
+import DeleteCompany from "./components/pages/DeleteCompany";
 
 function App() {
 
@@ -60,6 +62,8 @@ function App() {
                     <Route exact path="/job-requests" component={JobRequests}/>
                     <Route exact path="/edit-experience" component={EditExperience}/>
                     <Route exact path="/edit-education" component={EditEducation}/>
+                    <Route exact path="/delete-user" component={DeleteUser}/>
+                    <Route exact path="/delete-company" component={DeleteCompany}/>
                 </Switch>
             </Router>
         </>
