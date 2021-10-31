@@ -17,3 +17,7 @@
 .edit-button{
   margin-left: 10px;
 }
+
+.profile-delete-experience-item-button{
+  transform: translate(0, -150%);
+}
