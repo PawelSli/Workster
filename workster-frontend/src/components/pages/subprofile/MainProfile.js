@@ -1,15 +1,24 @@
 import "../../../assets/styles/profile.css"
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemAvatar from "@mui/material/ListItemAvatar";
+import Avatar from "@mui/material/Avatar";
+import ListItemText from "@mui/material/ListItemText";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
+import React from "react";
+import ExperienceItem from "../../reusable/ExperienceItem";
 
 
 export default function MainProfile() {
 
     return(
         <main>
-            <div className="container">
+            <div className="container mt-3">
                 <div className="main-body">
                     <div className="row gutters-sm">
                         <div className="col-md-4 mb-3">
-                            <div className="card">
+                            <div className="card shadow-lg">
                                 <div className="card-body">
                                     <div className="d-flex flex-column align-items-center text-center">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
@@ -23,7 +32,7 @@ export default function MainProfile() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card mt-3">
+                            <div className="card mt-3 shadow-lg">
                                 <ul className="list-group list-group-flush">
                                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 className="mb-0">
@@ -95,9 +104,26 @@ export default function MainProfile() {
                                     </li>
                                 </ul>
                             </div>
+
+                            <div className="card mt-3 shadow-lg">
+                                <div className="card-body ">
+                                    <div className="text-center">
+                                        <p className="h5">Education:</p>
+                                    </div>
+                                    <div >
+                                        <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
+                                            <ExperienceItem title="Engineer" company="Cracow University of Technology" from="Octover 2008" to="June 2013" image="pk.png"/>
+                                            <Divider variant="inset" component="li" />
+                                            <ExperienceItem title="High School Graduate" company="Liceum Ogólnokształcące nr 1 w Limanowej im. Władysława Orkana" from="September 2005" to="June 2008" image="lo1.jpg"/>
+                                        </List>
+                                    </div>
+                                    <button type="button" className="btn btn-primary">Edit</button>
+                                </div>
+
+                            </div>
                         </div>
                         <div className="col-md-8">
-                            <div className="card mb-3">
+                            <div className="card mb-3 shadow-lg">
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-sm-3">
@@ -146,19 +172,36 @@ export default function MainProfile() {
                                     <hr/>
                                     <div className="row">
                                         <div className="col-sm-12">
-                                            <a className="btn btn-info " target="__blank"
-                                               href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
+                                            <button type="button" className="btn btn-primary">Edit</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div className="card mb-3 shadow-lg">
+                                <div className="card-body ">
+                                    <div className="text-center">
+                                        <p className="h5">Experience:</p>
+                                    </div>
+                                    <div >
+                                        <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="microsoft.png"/>
+                                            <Divider variant="inset" component="li" />
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="sabre.jpg"/>
+                                            <Divider variant="inset" component="li" />
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="ibm.jpg"/>
+                                        </List>
+                                    </div>
+                                    <button type="button" className="btn btn-primary">Edit</button>
+                                </div>
+                            </div>
+
                             <div className="row gutters-sm">
                                 <div className="col-sm-12 mb-3">
-                                    <div className="card h-100">
+                                    <div className="card h-100 shadow-lg">
                                         <div className="card-body">
                                             <h6 className="d-flex align-items-center mb-3 d-flex justify-content-center">
-                                                Description
+                                                <p className="h5" >Description:</p>
                                             </h6>
                                             <small>
                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac bibendum nisi. Praesent vel tristique ante. Curabitur lorem urna, dictum ut mattis eu, tincidunt in ligula. Ut nec vehicula elit, at semper nisl. Donec malesuada condimentum justo. Duis eleifend ante sit amet eros hendrerit gravida. Etiam libero ex, suscipit eu eros eget, consectetur efficitur magna. Sed molestie dictum lorem, at placerat lorem volutpat ut. Nam eget maximus ipsum, ac cursus ex.
@@ -171,6 +214,8 @@ export default function MainProfile() {
 
                                                 Vestibulum eget mi lacus. Ut ac luctus leo, ac volutpat sapien. Integer feugiat a justo sit amet mollis. Maecenas dui velit, sodales non vehicula quis, blandit non massa. Mauris nibh augue, posuere vel venenatis at, imperdiet non ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla tempus imperdiet tellus sit amet tempor. Curabitur mauris ligula, dictum at tellus et, dignissim pharetra ex.
                                             </small>
+                                            <br/>
+                                            <button type="button" className="btn btn-primary mt-4">Edit</button>
                                         </div>
                                     </div>
                                 </div>
