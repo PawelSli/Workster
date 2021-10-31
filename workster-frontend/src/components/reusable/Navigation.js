@@ -29,14 +29,13 @@ export default function Navigation() {
                             </div>
                         </li>
                         <li className="nav-item"><a className="nav-link link-navbar" href="#">Company</a></li>
-                        <li className="nav-item"><a className="nav-link link-navbar" href="#">Files</a></li>
+                        <li className="nav-item"><a className="nav-link link-navbar" href="/profile/files">Files</a></li>
                         <li className="nav-item dropdown">
                             <a className="nav-link link-navbar" href="#" onClick={() => setAddDropdown(!addDropdown)}>Add...</a>
                             <div className={`dropdown-menu ${addDropdown ? 'show' : ''}`}
                                  aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="/job-offer-add">... job offer</a>
-                                <a className="dropdown-item" href="#">... company</a>
-                                <a className="dropdown-item" href="#">... file</a>
+                                <a className="dropdown-item" href="/add-job-offer">... job offer</a>
+                                <a className="dropdown-item" href="/add-company">... company</a>
                             </div>
                         </li>
                         <li className="nav-item dropdown">

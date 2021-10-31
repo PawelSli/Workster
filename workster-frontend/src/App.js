@@ -34,6 +34,7 @@ import EditExperience from "./components/pages/EditExperience";
 import EditEducation from "./components/pages/EditEducation";
 import DeleteUser from "./components/pages/DeleteUser";
 import DeleteCompany from "./components/pages/DeleteCompany";
+import AddCompany from "./components/AddCompany";
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
                     <Route exact path="/pricing" component={Pricing}/>
 
                     <Route exact path="/add-job-offer" component={AddJobOffer} />
+                    <Route exact path="/add-company" component={AddCompany} />
 
 
                     <Route exact path="/profile/*" component={Profile}/>
