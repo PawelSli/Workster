@@ -2,7 +2,7 @@ import JobOfferBasicInformation from "./JobOfferBasicInformation";
 import React from "react";
 import JobOfferDescription from "./JobOfferDescription";
 
-export default function JobOfferStep({step,goForwardFunction,goBackFunction}) {
+export default function ({step,goForwardFunction,goBackFunction}) {
 
     switch (step) {
         case 0:
