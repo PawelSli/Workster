@@ -3,11 +3,23 @@ import logo from "../../assets/img/logo.svg";
 import React, {useState} from "react";
 import CompanySubPage from "./subcompany/CompanySubPage";
 import CompanyHeader from "../reusable/CompanyHeader";
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 import "../../assets/styles/my-job-offer.css"
+import {faCheck, faPaperPlane, faSearchPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export default function Company() {
 
     const [subPage, setSubPage] = useState(0);
+    const [text,setText] = useState("Send request to join company");
+    const [disable,setDisabled] = useState(false);
+
+    const clickItemToSendRequest = () =>{
+        setDisabled(true);
+        setText("Request send");
+    };
+
 
     return (
         <main>
@@ -37,6 +49,13 @@ export default function Company() {
                                     </a></li>
                                     <li className="nav-item"><a className="nav-link text-white"
                                                                 onClick={() => setSubPage(4)} href="#">Edit company information
+                                    </a></li>
+                                </ul>
+                                <ul className="navbar-nav ms-auto">
+                                    <li className="nav-item"><a className="nav-link active" href="#">
+                                        <button disabled={disable} className="btn btn-outline-primary swing animated" type="button" onClick={()=>clickItemToSendRequest()}>
+                                            {text} <FontAwesomeIcon icon={!disable? faPaperPlane: faCheck}/>
+                                        </button>
                                     </a></li>
                                 </ul>
                             </div>
