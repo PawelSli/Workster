@@ -1,0 +1,13 @@
+.checkbox-margin{
+    margin-left: 0.5em;
+}
+
+.job-desc-form-form-add-job{
+    min-width: 80%;
+    resize: none;
+}
+
+.editor-height{
+    min-height: 100px;
+    overflow: auto;
+}
