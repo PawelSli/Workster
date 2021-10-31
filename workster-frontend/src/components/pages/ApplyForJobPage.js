@@ -1,7 +1,7 @@
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import {Editor} from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
-
+import "../../assets/styles/add-job-ffer.css"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {useState} from "react";
 
@@ -24,7 +24,7 @@ export default function ApplyForJobPage() {
                         <h2 className="text-dark">Apply for a job</h2>
                         <p>Complete the form below to apply for the position listed.</p>
                     </div>
-                    <form className="job-desc-form-form">
+                    <form className="job-desc-form-form-add-job shadow-lg">
                         <div className="mb-3">
                             <label className="form-label" htmlFor="name">Add message for employer</label>
                             <div className="draft-editor-root">
@@ -43,7 +43,9 @@ export default function ApplyForJobPage() {
                                 want</label>
                             <input type="file" className="form-control-file" id="exampleFormControlFile1"/>
                         </div>
-                        <button className="btn btn-primary" type="submit">Move on</button>
+                        <div className="text-center">
+                            <button className="btn btn-primary" type="submit">Publish the application</button>
+                        </div>
                     </form>
                 </div>
             </section>
