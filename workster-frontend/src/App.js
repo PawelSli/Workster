@@ -38,6 +38,7 @@ import AddCompany from "./components/AddCompany";
 import EditUserInformation from "./components/pages/EditUserInformation";
 import ChangePassword from "./components/pages/ChangePassword";
 import ShowMyJobRequest from "./components/pages/ShowMyJobRequest";
+import EditJobOffer from "./components/EditJobOffer";
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
                     <Route exact path="/edit-user-information" component={EditUserInformation}/>
                     <Route exact path="/change-password" component={ChangePassword}/>
                     <Route exact path="/show-my-job-request" component={ShowMyJobRequest}/>
+                    <Route exact path="/edit-job-offer" component={EditJobOffer}/>
 
                 </Switch>
             </Router>
