@@ -21,3 +21,7 @@
 .profile-delete-experience-item-button{
   transform: translate(0, -150%);
 }
+
+.profile-changes-buttons-margin{
+  margin-left: 0.7em;
+}
