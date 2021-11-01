@@ -18,3 +18,7 @@
 body{
   background-color: rgb(246, 246, 246);
 }
+
+#dropdown-basic::after{
+  display: none;
+}
