@@ -25,3 +25,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.job-card-application-heigth{
+    height: 650px;
+}
