@@ -37,6 +37,7 @@ import DeleteCompany from "./components/pages/DeleteCompany";
 import AddCompany from "./components/AddCompany";
 import EditUserInformation from "./components/pages/EditUserInformation";
 import ChangePassword from "./components/pages/ChangePassword";
+import ShowMyJobRequest from "./components/pages/ShowMyJobRequest";
 
 function App() {
 
@@ -70,6 +71,7 @@ function App() {
                     <Route exact path="/delete-company" component={DeleteCompany}/>
                     <Route exact path="/edit-user-information" component={EditUserInformation}/>
                     <Route exact path="/change-password" component={ChangePassword}/>
+                    <Route exact path="/show-my-job-request" component={ShowMyJobRequest}/>
 
                 </Switch>
             </Router>
