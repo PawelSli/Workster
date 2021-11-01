@@ -11,11 +11,18 @@ import ExperienceItem from "../../reusable/ExperienceItem";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import {useHistory} from "react-router-dom";
 
 export default function MainProfile() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const history = useHistory();
+
+    const routeChange = (string) =>{
+        history.push(string);
+    }
 
     const style = {
         position: 'absolute',
@@ -134,7 +141,7 @@ export default function MainProfile() {
                                             <ExperienceItem title="High School Graduate" company="Liceum Ogólnokształcące nr 1 w Limanowej im. Władysława Orkana" from="September 2005" to="June 2008" image="lo1.jpg"/>
                                         </List>
                                     </div>
-                                    <button type="button" className="btn btn-primary">Edit</button>
+                                    <button type="button" onClick={()=>routeChange("/edit-education")} className="btn btn-primary">Edit</button>
                                 </div>
 
                             </div>
@@ -189,8 +196,8 @@ export default function MainProfile() {
                                     <hr/>
                                     <div className="row">
                                         <div className="col-12  ">
-                                            <button type="button" className="btn btn-primary">Edit</button>
-                                            <button type="button" className="btn btn-warning profile-changes-buttons-margin">Change your password</button>
+                                            <button type="button" className="btn btn-primary" onClick={()=>routeChange("/edit-user-information")}>Edit</button>
+                                            <button type="button" className="btn btn-warning profile-changes-buttons-margin" onClick={()=>routeChange("/change-password")}>Change your password</button>
                                             <button type="button" onClick={handleOpen} data-toggle="modal" data-target="#exampleModalCenter" className="btn btn-danger profile-changes-buttons-margin">Delete your account</button>
                                         </div>
                                     </div>
@@ -229,7 +236,7 @@ export default function MainProfile() {
                                             <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="ibm.jpg"/>
                                         </List>
                                     </div>
-                                    <button type="button" className="btn btn-primary">Edit</button>
+                                    <button type="button" className="btn btn-primary" onClick={()=>routeChange("/edit-experience")}>Edit</button>
                                 </div>
                             </div>
 

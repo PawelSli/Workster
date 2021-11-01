@@ -7,7 +7,6 @@ import RegisterPage from "./components/pages/RegisterPage";
 import JobOfferPage from "./components/pages/JobOfferPage"
 import ApplyForJobPage from "./components/pages/ApplyForJobPage"
 import ContactUs from "./components/pages/ContactUs"
-import Pricing from "./components/pages/Pricing"
 import history from "./hooks/history";
 
 import './App.css';
@@ -52,14 +51,9 @@ function App() {
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
                     <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
-
                     <Route exact path="/contact-us" component={ContactUs}/>
-                    <Route exact path="/pricing" component={Pricing}/>
-
                     <Route exact path="/add-job-offer" component={AddJobOffer} />
                     <Route exact path="/add-company" component={AddCompany} />
-
-
                     <Route exact path="/profile/*" component={Profile}/>
                     <Route exact path="/company" component={Company}/>
                     <Route exact path="/favourite-job-offers" component={FavouriteJobOffers}/>

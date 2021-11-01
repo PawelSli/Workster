@@ -14,13 +14,15 @@ export default function JobOfferListElement({image, title, company, location, ca
             </div>
             <div className="container row col-8 col-md-10 col-lg-11 ">
                 <div className="col-11 d-flex flex-row row ">
-                    <div className="col-12 ">
-                        <h5 className="font-weight-bold text-hidden">
-                            {title}
-                            <br/>
-                            <small className="text-muted">{company}</small>
-                        </h5>
-                    </div>
+                    <a href="/job-offer" className="text-dark">
+                        <div className="col-12 ">
+                            <h5 className="font-weight-bold text-hidden">
+                                {title}
+                                <br/>
+                                <small className="text-muted">{company}</small>
+                            </h5>
+                        </div>
+                    </a>
                     <div className="row d-flex flex-row ">
                         <div className="col-6 col-md-3 text-hidden">
                             <FontAwesomeIcon className="icon-new-job-offers" icon={faMapMarkerAlt}/>{location}
@@ -45,19 +47,19 @@ export default function JobOfferListElement({image, title, company, location, ca
                          aria-labelledby="dropdownMenuLink">
                         {posted ?
                             <div>
-                                <a className="dropdown-item " href="#">See applications</a>
+                                <a className="dropdown-item " href="/job-requests">See applications</a>
                                 <div className="dropdown-divider"/>
                                 <a className="dropdown-item " href="#">Remove job offer</a>
                             </div>
                             :
                             applied ?
-                                <a className="dropdown-item " href="#">See your application</a>
+                                <a className="dropdown-item " href="/show-my-job-request">See your application</a>
                                 :
                                 <div>
                                     {!favourite ? <a className="dropdown-item " href="#">Add to favourites</a> :
                                         <a className="dropdown-item " href="#">Remove from favourites</a>}
-                                    {!applied ? <div className="dropdown-divider"/> : <div/>}
-                                    {!applied ? <a className="dropdown-item " href="#">Apply for a job</a> : <div/>}
+                                    {(!favourite && !applied) ? <div className="dropdown-divider"/> : <div/>}
+                                    {!applied ? <a className="dropdown-item " href="/apply-for-a-job">Apply for a job</a> : <div/>}
                                 </div>
                         }
                     </div>

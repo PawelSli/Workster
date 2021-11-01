@@ -7,15 +7,22 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageSearch from '@mui/icons-material/ImageSearch';
+import {useHistory} from "react-router-dom";
 
 
 export default function CompanyItem({image,title, from}) {
+
+    const history = useHistory();
+
+    const routeChange = (string) =>{
+        history.push(string);
+    }
 
     return (
         <ListItem alignItems="flex-start" secondaryAction={
             <div>
                 <IconButton edge="end" aria-label="look">
-                    <ImageSearch />
+                    <ImageSearch onClick={()=>routeChange("/company")}/>
                 </IconButton>
                 <IconButton edge="end" aria-label="delete">
                     <DeleteIcon />

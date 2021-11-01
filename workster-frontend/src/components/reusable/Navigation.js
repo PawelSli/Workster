@@ -2,13 +2,23 @@ import React, {useState} from "react";
 
 import logo from '../../assets/img/logo.svg';
 import Avatar from "@mui/material/Avatar";
+
 import { DropdownButton,Dropdown } from 'react-bootstrap';
+import { useHistory } from "react-router-dom";
+
 
 export default function Navigation() {
 
     const [addDropdown, setAddDropdown] = useState(false);
+    const [companyDropdown, setCompanyDropdown] = useState(false);
     const [adminDropdown, setAdminDropdown] = useState(false);
     const [jobOfferDropdown, setJobOfferDropdown] = useState(false);
+
+    const history = useHistory();
+
+    const routeChange = (string) =>{
+        history.push(string);
+    }
 
     return (
         <nav className="navbar navbar-light navbar-expand-md bg-dark sticky-top">
@@ -30,7 +40,13 @@ export default function Navigation() {
                                 <a className="dropdown-item" href="/posted-job-offers">My job offers</a>
                             </div>
                         </li>
-                        <li className="nav-item"><a className="nav-link link-navbar" href="#">Company</a></li>
+                        <li className="nav-item dropdown">
+                            <a className="nav-link link-navbar" href="#" onClick={() => setCompanyDropdown(!companyDropdown)}>My companies</a>
+                            <div className={`dropdown-menu ${companyDropdown ? 'show' : ''}`}
+                                 aria-labelledby="navbarDropdown">
+                                <a className="dropdown-item" href="/company">Company 1</a>
+                            </div>
+                        </li>
                         <li className="nav-item dropdown">
                             <a className="nav-link link-navbar" href="#" onClick={() => setAddDropdown(!addDropdown)}>Add...</a>
                             <div className={`dropdown-menu ${addDropdown ? 'show' : ''}`}
@@ -43,21 +59,20 @@ export default function Navigation() {
                             <a className="nav-link link-navbar" href="#" onClick={() => setAdminDropdown(!adminDropdown)}>Admin panel</a>
                             <div className={`dropdown-menu ${adminDropdown ? 'show' : ''}`}
                                  aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Delete user</a>
-                                <a className="dropdown-item" href="#">Delete company</a>
+                                <a className="dropdown-item" href="/delete-user">Delete user</a>
+                                <a className="dropdown-item" href="/delete-company">Delete company</a>
                             </div>
                         </li>
                     </ul>
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item"><a className="nav-link active" href="#">
                             <button className="btn btn-outline-primary swing animated" type="button"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="/signin">Log In
+                                     onClick={()=>routeChange("/login")}>Log In
                             </button>
                         </a></li>
                         <li className="nav-item"><a className="nav-link active" href="#">
-                            <button className="btn btn-primary swing animated" type="button" data-bs-toggle="modal"
-                                    data-bs-target="/register">Sign Up
+                            <button className="btn btn-primary swing animated" type="button"
+                                    onClick={()=>routeChange("/register")}>Sign Up
                             </button>
                         </a></li>
                         <li className="nav-item dropdown">
