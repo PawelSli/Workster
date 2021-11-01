@@ -19,3 +19,9 @@
 .input-key-words{
     width: 70%;
 }
+
+.text-hidden-requests{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
