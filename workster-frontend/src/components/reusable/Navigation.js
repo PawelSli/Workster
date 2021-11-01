@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 
 import logo from '../../assets/img/logo.svg';
+import Avatar from "@mui/material/Avatar";
+import { DropdownButton,Dropdown } from 'react-bootstrap';
 
 export default function Navigation() {
 
@@ -29,7 +31,6 @@ export default function Navigation() {
                             </div>
                         </li>
                         <li className="nav-item"><a className="nav-link link-navbar" href="#">Company</a></li>
-                        <li className="nav-item"><a className="nav-link link-navbar" href="/profile/files">Files</a></li>
                         <li className="nav-item dropdown">
                             <a className="nav-link link-navbar" href="#" onClick={() => setAddDropdown(!addDropdown)}>Add...</a>
                             <div className={`dropdown-menu ${addDropdown ? 'show' : ''}`}
@@ -59,6 +60,19 @@ export default function Navigation() {
                                     data-bs-target="/register">Sign Up
                             </button>
                         </a></li>
+                        <li className="nav-item dropdown">
+                            <Dropdown id="dropdown-basic">
+                                <Dropdown.Toggle variant="black"  id="dropdown-basic">
+                                    <Avatar alt="Travis Howard" src={`${process.env.PUBLIC_URL}/star-sky.jpg`}/>
+                                </Dropdown.Toggle>
+
+                                <Dropdown.Menu>
+                                    <Dropdown.Item href="/profile/main">Profile</Dropdown.Item>
+                                    <Dropdown.Item href="/profile/files">Files</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-3">Log out</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </li>
                     </ul>
                 </div>
             </div>
