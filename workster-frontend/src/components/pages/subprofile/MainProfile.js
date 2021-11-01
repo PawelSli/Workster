@@ -8,9 +8,26 @@ import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
 import React from "react";
 import ExperienceItem from "../../reusable/ExperienceItem";
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
 
 export default function MainProfile() {
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     return(
         <main>
@@ -171,12 +188,32 @@ export default function MainProfile() {
                                     </div>
                                     <hr/>
                                     <div className="row">
-                                        <div className="col-sm-12">
+                                        <div className="col-12  ">
                                             <button type="button" className="btn btn-primary">Edit</button>
+                                            <button type="button" className="btn btn-warning profile-changes-buttons-margin">Change your password</button>
+                                            <button type="button" onClick={handleOpen} data-toggle="modal" data-target="#exampleModalCenter" className="btn btn-danger profile-changes-buttons-margin">Delete your account</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={style} className="bg-dark card shadow-lg">
+                                    <Typography id="modal-modal-title" variant="h6" component="h2" className="text-center text-white">
+                                        Are you sure you want to delete your account?
+                                    </Typography>
+                                    <div className="d-flex justify-content-end mt-3">
+                                        <button type="button" className="btn btn-primary" onClick={handleClose}>Go back</button>
+                                        <button type="button" className="btn btn-danger profile-changes-buttons-margin">Delete account</button>
+                                    </div>
+                                </Box>
+                            </Modal>
+
 
                             <div className="card mb-3 shadow-lg">
                                 <div className="card-body ">
@@ -214,8 +251,6 @@ export default function MainProfile() {
 
                                                 Vestibulum eget mi lacus. Ut ac luctus leo, ac volutpat sapien. Integer feugiat a justo sit amet mollis. Maecenas dui velit, sodales non vehicula quis, blandit non massa. Mauris nibh augue, posuere vel venenatis at, imperdiet non ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla tempus imperdiet tellus sit amet tempor. Curabitur mauris ligula, dictum at tellus et, dignissim pharetra ex.
                                             </small>
-                                            <br/>
-                                            <button type="button" className="btn btn-primary mt-4">Edit</button>
                                         </div>
                                     </div>
                                 </div>
