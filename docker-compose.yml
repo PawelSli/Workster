@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    container_name: mysql_db
+    environment:
+      MYSQL_DATABASE: 'workster'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'user_password'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    ports:
+    - "3306:3306"
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
