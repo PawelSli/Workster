@@ -38,6 +38,7 @@ import EditUserInformation from "./components/pages/EditUserInformation";
 import ChangePassword from "./components/pages/ChangePassword";
 import ShowMyJobRequest from "./components/pages/ShowMyJobRequest";
 import EditJobOffer from "./components/EditJobOffer";
+import PrivateRoute from "./components/reusable/PrivateRoute";
 
 function App() {
 
@@ -50,25 +51,24 @@ function App() {
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
-                    <Route exact path="/apply-for-a-job" component={ApplyForJobPage}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
-                    <Route exact path="/add-job-offer" component={AddJobOffer} />
-                    <Route exact path="/add-company" component={AddCompany} />
-                    <Route exact path="/profile/*" component={Profile}/>
                     <Route exact path="/company" component={Company}/>
-                    <Route exact path="/favourite-job-offers" component={FavouriteJobOffers}/>
-                    <Route exact path="/posted-job-offers" component={PostedJobOffers}/>
-                    <Route exact path="/applied-job-offers" component={AppliedJobOffers}/>
-                    <Route exact path="/job-requests" component={JobRequests}/>
-                    <Route exact path="/edit-experience" component={EditExperience}/>
-                    <Route exact path="/edit-education" component={EditEducation}/>
-                    <Route exact path="/delete-user" component={DeleteUser}/>
-                    <Route exact path="/delete-company" component={DeleteCompany}/>
-                    <Route exact path="/edit-user-information" component={EditUserInformation}/>
-                    <Route exact path="/change-password" component={ChangePassword}/>
-                    <Route exact path="/show-my-job-request" component={ShowMyJobRequest}/>
-                    <Route exact path="/edit-job-offer" component={EditJobOffer}/>
-
+                    <PrivateRoute exact path="/apply-for-a-job" component={ApplyForJobPage}/>
+                    <PrivateRoute exact path="/add-job-offer" component={AddJobOffer} />
+                    <PrivateRoute exact path="/add-company" component={AddCompany} />
+                    <PrivateRoute exact path="/profile/*" component={Profile}/>
+                    <PrivateRoute exact path="/favourite-job-offers" component={FavouriteJobOffers}/>
+                    <PrivateRoute exact path="/posted-job-offers" component={PostedJobOffers}/>
+                    <PrivateRoute exact path="/applied-job-offers" component={AppliedJobOffers}/>
+                    <PrivateRoute exact path="/job-requests" component={JobRequests}/>
+                    <PrivateRoute exact path="/edit-experience" component={EditExperience}/>
+                    <PrivateRoute exact path="/edit-education" component={EditEducation}/>
+                    <PrivateRoute exact path="/delete-user" component={DeleteUser}/>
+                    <PrivateRoute exact path="/delete-company" component={DeleteCompany}/>
+                    <PrivateRoute exact path="/edit-user-information" component={EditUserInformation}/>
+                    <PrivateRoute exact path="/change-password" component={ChangePassword}/>
+                    <PrivateRoute exact path="/show-my-job-request" component={ShowMyJobRequest}/>
+                    <PrivateRoute exact path="/edit-job-offer" component={EditJobOffer}/>
                 </Switch>
             </Router>
         </>

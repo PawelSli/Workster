@@ -70,3 +70,8 @@
   transform: translateY(1px);
 }
 
+.white-input-form{
+  color: red !important;
+  background: red;
+  /*background-color: rgb(232,240,254);*/
+}
