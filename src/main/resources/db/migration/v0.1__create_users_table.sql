@@ -4,6 +4,7 @@ create table users
     name        varchar(255)  not null,
     password    varchar(255)  not null,
     created_at  timestamp     not null,
+    birth       date     not null,
     title       varchar(50)   null,
     address     varchar(255)  null,
     email       varchar(255)  null,
