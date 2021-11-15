@@ -65,7 +65,7 @@ function App() {
                     <PrivateRoute exact path="/edit-education" component={EditEducation}/>
                     <PrivateRoute exact path="/delete-user" component={DeleteUser}/>
                     <PrivateRoute exact path="/delete-company" component={DeleteCompany}/>
-                    <PrivateRoute exact path="/edit-user-information" component={EditUserInformation}/>
+                    <PrivateRoute exact path="/edit-user-information/*" component={EditUserInformation}/>
                     <PrivateRoute exact path="/change-password" component={ChangePassword}/>
                     <PrivateRoute exact path="/show-my-job-request" component={ShowMyJobRequest}/>
                     <PrivateRoute exact path="/edit-job-offer" component={EditJobOffer}/>

@@ -1,9 +1,13 @@
 package com.github.pawelsli.workster.domain;
 
+import com.github.pawelsli.workster.entities.JobOffer;
 import com.github.pawelsli.workster.entities.User;
+import com.github.pawelsli.workster.mapper.FileMapper;
+import com.github.pawelsli.workster.mapper.UserMapper;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -19,6 +24,7 @@ import java.util.stream.Collectors;
 public class UserImpl implements UserDetails {
 
     private static final long serialVersionUID = 1L;
+
     private Long userId;
     private String username;
     private String password;
@@ -36,6 +42,7 @@ public class UserImpl implements UserDetails {
     private String description;
     private String image;
     private Collection<? extends GrantedAuthority> authorities;
+    private Set<FileImpl> files;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,6 +60,18 @@ public class UserImpl implements UserDetails {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .authorities(authorities)
+                .createdAt(user.getCreatedAt())
+                .birth(user.getBirth())
+                .title(user.getTitle())
+                .address(user.getAddress())
+                .phone(user.getPhone())
+                .website(user.getWebsite())
+                .github(user.getGithub())
+                .twitter(user.getTwitter())
+                .instagram(user.getInstagram())
+                .facebook(user.getFacebook())
+                .description(user.getDescription())
+                .image(user.getImage())
                 .build();
     }
 

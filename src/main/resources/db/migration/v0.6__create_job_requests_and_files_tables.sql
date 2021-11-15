@@ -8,7 +8,7 @@ create table job_requests
     constraint job_requests_user_id_fk
         foreign key (id_user) references users (id),
     description  varchar(5000) not null
-)
+);
 
 create table files
 (
@@ -16,9 +16,8 @@ create table files
     id_user bigint       not null,
     constraint files_user_id_fk
         foreign key (id_user) references users (id),
-    name    varchar(255) not null,
-    type    varchar(255) not null
-)
+    name    varchar(255) not null
+);
 
 create table job_requests_files(
     id_file bigint not null,
@@ -28,5 +27,5 @@ create table job_requests_files(
         foreign key (id_file) references files(id),
     constraint job_requests_files_request_id_fk
         foreign key (id_job_request) references job_requests(id)
-)
+);
 

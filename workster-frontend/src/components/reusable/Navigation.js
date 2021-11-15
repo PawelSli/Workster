@@ -31,7 +31,7 @@ export default function Navigation() {
                 setAdmin(true)
             }
         }
-    });
+    },[]);
 
     return (
         <nav className="navbar navbar-light navbar-expand-md bg-dark sticky-top">

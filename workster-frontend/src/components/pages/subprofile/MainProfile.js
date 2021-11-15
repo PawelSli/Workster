@@ -6,23 +6,42 @@ import Avatar from "@mui/material/Avatar";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import ExperienceItem from "../../reusable/ExperienceItem";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {useHistory} from "react-router-dom";
+import UserService from "../../../services/user.service"
 
 export default function MainProfile() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('');
+    const [birth, setBirth] = useState('');
+    const [description, setDescription] = useState('');
+    const [facebook, setFacebook] = useState('');
+    const [github, setGithub] = useState('');
+    const [image, setImage] = useState('');
+    const [instagram, setInstagram] = useState('');
+    const [phone, setPhone] = useState('');
+    const [title, setTitle] = useState('');
+    const [twitter, setTwitter] = useState('');
+    const [website, setWebsite] = useState('');
+    const [photo, setPhoto] = useState(null);
+
+    const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const history = useHistory();
 
-    const routeChange = (string) =>{
+    const routeChange = (string) => {
         history.push(string);
-    }
+    };
 
     const style = {
         position: 'absolute',
@@ -36,7 +55,50 @@ export default function MainProfile() {
         p: 4,
     };
 
-    return(
+    const uploadPhoto = (event) => {
+        event.preventDefault();
+        setMessage("");
+        setLoading(true);
+
+        UserService.uploadPhoto(event.target.files[0])
+            .then(
+                ()=>window.location.reload(),
+                (error)=>{
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+
+                    setLoading(false);
+                    setMessage(resMessage);
+                }
+            )
+    };
+
+    useEffect(() => {
+        UserService.getMainProfileInformation(window.location.href.split('/')[5])
+            .then(response => {
+                setName(response.data.username);
+                setEmail(response.data.email);
+                setAddress(response.data.address);
+                setBirth(response.data.birth);
+                setDescription(response.data.description);
+                setFacebook(response.data.facebook);
+                setGithub(response.data.github);
+                setImage(response.data.image);
+                setInstagram(response.data.instagram);
+                setPhone(response.data.phone);
+                setTitle(response.data.title);
+                setTwitter(response.data.twitter);
+                setWebsite(response.data.website);
+                setPhoto(response.data.image);
+            })
+            .catch(error => console.log(error));
+    }, []);
+
+    return (
         <main>
             <div className="container mt-3">
                 <div className="main-body">
@@ -45,13 +107,12 @@ export default function MainProfile() {
                             <div className="card shadow-lg">
                                 <div className="card-body">
                                     <div className="d-flex flex-column align-items-center text-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                        <img src={`${process.env.PUBLIC_URL}/${photo}`} alt="Admin"
                                              className="rounded-circle" width="150"/>
                                         <div className="mt-3">
-                                            <h4>John Doe</h4>
-                                            <p className="text-secondary mb-1">Full Stack Developer</p>
-                                            <p className="text-muted font-size-sm">Bay Area, San Francisco,
-                                                CA</p>
+                                            <h4>{name}</h4>
+                                            <p className="text-secondary mb-1">{title}</p>
+                                            <p className="text-muted font-size-sm">{address}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +132,7 @@ export default function MainProfile() {
                                             </svg>
                                             Website
                                         </h6>
-                                        <span className="text-secondary">https://bootdey.com</span>
+                                        <span className="text-secondary">{website}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 className="mb-0">
@@ -84,7 +145,7 @@ export default function MainProfile() {
                                             </svg>
                                             Github
                                         </h6>
-                                        <span className="text-secondary">bootdey</span>
+                                        <span className="text-secondary">{github}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 className="mb-0">
@@ -97,7 +158,7 @@ export default function MainProfile() {
                                             </svg>
                                             Twitter
                                         </h6>
-                                        <span className="text-secondary">@bootdey</span>
+                                        <span className="text-secondary">{twitter}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 className="mb-0">
@@ -111,7 +172,7 @@ export default function MainProfile() {
                                             </svg>
                                             Instagram
                                         </h6>
-                                        <span className="text-secondary">bootdey</span>
+                                        <span className="text-secondary">{instagram}</span>
                                     </li>
                                     <li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                                         <h6 className="mb-0">
@@ -124,7 +185,7 @@ export default function MainProfile() {
                                             </svg>
                                             Facebook
                                         </h6>
-                                        <span className="text-secondary">bootdey</span>
+                                        <span className="text-secondary">{facebook}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -134,14 +195,19 @@ export default function MainProfile() {
                                     <div className="text-center">
                                         <p className="h5">Education:</p>
                                     </div>
-                                    <div >
-                                        <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
-                                            <ExperienceItem title="Engineer" company="Cracow University of Technology" from="Octover 2008" to="June 2013" image="pk.png"/>
-                                            <Divider variant="inset" component="li" />
-                                            <ExperienceItem title="High School Graduate" company="Liceum Ogólnokształcące nr 1 w Limanowej im. Władysława Orkana" from="September 2005" to="June 2008" image="lo1.jpg"/>
+                                    <div>
+                                        <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+                                            <ExperienceItem title="Engineer" company="Cracow University of Technology"
+                                                            from="Octover 2008" to="June 2013" image="pk.png"/>
+                                            <Divider variant="inset" component="li"/>
+                                            <ExperienceItem title="High School Graduate"
+                                                            company="Liceum Ogólnokształcące nr 1 w Limanowej im. Władysława Orkana"
+                                                            from="September 2005" to="June 2008" image="lo1.jpg"/>
                                         </List>
                                     </div>
-                                    <button type="button" onClick={()=>routeChange("/edit-education")} className="btn btn-primary">Edit</button>
+                                    <button type="button" onClick={() => routeChange("/edit-education")}
+                                            className="btn btn-primary">Edit
+                                    </button>
                                 </div>
 
                             </div>
@@ -149,12 +215,19 @@ export default function MainProfile() {
                         <div className="col-md-8">
                             <div className="card mb-3 shadow-lg">
                                 <div className="card-body">
+                                    {message && (
+                                        <div className="form-group">
+                                            <div className={"alert alert-danger"} role="alert">
+                                                {message}
+                                            </div>
+                                        </div>
+                                    )}
                                     <div className="row">
                                         <div className="col-sm-3">
                                             <h6 className="mb-0">Full Name</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            Kenneth Valdez
+                                            {name}
                                         </div>
                                     </div>
                                     <hr/>
@@ -163,7 +236,7 @@ export default function MainProfile() {
                                             <h6 className="mb-0">Email</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            fip@jukmuh.al
+                                            {email}
                                         </div>
                                     </div>
                                     <hr/>
@@ -172,16 +245,16 @@ export default function MainProfile() {
                                             <h6 className="mb-0">Phone</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            (239) 816-9029
+                                            {phone}
                                         </div>
                                     </div>
                                     <hr/>
                                     <div className="row">
                                         <div className="col-sm-3">
-                                            <h6 className="mb-0">Mobile</h6>
+                                            <h6 className="mb-0">Date of birth</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            (320) 380-4539
+                                            {birth}
                                         </div>
                                     </div>
                                     <hr/>
@@ -190,15 +263,33 @@ export default function MainProfile() {
                                             <h6 className="mb-0">Address</h6>
                                         </div>
                                         <div className="col-sm-9 text-secondary">
-                                            Bay Area, San Francisco, CA
+                                            {address}
                                         </div>
                                     </div>
                                     <hr/>
                                     <div className="row">
                                         <div className="col-12  ">
-                                            <button type="button" className="btn btn-primary" onClick={()=>routeChange("/edit-user-information")}>Edit</button>
-                                            <button type="button" className="btn btn-warning profile-changes-buttons-margin" onClick={()=>routeChange("/change-password")}>Change your password</button>
-                                            <button type="button" onClick={handleOpen} data-toggle="modal" data-target="#exampleModalCenter" className="btn btn-danger profile-changes-buttons-margin">Delete your account</button>
+                                            <button type="button" className="btn btn-primary"
+                                                    onClick={() => routeChange("/edit-user-information")}>Edit
+                                            </button>
+                                            <button type="button"
+                                                    className="btn btn-warning profile-changes-buttons-margin"
+                                                    onClick={() => routeChange("/change-password")}>Change your password
+                                            </button>
+                                            <button type="button" onClick={handleOpen} data-toggle="modal"
+                                                    data-target="#exampleModalCenter"
+                                                    className="btn btn-danger profile-changes-buttons-margin">Delete
+                                                your account
+                                            </button>
+                                            <button type="button"
+                                                    className="btn btn-outline-danger w-md waves-effect waves-light margin-left-files-button"
+                                                    onClick={() => document.getElementById("getFile").click()}>
+                                                {loading && (
+                                                    <span className="spinner-border spinner-border-sm"/>
+                                                )}
+                                                Upload photo
+                                            </button>
+                                            <input type='file' id="getFile" onChange={uploadPhoto} style={{display: "none"}}/>
                                         </div>
                                     </div>
                                 </div>
@@ -211,12 +302,17 @@ export default function MainProfile() {
                                 aria-describedby="modal-modal-description"
                             >
                                 <Box sx={style} className="bg-dark card shadow-lg">
-                                    <Typography id="modal-modal-title" variant="h6" component="h2" className="text-center text-white">
+                                    <Typography id="modal-modal-title" variant="h6" component="h2"
+                                                className="text-center text-white">
                                         Are you sure you want to delete your account?
                                     </Typography>
                                     <div className="d-flex justify-content-end mt-3">
-                                        <button type="button" className="btn btn-primary" onClick={handleClose}>Go back</button>
-                                        <button type="button" className="btn btn-danger profile-changes-buttons-margin">Delete account</button>
+                                        <button type="button" className="btn btn-primary" onClick={handleClose}>Go
+                                            back
+                                        </button>
+                                        <button type="button"
+                                                className="btn btn-danger profile-changes-buttons-margin">Delete account
+                                        </button>
                                     </div>
                                 </Box>
                             </Modal>
@@ -227,16 +323,21 @@ export default function MainProfile() {
                                     <div className="text-center">
                                         <p className="h5">Experience:</p>
                                     </div>
-                                    <div >
-                                        <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="microsoft.png"/>
-                                            <Divider variant="inset" component="li" />
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="sabre.jpg"/>
-                                            <Divider variant="inset" component="li" />
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008" to="March 2021" image="ibm.jpg"/>
+                                    <div>
+                                        <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
+                                                            to="March 2021" image="microsoft.png"/>
+                                            <Divider variant="inset" component="li"/>
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
+                                                            to="March 2021" image="sabre.jpg"/>
+                                            <Divider variant="inset" component="li"/>
+                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
+                                                            to="March 2021" image="ibm.jpg"/>
                                         </List>
                                     </div>
-                                    <button type="button" className="btn btn-primary" onClick={()=>routeChange("/edit-experience")}>Edit</button>
+                                    <button type="button" className="btn btn-primary"
+                                            onClick={() => routeChange("/edit-experience")}>Edit
+                                    </button>
                                 </div>
                             </div>
 
@@ -245,18 +346,55 @@ export default function MainProfile() {
                                     <div className="card h-100 shadow-lg">
                                         <div className="card-body">
                                             <h6 className="d-flex align-items-center mb-3 d-flex justify-content-center">
-                                                <p className="h5" >Description:</p>
+                                                <p className="h5">Description:</p>
                                             </h6>
                                             <small>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac bibendum nisi. Praesent vel tristique ante. Curabitur lorem urna, dictum ut mattis eu, tincidunt in ligula. Ut nec vehicula elit, at semper nisl. Donec malesuada condimentum justo. Duis eleifend ante sit amet eros hendrerit gravida. Etiam libero ex, suscipit eu eros eget, consectetur efficitur magna. Sed molestie dictum lorem, at placerat lorem volutpat ut. Nam eget maximus ipsum, ac cursus ex.
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ac
+                                                bibendum nisi. Praesent vel tristique ante. Curabitur lorem urna, dictum
+                                                ut mattis eu, tincidunt in ligula. Ut nec vehicula elit, at semper nisl.
+                                                Donec malesuada condimentum justo. Duis eleifend ante sit amet eros
+                                                hendrerit gravida. Etiam libero ex, suscipit eu eros eget, consectetur
+                                                efficitur magna. Sed molestie dictum lorem, at placerat lorem volutpat
+                                                ut. Nam eget maximus ipsum, ac cursus ex.
 
-                                                Integer ac semper nulla. Mauris non enim dignissim ex tincidunt vestibulum eu eget elit. Sed sit amet erat ut augue vestibulum vestibulum. Cras risus diam, accumsan sit amet felis at, gravida mattis quam. Proin vel mattis odio. Donec ornare tortor at felis ornare, ut tempor sapien ullamcorper. Nullam a eleifend erat, sit amet tincidunt odio. Ut quis ligula ut eros vestibulum volutpat. Curabitur pretium nunc metus, at congue nibh dapibus at. Aliquam erat volutpat. Nunc aliquet felis placerat mi efficitur, id congue neque scelerisque. Maecenas enim elit, posuere vel nulla nec, ultricies viverra ligula. Fusce aliquam enim elit, in ultrices mi gravida sit amet. Curabitur porttitor nec ex in ornare. Nullam commodo non eros in eleifend. Nunc nec risus lacus.
+                                                Integer ac semper nulla. Mauris non enim dignissim ex tincidunt
+                                                vestibulum eu eget elit. Sed sit amet erat ut augue vestibulum
+                                                vestibulum. Cras risus diam, accumsan sit amet felis at, gravida mattis
+                                                quam. Proin vel mattis odio. Donec ornare tortor at felis ornare, ut
+                                                tempor sapien ullamcorper. Nullam a eleifend erat, sit amet tincidunt
+                                                odio. Ut quis ligula ut eros vestibulum volutpat. Curabitur pretium nunc
+                                                metus, at congue nibh dapibus at. Aliquam erat volutpat. Nunc aliquet
+                                                felis placerat mi efficitur, id congue neque scelerisque. Maecenas enim
+                                                elit, posuere vel nulla nec, ultricies viverra ligula. Fusce aliquam
+                                                enim elit, in ultrices mi gravida sit amet. Curabitur porttitor nec ex
+                                                in ornare. Nullam commodo non eros in eleifend. Nunc nec risus lacus.
 
-                                                Donec eget tristique felis. Nam non ante quis velit feugiat convallis a eget velit. Curabitur faucibus turpis mi, non condimentum ante molestie quis. Morbi condimentum dolor vel viverra suscipit. Phasellus rutrum ornare euismod. Cras faucibus non lectus a lacinia. Sed suscipit nibh eget velit bibendum, at suscipit elit malesuada. Praesent quis nibh eget orci blandit condimentum. Vivamus molestie eleifend magna, at tincidunt sem iaculis vitae. Aliquam erat volutpat. Proin venenatis elit lacus, in interdum quam commodo non. Ut turpis urna, rutrum quis eros quis, lobortis placerat nunc. Nullam ac sollicitudin elit. Mauris sed finibus lacus.
+                                                Donec eget tristique felis. Nam non ante quis velit feugiat convallis a
+                                                eget velit. Curabitur faucibus turpis mi, non condimentum ante molestie
+                                                quis. Morbi condimentum dolor vel viverra suscipit. Phasellus rutrum
+                                                ornare euismod. Cras faucibus non lectus a lacinia. Sed suscipit nibh
+                                                eget velit bibendum, at suscipit elit malesuada. Praesent quis nibh eget
+                                                orci blandit condimentum. Vivamus molestie eleifend magna, at tincidunt
+                                                sem iaculis vitae. Aliquam erat volutpat. Proin venenatis elit lacus, in
+                                                interdum quam commodo non. Ut turpis urna, rutrum quis eros quis,
+                                                lobortis placerat nunc. Nullam ac sollicitudin elit. Mauris sed finibus
+                                                lacus.
 
-                                                Nullam vitae odio justo. Donec accumsan consequat nisl vel finibus. Donec dignissim, nunc at elementum tempus, tellus velit facilisis lectus, in tempus orci dui et ex. Curabitur a efficitur felis. Donec quis mattis dui. Nunc volutpat posuere sollicitudin. Donec libero augue, posuere ac turpis ac, fringilla faucibus ligula. Proin dictum metus a nisi convallis, at blandit ante facilisis. Ut tincidunt orci eu urna imperdiet lacinia.
+                                                Nullam vitae odio justo. Donec accumsan consequat nisl vel finibus.
+                                                Donec dignissim, nunc at elementum tempus, tellus velit facilisis
+                                                lectus, in tempus orci dui et ex. Curabitur a efficitur felis. Donec
+                                                quis mattis dui. Nunc volutpat posuere sollicitudin. Donec libero augue,
+                                                posuere ac turpis ac, fringilla faucibus ligula. Proin dictum metus a
+                                                nisi convallis, at blandit ante facilisis. Ut tincidunt orci eu urna
+                                                imperdiet lacinia.
 
-                                                Vestibulum eget mi lacus. Ut ac luctus leo, ac volutpat sapien. Integer feugiat a justo sit amet mollis. Maecenas dui velit, sodales non vehicula quis, blandit non massa. Mauris nibh augue, posuere vel venenatis at, imperdiet non ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla tempus imperdiet tellus sit amet tempor. Curabitur mauris ligula, dictum at tellus et, dignissim pharetra ex.
+                                                Vestibulum eget mi lacus. Ut ac luctus leo, ac volutpat sapien. Integer
+                                                feugiat a justo sit amet mollis. Maecenas dui velit, sodales non
+                                                vehicula quis, blandit non massa. Mauris nibh augue, posuere vel
+                                                venenatis at, imperdiet non ligula. Pellentesque habitant morbi
+                                                tristique senectus et netus et malesuada fames ac turpis egestas. Nulla
+                                                tempus imperdiet tellus sit amet tempor. Curabitur mauris ligula, dictum
+                                                at tellus et, dignissim pharetra ex.
                                             </small>
                                         </div>
                                     </div>
