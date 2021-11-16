@@ -21,6 +21,8 @@ create table experiences
             on delete cascade,
     title      varchar(255) not null,
     company    varchar(255) not null,
+    location   varchar(255) not null,
     start_date date         not null,
-    end_date   date         not null
+    end_date   date         null,
+    still_work boolean      null
 );

@@ -6,7 +6,7 @@ const API_URL = "http://localhost:8080/profile/";
 const uploadPhoto = (file) => {
     let formData = new FormData();
     formData.append("file", file);
-    return axios.post(API_URL + `upload-photo`,formData, {
+    return axios.post(API_URL + `upload-photo`, formData, {
         headers: authHeader(),
         "Content-Type": "multipart/form-data"
     })
