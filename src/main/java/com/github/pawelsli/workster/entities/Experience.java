@@ -31,7 +31,12 @@ public class Experience {
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "location", nullable = false)
+    private String location;
+
+    @Column(name = "end_date")
     private LocalDate endDate;
 
+    @Column(name = "still_work")
+    private Boolean stillWork;
 }
