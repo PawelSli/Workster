@@ -2,7 +2,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import React, {useState} from "react";
 
-export default function ExperienceFormItem({position, title, company, location, remove, update, updateCheckbox, startDate, endDate, stillWork}) {
+export default function EducationFormItem({position, title, school, location, remove, update, updateCheckbox, startDate, endDate, stillEducate}) {
 
     const onChange = (e) => update(e.target, position);
     const onChangeCheckbox = (e) => updateCheckbox(position);
@@ -15,7 +15,7 @@ export default function ExperienceFormItem({position, title, company, location, 
                 </IconButton>
             </div>
             <div className="text-center">
-                <p className="h5">Job nr {position}</p>
+                <p className="h5">School nr {position}</p>
             </div>
             <div className="mb-3">
                 <label htmlFor="inputTitle">Enter title</label>
@@ -23,8 +23,8 @@ export default function ExperienceFormItem({position, title, company, location, 
                        onChange={onChange}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="inputCompany">Enter company</label>
-                <input type="text" className="form-control" id="inputCompany" name="company" value={company}
+                <label htmlFor="inputCompany">Enter name of school</label>
+                <input type="text" className="form-control" id="inputCompany" name="school" value={school}
                        onChange={onChange}/>
             </div>
             <div className="mb-3">
@@ -33,25 +33,23 @@ export default function ExperienceFormItem({position, title, company, location, 
                        onChange={onChange}/>
             </div>
             <div className="mb-3">
-                <label htmlFor="inputStart">Indicate the time when you began working in this
-                    occupation</label>
+                <label htmlFor="inputStart">Indicate the time when you began to educate in this school</label>
                 <input type="date" name="startDate" className="form-control" id="inputStart" value={startDate}
                        onChange={onChange}
                        placeholder="Company location"/>
             </div>
             <div className="mb-3">
-                <input className="form-check-input" type="checkbox" value={stillWork} id="defaultCheck1" name="stillWork"
-                       onChange={onChangeCheckbox} checked={stillWork?"true":"false"}/>
+                <input className="form-check-input" type="checkbox" value={stillEducate} id="defaultCheck1" name="stillEducate"
+                       onChange={onChangeCheckbox} checked={stillEducate?"true":"false"}/>
                 <label className="form-check-label checkbox-margin" htmlFor="defaultCheck1">
-                    I still work there now
+                    I still educate there now
                 </label>
             </div>
             <div className="mb-3">
-                <label htmlFor="inputEnd">Indicate the time when you ended working in this
-                    occupation</label>
+                <label htmlFor="inputEnd">Indicate the time when you ended educating in this facility</label>
                 <input lang="eng-us" type="date" name="endDate" className="form-control" id="inputEnd" value={endDate}
                        onChange={onChange}
-                       placeholder="Company location" disabled={stillWork ? "disabled" : ""}/>
+                       placeholder="School location" disabled={stillEducate ? "disabled" : ""}/>
             </div>
         </form>
     )

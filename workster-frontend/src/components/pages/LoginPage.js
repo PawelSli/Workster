@@ -36,7 +36,7 @@ const LoginPage = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             AuthService.login(username, password).then(
                 () => {
-                    history.push("/profile/main");
+                    history.push(`/profile/main/${localStorage.getItem("user").username}`);
                     window.location.reload();
                 },
                 (error) => {

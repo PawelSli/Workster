@@ -16,6 +16,13 @@ const getMainProfileInformation = (username) => {
     return axios.get(API_URL + `main/${username}`);
 };
 
+const getMainProfileInformationForEdit = () => {
+    console.log("HMM");
+    return axios.get(API_URL+'edit-main-information',{
+        headers: authHeader()
+    })
+};
+
 const editMainProfileInformation = (name, email, address, birth, description, facebook, github, image, instagram, phone, title, twitter, website) => {
     return axios.post(API_URL + 'edit-main-information', {
         name,
@@ -39,5 +46,6 @@ const editMainProfileInformation = (name, email, address, birth, description, fa
 export default {
     getMainProfileInformation,
     editMainProfileInformation,
-    uploadPhoto
+    uploadPhoto,
+    getMainProfileInformationForEdit
 };

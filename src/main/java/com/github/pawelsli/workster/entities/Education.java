@@ -31,6 +31,12 @@ public class Education {
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "end_date")
     private LocalDate endDate;
+
+    @Column(name = "location", nullable = false)
+    private String location;
+
+    @Column(name = "still_educate")
+    private Boolean stillEducate;
 }
