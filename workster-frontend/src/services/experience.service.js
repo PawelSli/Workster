@@ -3,10 +3,14 @@ import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/experience";
 
+const getExperiencesPublic = (username) => {
+    return axios.get(API_URL+`/public/${username}`);
+}
+
 const getExperiences = () => {
-    return axios.get(API_URL, {
+    return axios.get(API_URL,{
         headers: authHeader(),
-    });
+    })
 };
 
 const saveExperiences = (listOfExperiences) => {
@@ -18,5 +22,6 @@ const saveExperiences = (listOfExperiences) => {
 
 export default {
     getExperiences,
+    getExperiencesPublic,
     saveExperiences
 };

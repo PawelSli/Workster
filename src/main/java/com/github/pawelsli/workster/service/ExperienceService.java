@@ -22,14 +22,22 @@ import java.util.stream.Collectors;
 public class ExperienceService {
 
     private final ExperienceRepository experienceRepository;
+    private final UserRepository userRepository;
     private final UserMapper userMapper;
     private final ExperienceMapper experienceMapper;
 
     @Autowired
-    public ExperienceService(ExperienceRepository experienceRepository, UserMapper userMapper, ExperienceMapper experienceMapper) {
+    public ExperienceService(ExperienceRepository experienceRepository, UserRepository userRepository, UserMapper userMapper, ExperienceMapper experienceMapper) {
         this.experienceRepository = experienceRepository;
+        this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.experienceMapper = experienceMapper;
+    }
+
+    public ExperienceResponse getAllUserExperiencesPublic(String username) {
+        UserImpl user = userMapper.userToUserImpl(userRepository.findByName(username).orElseThrow());
+        List<Experience> experienceList = experienceRepository.findAllByUser(userMapper.userImplToUser(user));
+        return new ExperienceResponse(experienceList.stream().map(experienceMapper::experienceToExperienceImpl).collect(Collectors.toList()));
     }
 
     public ExperienceResponse getAllUserExperiences() {

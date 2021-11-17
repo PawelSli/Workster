@@ -17,7 +17,6 @@ const getMainProfileInformation = (username) => {
 };
 
 const getMainProfileInformationForEdit = () => {
-    console.log("HMM");
     return axios.get(API_URL+'edit-main-information',{
         headers: authHeader()
     })

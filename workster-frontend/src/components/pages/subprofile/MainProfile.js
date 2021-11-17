@@ -102,7 +102,7 @@ export default function MainProfile() {
             })
             .catch(error => console.log(error));
 
-        ExperienceService.getExperiences().then(
+        ExperienceService.getExperiencesPublic(window.location.href.split('/')[5]).then(
             result => {
                 setExperiences(result.data.experienceList);
                 console.log(result.data)
@@ -110,7 +110,7 @@ export default function MainProfile() {
             error => console.log(error)
         );
 
-        EducationService.getEducations().then(
+        EducationService.getEducationPublic(window.location.href.split('/')[5]).then(
             result => {
                 setEducations(result.data.educationList);
                 console.log(result.data)
