@@ -2,7 +2,6 @@ package com.github.pawelsli.workster.controllers;
 
 import com.github.pawelsli.workster.domain.ExperienceImpl;
 import com.github.pawelsli.workster.entities.Experience;
-import com.github.pawelsli.workster.payload.request.ExperienceRequest;
 import com.github.pawelsli.workster.payload.response.ExperienceResponse;
 import com.github.pawelsli.workster.payload.response.MessageResponse;
 import com.github.pawelsli.workster.service.ExperienceService;

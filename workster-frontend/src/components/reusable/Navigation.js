@@ -108,7 +108,7 @@ export default function Navigation() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/profile/main">Profile</Dropdown.Item>
+                                        <Dropdown.Item href={`/profile/main/${JSON.parse(localStorage.getItem('user')).username}`}>Profile</Dropdown.Item>
                                         <Dropdown.Item href="/profile/files">Files</Dropdown.Item>
                                         <Dropdown.Item onClick={() => {
                                             AuthService.logout();

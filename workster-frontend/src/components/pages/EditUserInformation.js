@@ -22,7 +22,7 @@ export default function EditUserInformation() {
     const [website, setWebsite] = useState('');
 
     useEffect(() => {
-        UserService.getMainProfileInformation(window.location.href.split('/')[4])
+        UserService.getMainProfileInformationForEdit()
             .then(response => {
                 setName(response.data.username);
                 setEmail(response.data.email);

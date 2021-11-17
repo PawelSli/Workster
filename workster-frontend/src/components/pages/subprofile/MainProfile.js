@@ -13,6 +13,9 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import {useHistory} from "react-router-dom";
 import UserService from "../../../services/user.service"
+import ExperienceService from "../../../services/experience.service"
+import EducationService from "../../../services/education.service"
+import ExperienceFormItem from "../../reusable/ExperienceFormItem";
 
 export default function MainProfile() {
     const [open, setOpen] = useState(false);
@@ -30,6 +33,8 @@ export default function MainProfile() {
     const [twitter, setTwitter] = useState('');
     const [website, setWebsite] = useState('');
     const [photo, setPhoto] = useState(null);
+    const [experiences, setExperiences] = useState([]);
+    const [educations,setEducations] = useState([]);
 
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
@@ -62,8 +67,8 @@ export default function MainProfile() {
 
         UserService.uploadPhoto(event.target.files[0])
             .then(
-                ()=>window.location.reload(),
-                (error)=>{
+                () => window.location.reload(),
+                (error) => {
                     const resMessage =
                         (error.response &&
                             error.response.data &&
@@ -96,6 +101,24 @@ export default function MainProfile() {
                 setPhoto(response.data.image);
             })
             .catch(error => console.log(error));
+
+        ExperienceService.getExperiences().then(
+            result => {
+                setExperiences(result.data.experienceList);
+                console.log(result.data)
+            },
+            error => console.log(error)
+        );
+
+        EducationService.getEducations().then(
+            result => {
+                setEducations(result.data.educationList);
+                console.log(result.data)
+            },
+            error => console.log(error)
+        )
+
+
     }, []);
 
     return (
@@ -197,12 +220,15 @@ export default function MainProfile() {
                                     </div>
                                     <div>
                                         <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-                                            <ExperienceItem title="Engineer" company="Cracow University of Technology"
-                                                            from="Octover 2008" to="June 2013" image="pk.png"/>
-                                            <Divider variant="inset" component="li"/>
-                                            <ExperienceItem title="High School Graduate"
-                                                            company="Liceum Ogólnokształcące nr 1 w Limanowej im. Władysława Orkana"
-                                                            from="September 2005" to="June 2008" image="lo1.jpg"/>
+                                            {
+                                                educations.map((item,index)=>(
+                                                        <div>
+                                                            <ExperienceItem title={item.title} company={item.school} from={item.startDate}
+                                                                            to={item.endDate} index={index} list={experiences.length} />
+                                                        </div>
+                                                    )
+                                                )
+                                            }
                                         </List>
                                     </div>
                                     <button type="button" onClick={() => routeChange("/edit-education")}
@@ -289,7 +315,8 @@ export default function MainProfile() {
                                                 )}
                                                 Upload photo
                                             </button>
-                                            <input type='file' id="getFile" onChange={uploadPhoto} style={{display: "none"}}/>
+                                            <input type='file' id="getFile" onChange={uploadPhoto}
+                                                   style={{display: "none"}}/>
                                         </div>
                                     </div>
                                 </div>
@@ -325,14 +352,15 @@ export default function MainProfile() {
                                     </div>
                                     <div>
                                         <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
-                                                            to="March 2021" image="microsoft.png"/>
-                                            <Divider variant="inset" component="li"/>
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
-                                                            to="March 2021" image="sabre.jpg"/>
-                                            <Divider variant="inset" component="li"/>
-                                            <ExperienceItem title="Team Manager" company="Microsoft" from="January 2008"
-                                                            to="March 2021" image="ibm.jpg"/>
+                                            {
+                                                experiences.map((item,index)=>(
+                                                    <div>
+                                                        <ExperienceItem title={item.title} company={item.company} from={item.startDate}
+                                                                            to={item.endDate} index={index} list={experiences.length} />
+                                                    </div>
+                                                    )
+                                                )
+                                            }
                                         </List>
                                     </div>
                                     <button type="button" className="btn btn-primary"

@@ -37,6 +37,14 @@ public class UserController {
         return ResponseEntity.ok(profileInformationResponse);
     }
 
+    @GetMapping(value = "/edit-main-information")
+    public ResponseEntity<?> getProfileInformation(){
+        ProfileInformationResponse profileInformationResponse = userService.getProfileInformationForEditPage();
+
+        log.info("Retrieving user profile information: {} successfully completed", profileInformationResponse.getUsername());
+        return ResponseEntity.ok(profileInformationResponse);
+    }
+
     @PostMapping(value = "/edit-main-information")
     public ResponseEntity<?> editProfile(@Valid @RequestBody ProfileInformationRequest profileInformationRequest) {
         userService.modifyUser(profileInformationRequest);

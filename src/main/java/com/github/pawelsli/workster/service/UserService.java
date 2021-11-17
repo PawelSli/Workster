@@ -44,6 +44,11 @@ public class UserService implements UserDetailsService {
         return new ProfileInformationResponse(user);
     }
 
+    public ProfileInformationResponse getProfileInformationForEditPage(){
+        String name = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        return getProfileInformation(name);
+    }
+
     public void modifyUser(ProfileInformationRequest profileInformationRequest) {
         String userName = ((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         UserImpl userImpl = (UserImpl) loadUserByUsername(userName);
