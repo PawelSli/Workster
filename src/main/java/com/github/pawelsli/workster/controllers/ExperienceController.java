@@ -26,6 +26,14 @@ public class ExperienceController {
         this.experienceService = experienceService;
     }
 
+    @GetMapping(value = "/public/{name}")
+    public ResponseEntity<?> getExperiencesForUserPublic(@PathVariable String name) {
+        ExperienceResponse experienceResponse = experienceService.getAllUserExperiencesPublic(name);
+
+        log.info("Getting list of experience ended successfully");
+        return ResponseEntity.ok(experienceResponse);
+    }
+
     @GetMapping
     public ResponseEntity<?> getExperiencesForUser() {
         ExperienceResponse experienceResponse = experienceService.getAllUserExperiences();
@@ -35,11 +43,11 @@ public class ExperienceController {
     }
 
     @PostMapping(consumes = "application/json")
-    public ResponseEntity<?> updateUserExperience(@Valid @RequestBody List<ExperienceImpl> experienceList){
+    public ResponseEntity<?> updateUserExperience(@Valid @RequestBody List<ExperienceImpl> experienceList) {
         experienceService.saveUserExperiences(experienceList);
 
         log.info("Saving list of experience ended successfully");
         return ResponseEntity.ok(new MessageResponse("Saving list of experience ended successfully"));
     }
-    
+
 }

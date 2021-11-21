@@ -15,9 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/profile")
+@RequestMapping ("/profile")
 @Slf4j
 public class UserController {
     private final UserService userService;
@@ -29,7 +29,7 @@ public class UserController {
         this.fileStorageService = fileStorageService;
     }
 
-    @GetMapping(value = "/main/{name}")
+    @GetMapping (value = "/main/{name}")
     public ResponseEntity<?> getProfileByName(@PathVariable String name) {
         ProfileInformationResponse profileInformationResponse = userService.getProfileInformation(name);
 
@@ -37,15 +37,16 @@ public class UserController {
         return ResponseEntity.ok(profileInformationResponse);
     }
 
-    @GetMapping(value = "/edit-main-information")
-    public ResponseEntity<?> getProfileInformation(){
+    @GetMapping (value = "/edit-main-information")
+    public ResponseEntity<?> getProfileInformation() {
         ProfileInformationResponse profileInformationResponse = userService.getProfileInformationForEditPage();
 
-        log.info("Retrieving user profile information: {} successfully completed", profileInformationResponse.getUsername());
+        log.info("Retrieving user profile information: {} successfully completed",
+                profileInformationResponse.getUsername());
         return ResponseEntity.ok(profileInformationResponse);
     }
 
-    @PostMapping(value = "/edit-main-information")
+    @PostMapping (value = "/edit-main-information")
     public ResponseEntity<?> editProfile(@Valid @RequestBody ProfileInformationRequest profileInformationRequest) {
         userService.modifyUser(profileInformationRequest);
 
@@ -53,14 +54,18 @@ public class UserController {
         return ResponseEntity.ok(new MessageResponse("User main data successfully modified!"));
     }
 
-    @PostMapping(value = "/upload-photo")
-    public ResponseEntity<?> uploadPhoto(@RequestParam("file") MultipartFile multipartFile) {
+    @PostMapping (value = "/upload-photo")
+    public ResponseEntity<?> uploadPhoto(@RequestParam ("file") MultipartFile multipartFile) {
         String message = "";
         try {
+            if (fileStorageService.checkIfExist(multipartFile.getOriginalFilename())) {
+                throw new Exception();
+            }
             fileStorageService.uploadPhoto(multipartFile);
 
             log.info("Photo: {} uploaded successfully", multipartFile.getOriginalFilename());
-            return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse("Uploaded the file successfully: " + multipartFile.getOriginalFilename()));
+            return ResponseEntity.status(HttpStatus.OK).body(
+                    new MessageResponse("Uploaded the file successfully: " + multipartFile.getOriginalFilename()));
         } catch (Exception e) {
             message = "Could not upload the file: " + multipartFile.getOriginalFilename() + "!";
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new MessageResponse(message));

@@ -6,6 +6,8 @@ import Avatar from "@mui/material/Avatar";
 import {DropdownButton, Dropdown} from 'react-bootstrap';
 import {useHistory} from "react-router-dom";
 import AuthService from "../../services/auth.service"
+import CompanyService from "../../services/company.service"
+import NavigationDropdownItem from "./NavigationDropdownItem";
 
 
 export default function Navigation() {
@@ -16,6 +18,7 @@ export default function Navigation() {
     const [jobOfferDropdown, setJobOfferDropdown] = useState(false);
     const [currentUser, setCurrentUser] = useState(false);
     const [admin, setAdmin] = useState(false);
+    const [companies, setCompanies] = useState([]);
 
     const history = useHistory();
 
@@ -30,8 +33,15 @@ export default function Navigation() {
             if (user.roles.includes("ROLE_ADMIN")) {
                 setAdmin(true)
             }
+            CompanyService.getAllCompaniesNames()
+                .then(result => {
+                    setCompanies(result.data.companyNames)
+                    console.log(result.data.companyNames)
+                }, error => {
+                    console.log(error);
+                })
         }
-    },[]);
+    }, []);
 
     return (
         <nav className="navbar navbar-light navbar-expand-md bg-dark sticky-top">
@@ -60,7 +70,13 @@ export default function Navigation() {
                                    onClick={() => setCompanyDropdown(!companyDropdown)}>My companies</a>
                                 <div className={`dropdown-menu ${companyDropdown ? 'show' : ''}`}
                                      aria-labelledby="navbarDropdown">
-                                    <a className="dropdown-item" href="/company">Company 1</a>
+                                    <div>
+                                        {
+                                            companies.map((item) =>
+                                                <NavigationDropdownItem target={item}/>
+                                            )
+                                        }
+                                    </div>
                                 </div>
                             </li>
                             <li className="nav-item dropdown">
@@ -108,7 +124,8 @@ export default function Navigation() {
                                     </Dropdown.Toggle>
 
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href={`/profile/main/${JSON.parse(localStorage.getItem('user')).username}`}>Profile</Dropdown.Item>
+                                        <Dropdown.Item
+                                            href={`/profile/main/${JSON.parse(localStorage.getItem('user')).username}`}>Profile</Dropdown.Item>
                                         <Dropdown.Item href="/profile/files">Files</Dropdown.Item>
                                         <Dropdown.Item onClick={() => {
                                             AuthService.logout();

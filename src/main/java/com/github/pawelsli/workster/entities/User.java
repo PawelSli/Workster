@@ -27,7 +27,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_role")}
     )
-    Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
@@ -35,7 +35,7 @@ public class User {
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_job_offer")}
     )
-    Set<JobOffer> favouriteJobOffers = new HashSet<>();
+    private Set<JobOffer> favouriteJobOffers = new HashSet<>();
 
     @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinTable(
@@ -43,7 +43,10 @@ public class User {
             joinColumns = {@JoinColumn(name = "id_user")},
             inverseJoinColumns = {@JoinColumn(name = "id_job_offer")}
     )
-    Set<JobOffer> appliedJobOffers = new HashSet<>();
+    private Set<JobOffer> appliedJobOffers = new HashSet<>();
+
+    @ManyToMany(mappedBy = "candidates")
+    private Set<Company> companySet = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Recruiter> recruiters = new HashSet<>();
@@ -51,7 +54,7 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Education> educations = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Experience> experiences = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

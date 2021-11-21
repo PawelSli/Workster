@@ -7,6 +7,7 @@ create table job_offers
     id_user     bigint        not null,
     constraint job_offers_user_id_fk
         foreign key (id_user) references users (id),
+    title       varchar(255)  not null,
     location    varchar(255)  not null,
     salary_low  varchar(255)  not null,
     salary_high varchar(255)  not null,

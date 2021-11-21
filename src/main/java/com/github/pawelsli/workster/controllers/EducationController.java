@@ -24,6 +24,14 @@ public class EducationController {
         this.educationService = educationService;
     }
 
+    @GetMapping(value = "/public/{name}")
+    public ResponseEntity<?> getEducationForUserPublic(@PathVariable String name){
+        EducationResponse educationResponse = educationService.getAllUserEducationsPublic(name);
+
+        log.info("Getting list of educations ended successfully");
+        return ResponseEntity.ok(educationResponse);
+    }
+
     @GetMapping
     public ResponseEntity<?> getEducationsForUser() {
         EducationResponse educationResponse = educationService.getAllUserEducations();

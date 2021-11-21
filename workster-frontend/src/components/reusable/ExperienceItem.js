@@ -31,7 +31,6 @@ export default function ExperienceItem({title, company, from, to, image,index,si
                                 component="span"
                                 variant="body2"
                                 color="text.primary"
-                                contentEditable="true"
                             >
                                 {company}
                                 <br/>

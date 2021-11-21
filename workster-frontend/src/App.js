@@ -33,7 +33,7 @@ import EditExperience from "./components/pages/EditExperience";
 import EditEducation from "./components/pages/EditEducation";
 import DeleteUser from "./components/pages/DeleteUser";
 import DeleteCompany from "./components/pages/DeleteCompany";
-import AddCompany from "./components/AddCompany";
+import AddCompany from "./components/pages/AddCompany";
 import EditUserInformation from "./components/pages/EditUserInformation";
 import ChangePassword from "./components/pages/ChangePassword";
 import ShowMyJobRequest from "./components/pages/ShowMyJobRequest";
@@ -52,7 +52,7 @@ function App() {
                     <Route exact path="/register" component={RegisterPage}/>
                     <Route exact path="/job-offer" component={JobOfferPage}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
-                    <Route exact path="/company" component={Company}/>
+                    <Route exact path="/company/*" component={Company}/>
                     <PrivateRoute exact path="/apply-for-a-job" component={ApplyForJobPage}/>
                     <PrivateRoute exact path="/add-job-offer" component={AddJobOffer} />
                     <PrivateRoute exact path="/add-company" component={AddCompany} />
