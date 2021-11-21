@@ -1,5 +1,6 @@
 package com.github.pawelsli.workster.entities;
 
+import com.github.pawelsli.workster.enums.RecruiterRole;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,7 @@ public class Recruiter {
     @JoinColumn(name = "id_company", nullable = false)
     private Company company;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private String status;
+    private RecruiterRole status;
 }

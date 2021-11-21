@@ -27,9 +27,13 @@ public class Company {
     )
     Set<User> candidates = new HashSet<>();
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Recruiter> recruiters;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Recruiter> recruiters = new HashSet<>();
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Lob
     @Column(name = "description")
     private String description;
 

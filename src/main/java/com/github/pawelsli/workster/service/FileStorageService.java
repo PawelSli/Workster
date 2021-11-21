@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.*;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -34,14 +35,6 @@ public class FileStorageService {
         this.userMapper = userMapper;
     }
 
-    public void init() {
-        try {
-            Files.createDirectory(root);
-        } catch (IOException e) {
-            throw new RuntimeException("Could not initialize folder for upload!");
-        }
-    }
-
     public void uploadPhoto(MultipartFile file) {
         try {
             Files.copy(file.getInputStream(), this.root.resolve(file.getOriginalFilename()));
@@ -52,6 +45,11 @@ public class FileStorageService {
         } catch (Exception e) {
             throw new RuntimeException("Could not store the file. Error: " + e.getMessage());
         }
+    }
+
+    public boolean checkIfExist(String fileName){
+        Path path = Paths.get(root+fileName);
+        return Files.exists(path);
     }
 
     public Resource load(String filename) {

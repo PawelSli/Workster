@@ -130,7 +130,7 @@ export default function MainProfile() {
                             <div className="card shadow-lg">
                                 <div className="card-body">
                                     <div className="d-flex flex-column align-items-center text-center">
-                                        <img src={`${process.env.PUBLIC_URL}/${photo}`} alt="Admin"
+                                        <img src={`${process.env.PUBLIC_URL}/photo/${photo}`} alt="Admin"
                                              className="rounded-circle" width="150"/>
                                         <div className="mt-3">
                                             <h4>{name}</h4>

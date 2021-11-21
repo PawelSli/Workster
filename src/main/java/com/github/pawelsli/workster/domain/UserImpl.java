@@ -1,12 +1,11 @@
 package com.github.pawelsli.workster.domain;
 
 import com.github.pawelsli.workster.entities.JobOffer;
+import com.github.pawelsli.workster.entities.Recruiter;
 import com.github.pawelsli.workster.entities.User;
 import com.github.pawelsli.workster.mapper.FileMapper;
 import com.github.pawelsli.workster.mapper.UserMapper;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,7 +18,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder(access = AccessLevel.PUBLIC)
 public class UserImpl implements UserDetails {
 
@@ -42,7 +44,7 @@ public class UserImpl implements UserDetails {
     private String description;
     private String image;
     private Collection<? extends GrantedAuthority> authorities;
-    private Set<FileImpl> files;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
