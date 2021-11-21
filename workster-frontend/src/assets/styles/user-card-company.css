@@ -3,3 +3,18 @@
     height: 10vw;
     object-fit: cover;
 }
+
+.inactiveLink {
+    pointer-events: none;
+    cursor: default;
+}
+
+.crown-not-admin{
+    font-size:1em;
+    -webkit-text-stroke-color: blue;
+    color:transparent;
+}
+
+.crown-not-admin:hover{
+    color: red !important;
+}

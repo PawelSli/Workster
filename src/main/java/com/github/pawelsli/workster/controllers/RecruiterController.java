@@ -1,6 +1,7 @@
 package com.github.pawelsli.workster.controllers;
 
 import com.github.pawelsli.workster.payload.request.DeleteUserRequest;
+import com.github.pawelsli.workster.payload.request.PromoteUserRequest;
 import com.github.pawelsli.workster.payload.response.MessageResponse;
 import com.github.pawelsli.workster.service.RecruiterService;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +38,21 @@ public class RecruiterController {
             return ResponseEntity.badRequest().body(
                     "Could not delete user. Error: " + exception.getMessage());
         }
+    }
 
+    @PostMapping (value = "/promote")
+    public ResponseEntity<?> promoteUserToCompanyAdmin(@Valid @RequestBody PromoteUserRequest promoteUserRequest) {
+        try {
+            recruiterService.promoteUserToCompanyAdmin(promoteUserRequest);
+
+            log.info("User: {} successfully promoted to admin in company: {}",
+                    promoteUserRequest.getRecruiterToPromote(), promoteUserRequest.getCompanyName());
+            return ResponseEntity.ok(new MessageResponse("User: " + promoteUserRequest.getRecruiterToPromote() + " " +
+                    "successfully promoted to admin in company: " + promoteUserRequest.getCompanyName()));
+        } catch (Exception exception) {
+            log.warn("Could not promote user. Error: {}", exception.getMessage());
+            return ResponseEntity.badRequest().body(
+                    "Could not promote user. Error: " + exception.getMessage());
+        }
     }
 }

@@ -65,7 +65,7 @@ export default function JobOfferPage() {
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>
-                                    <Event />
+                                    <Event  />
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText primary="Published" secondary="01.02.2022"  />
