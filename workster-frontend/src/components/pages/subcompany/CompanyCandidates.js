@@ -1,24 +1,15 @@
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faCrown, faSearchPlus, faTrash, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import CompanyUserCard from "../../reusable/CompanyUserCard";
+import React from "react";
 
-export default function CompanyCandidates() {
+export default function CompanyCandidates({candidates,companyName}) {
 
     return (
         <div className="row p-2">
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
-            <CompanyUserCard/>
+            {candidates.map(item => (
+                <CompanyUserCard username={item.username} createdAt={item.createdAt}
+                                 image={item.image} title={item.title} companyName={companyName}/>
+            ))}
         </div>
     )
+
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 public class CompanyDataResponse {
     private RecruiterRole recruiterRole;
-    private List<UserImpl> candidates;
+    private List<UserImplCandidateDataResponse> candidates;
     private List<RecruiterDataResponse> recruiters;
     private List<JobOfferListElementResponse> jobOffers;
     private String name;
@@ -54,7 +54,7 @@ public class CompanyDataResponse {
     }
 
     public CompanyDataResponse(RecruiterRole recruiterRole,
-                               List<UserImpl> candidates,
+                               List<UserImplCandidateDataResponse> candidates,
                                Map<UserImpl, RecruiterImpl> recruiters,
                                List<JobOfferListElementResponse> jobOffers,
                                String name,
