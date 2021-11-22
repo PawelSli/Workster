@@ -17,14 +17,13 @@ import com.github.pawelsli.workster.payload.request.CreateCompanyRequest;
 import com.github.pawelsli.workster.payload.response.CompanyDataResponse;
 import com.github.pawelsli.workster.payload.response.JobOfferListElementResponse;
 import com.github.pawelsli.workster.payload.response.NavigationCompanyListResponse;
+import com.github.pawelsli.workster.payload.response.UserImplCandidateDataResponse;
 import com.github.pawelsli.workster.repositories.CompanyRepository;
 import com.github.pawelsli.workster.repositories.JobOfferRepository;
 import com.github.pawelsli.workster.repositories.RecruiterRepository;
 import com.github.pawelsli.workster.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
@@ -37,7 +36,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class CompanyService {
@@ -118,9 +116,13 @@ public class CompanyService {
                     return new CompanyDataResponse(RecruiterRole.RECRUITER_BASIC, recruiterList, jobOffers,
                             company.getName(), company.getDescription(), company.getImage());
                 case RECRUITER_ADMIN: {
-                    List<UserImpl> candidates = company.getCandidates().stream()
+                    List<UserImplCandidateDataResponse> candidates = company.getCandidates().stream()
                             .map(userMapper::userToUserImpl)
+                            .map(UserImplCandidateDataResponse::new)
                             .collect(Collectors.toList());
+
+
+
                     return new CompanyDataResponse(RecruiterRole.RECRUITER_ADMIN, candidates, recruiterList, jobOffers,
                             company.getName(), company.getDescription(), company.getImage());
                 }

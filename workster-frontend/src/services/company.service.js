@@ -15,6 +15,7 @@ const getAllCompaniesNames = () => {
     });
 };
 
+
 const postCompany = (title, logo, description) => {
     let formData = new FormData();
     formData.append("logo", logo);

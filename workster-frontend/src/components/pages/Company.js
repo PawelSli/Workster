@@ -9,6 +9,8 @@ import "../../assets/styles/my-job-offer.css"
 import {faCheck, faPaperPlane, faSearchPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CompanyService from "../../services/company.service";
+import CandidateService from "../../services/candidate.service";
+import AuthService from "../../services/auth.service";
 
 export default function Company() {
 
@@ -20,6 +22,7 @@ export default function Company() {
     const [adminEdit, setAdminEdit] = useState('');
     const [admin, setAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [applicable, setApplicable] = useState(false);
 
 
     const [companyInfo, setCompanyInfo] = useState({
@@ -52,6 +55,11 @@ export default function Company() {
                     setAdminEdit('Edit company');
                     setAdmin(true);
                 }
+                if (result.data.recruiterRole === "NON_RECRUITER" && AuthService.isLogged()) {
+                    setApplicable(true);
+                    await checkIfCandidate(result.data.name);
+                }
+
                 setLoading(false);
             } catch (error) {
                 console.log(error);
@@ -60,8 +68,27 @@ export default function Company() {
     }
 
     const clickItemToSendRequest = () => {
-        setDisabled(true);
-        setText("Request send");
+        CandidateService.applyForRecruiter(companyInfo.name).then(
+            result => {
+                setDisabled(true);
+                setText("Request send");
+            },
+            error => {
+                console.log(error)
+            }
+        )
+    };
+
+    const checkIfCandidate = (company) => {
+        return CandidateService.checkIfApplied(company)
+            .then(result => {
+                if (result.data.applied) {
+                    setText("You already applied for recruiter in this company.");
+                    setDisabled(true);
+                }
+            }, error => {
+                console.log(error);
+            });
     };
 
     useGetCompanyInfo();
@@ -124,16 +151,22 @@ export default function Company() {
                                                         </a>
                                                     </li>
                                                 </ul>
-                                                <ul className="navbar-nav ms-auto">
-                                                    <li className="nav-item"><a className="nav-link active" href="#">
-                                                        <button disabled={disable}
-                                                                className="btn btn-outline-primary swing animated"
-                                                                type="button" onClick={() => clickItemToSendRequest()}>
-                                                            {text} <FontAwesomeIcon
-                                                            icon={!disable ? faPaperPlane : faCheck}/>
-                                                        </button>
-                                                    </a></li>
-                                                </ul>
+                                                {
+                                                    applicable && (
+                                                        <ul className="navbar-nav ms-auto">
+                                                            <li className="nav-item"><a className="nav-link active"
+                                                                                        href="#">
+                                                                <button disabled={disable}
+                                                                        className="btn btn-outline-primary swing animated"
+                                                                        type="button"
+                                                                        onClick={() => clickItemToSendRequest()}>
+                                                                    {text} <FontAwesomeIcon
+                                                                    icon={!disable ? faPaperPlane : faCheck}/>
+                                                                </button>
+                                                            </a></li>
+                                                        </ul>
+                                                    )
+                                                }
                                             </div>
                                         </div>
                                     </nav>
@@ -143,7 +176,7 @@ export default function Company() {
                                 <div className="col-12 col-md-8  card shadow-lg">
                                     <CompanySubPage subPage={subPage} text={companyInfo.description}
                                                     recruiters={companyInfo.recruiters} admin={admin}
-                                                    companyName={companyInfo.name}/>
+                                                    companyName={companyInfo.name} candidates={companyInfo.candidates}/>
                                 </div>
                             </div>
                         </div>
