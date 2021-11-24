@@ -13,21 +13,21 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    @Value("${pawelsli.app.jwtSecret}")
+    @Value ("${pawelsli.app.jwtSecret}")
     private String jwtSecret;
 
-    @Value("${pawelsli.app.jwtExpirationMs}")
+    @Value ("${pawelsli.app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
         UserImpl user = (UserImpl) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(user.getEmail())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
-                .compact();
+                   .setSubject(user.getEmail())
+                   .setIssuedAt(new Date())
+                   .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                   .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                   .compact();
     }
 
     public String getEmailFromJwtToken(String token) {

@@ -1,7 +1,7 @@
 create table companies
 (
     id          bigint auto_increment primary key,
-    id_user     bigint                              not null,
+    name        varchar(255)                        not null,
     description longtext COLLATE utf8mb4_unicode_ci not null,
     image       varchar(255)                        not null
 );

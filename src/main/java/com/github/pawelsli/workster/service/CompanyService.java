@@ -14,6 +14,7 @@ import com.github.pawelsli.workster.mapper.JobOfferMapper;
 import com.github.pawelsli.workster.mapper.RecruiterMapper;
 import com.github.pawelsli.workster.mapper.UserMapper;
 import com.github.pawelsli.workster.payload.request.CreateCompanyRequest;
+import com.github.pawelsli.workster.payload.request.ModifyCompanyRequest;
 import com.github.pawelsli.workster.payload.response.CompanyDataResponse;
 import com.github.pawelsli.workster.payload.response.JobOfferListElementResponse;
 import com.github.pawelsli.workster.payload.response.NavigationCompanyListResponse;
@@ -89,13 +90,13 @@ public class CompanyService {
         Company company = companyRepository.findByName(name);
         List<JobOfferListElementResponse> jobOffers =
                 jobOfferRepository.findAllByCompany(company).stream()
-                        .map(jobOfferMapper::jobOfferToJobOfferImpl)
-                        .map(JobOfferListElementResponse::new)
-                        .collect(Collectors.toList());
+                                  .map(jobOfferMapper::jobOfferToJobOfferImpl)
+                                  .map(JobOfferListElementResponse::new)
+                                  .collect(Collectors.toList());
 
         if (principal.toString().equalsIgnoreCase("anonymousUser")) {
             return new CompanyDataResponse(RecruiterRole.NON_RECRUITER, jobOffers, company.getName(),
-                    company.getDescription(), company.getImage());
+                                           company.getDescription(), company.getImage());
         }
         User user = userMapper.userImplToUser((UserImpl) principal);
         Optional<Recruiter> companyRecruiter =
@@ -105,7 +106,7 @@ public class CompanyService {
         if (companyRecruiter.isEmpty()) {
 
             return new CompanyDataResponse(RecruiterRole.NON_RECRUITER, jobOffers, company.getName(),
-                    company.getDescription(), company.getImage());
+                                           company.getDescription(), company.getImage());
 
         } else {
 
@@ -113,40 +114,46 @@ public class CompanyService {
 
             switch (companyRecruiter.get().getStatus()) {
                 case RECRUITER_BASIC:
-                    return new CompanyDataResponse(RecruiterRole.RECRUITER_BASIC, recruiterList, jobOffers,
-                            company.getName(), company.getDescription(), company.getImage());
+                    return new CompanyDataResponse(RecruiterRole.RECRUITER_BASIC,
+                                                   recruiterList,
+                                                   jobOffers,
+                                                   company.getName(),
+                                                   company.getDescription(),
+                                                   company.getImage());
                 case RECRUITER_ADMIN: {
                     List<UserImplCandidateDataResponse> candidates = company.getCandidates().stream()
-                            .map(userMapper::userToUserImpl)
-                            .map(UserImplCandidateDataResponse::new)
-                            .collect(Collectors.toList());
+                                                                            .map(userMapper::userToUserImpl)
+                                                                            .map(UserImplCandidateDataResponse::new)
+                                                                            .collect(Collectors.toList());
 
-
-
-                    return new CompanyDataResponse(RecruiterRole.RECRUITER_ADMIN, candidates, recruiterList, jobOffers,
-                            company.getName(), company.getDescription(), company.getImage());
+                    return new CompanyDataResponse(RecruiterRole.RECRUITER_ADMIN,
+                                                   candidates,
+                                                   recruiterList,
+                                                   jobOffers,
+                                                   company.getName(),
+                                                   company.getDescription(),
+                                                   company.getImage());
                 }
                 default:
-                    throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED,
-                            "This type of recruiter is not implemented!");
+                    throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "This type of recruiter is not implemented!");
             }
         }
     }
 
     private Map<UserImpl, RecruiterImpl> getRecruitersMap(Company company) {
         List<UserImpl> userList = userRepository.findAllByRecruitersIn(company.getRecruiters()).stream()
-                .map(userMapper::userToUserImpl)
-                .collect(Collectors.toList());
+                                                .map(userMapper::userToUserImpl)
+                                                .collect(Collectors.toList());
         List<RecruiterImpl> recruiterList = company.getRecruiters().stream()
-                .map(recruiterMapper::recruiterToRecruiterImpl)
-                .collect(Collectors.toList());
+                                                   .map(recruiterMapper::recruiterToRecruiterImpl)
+                                                   .collect(Collectors.toList());
 
         Map<UserImpl, RecruiterImpl> finalMapOfRecruiters = new HashMap<>();
         userList.forEach(user -> {
             RecruiterImpl recruiterForUser = recruiterList.stream()
-                    .filter(recruiter -> recruiter.getUser().getEmail().equalsIgnoreCase(user.getEmail()))
-                    .findFirst()
-                    .orElseThrow(IllegalStateException::new);
+                                                          .filter(recruiter -> recruiter.getUser().getEmail().equalsIgnoreCase(user.getEmail()))
+                                                          .findFirst()
+                                                          .orElseThrow(IllegalStateException::new);
             finalMapOfRecruiters.put(user, recruiterForUser);
         });
 
@@ -186,5 +193,16 @@ public class CompanyService {
 
         companyRepository.save(company);
         recruiterRepository.save(recruiter);
+    }
+
+    public void modifyCompanyDate(ModifyCompanyRequest modifyCompanyRequest, MultipartFile multipartFile) throws Exception {
+        Files.copy(multipartFile.getInputStream(), this.root.resolve(multipartFile.getOriginalFilename()));
+        if (! companyRepository.existsByName(modifyCompanyRequest.getPreviousCompanyName())) {
+            throw new RuntimeException("Company with name: " + modifyCompanyRequest.getPreviousCompanyName() + " does not exist!");
+        }
+        Company company = companyRepository.findByName(modifyCompanyRequest.getPreviousCompanyName());
+
+        company = modifyCompanyRequest.modifyCompany(company, multipartFile.getOriginalFilename());
+        companyRepository.save(company);
     }
 }

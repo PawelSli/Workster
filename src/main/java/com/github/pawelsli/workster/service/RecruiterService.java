@@ -15,9 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-/**
- * @noinspection DuplicatedCode
- */
+
 @Service
 public class RecruiterService {
     private final RecruiterRepository recruiterRepository;
@@ -40,15 +38,15 @@ public class RecruiterService {
         UserImpl userImpl = getUser();
         Company company = companyRepository.findByName(deleteUserRequest.getCompanyName());
         Recruiter thisRecruiter = company.getRecruiters().stream()
-                .filter(recruiter -> recruiter.getUser().getName().equalsIgnoreCase(userImpl.getUsername()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("This user doesn't belong to the company!"));
+                                         .filter(recruiter -> recruiter.getUser().getName().equalsIgnoreCase(userImpl.getUsername()))
+                                         .findFirst()
+                                         .orElseThrow(() -> new RuntimeException("This user doesn't belong to the company!"));
 
         if (thisRecruiter.getStatus() == RecruiterRole.RECRUITER_BASIC) {
             throw new RuntimeException("This user is just a basic user!");
         }
         User fallenUser = userRepository.findByName(deleteUserRequest.getRecruiterToDelete())
-                .orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
+                                        .orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
         Recruiter recruiterToDelete = recruiterRepository.findByUserAndCompany(fallenUser, company);
         fallenUser.getRecruiters().remove(recruiterToDelete);
         userRepository.save(fallenUser);
@@ -61,15 +59,15 @@ public class RecruiterService {
         UserImpl userImpl = getUser();
         Company company = companyRepository.findByName(promoteUserRequest.getCompanyName());
         Recruiter thisRecruiter = company.getRecruiters().stream()
-                .filter(recruiter -> recruiter.getUser().getName().equalsIgnoreCase(userImpl.getUsername()))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("This user doesn't belong to the company!"));
+                                         .filter(recruiter -> recruiter.getUser().getName().equalsIgnoreCase(userImpl.getUsername()))
+                                         .findFirst()
+                                         .orElseThrow(() -> new RuntimeException("This user doesn't belong to the company!"));
 
         if (thisRecruiter.getStatus() == RecruiterRole.RECRUITER_BASIC) {
             throw new RuntimeException("This user is just a basic user!");
         }
         User userToPromote = userRepository.findByName(promoteUserRequest.getRecruiterToPromote())
-                .orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
+                                           .orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
         Recruiter recruiterToPromote = recruiterRepository.findByUserAndCompany(userToPromote, company);
         if (recruiterToPromote.getStatus() == RecruiterRole.RECRUITER_ADMIN) {
             throw new RuntimeException("This user is already admin!");
