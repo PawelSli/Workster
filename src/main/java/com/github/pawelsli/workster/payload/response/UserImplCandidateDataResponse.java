@@ -15,7 +15,7 @@ public class UserImplCandidateDataResponse {
     private LocalDateTime createdAt;
     private String image;
 
-    public UserImplCandidateDataResponse(UserImpl user){
+    public UserImplCandidateDataResponse(UserImpl user) {
         this.userId = user.getUserId();
         this.username = user.getUsername();
         this.title = user.getTitle();

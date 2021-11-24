@@ -27,7 +27,10 @@ public class EducationService {
     private final EducationMapper educationMapper;
 
     @Autowired
-    public EducationService(EducationRepository educationRepository, UserRepository userRepository, UserMapper userMapper, EducationMapper educationMapper) {
+    public EducationService(EducationRepository educationRepository,
+                            UserRepository userRepository,
+                            UserMapper userMapper,
+                            EducationMapper educationMapper) {
         this.educationRepository = educationRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;

@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.nio.file.*;
 
 import java.io.IOException;
@@ -47,8 +48,8 @@ public class FileStorageService {
         }
     }
 
-    public boolean checkIfExist(String fileName){
-        Path path = Paths.get(root+fileName);
+    public boolean checkIfExist(String fileName) {
+        Path path = Paths.get(root + fileName);
         return Files.exists(path);
     }
 

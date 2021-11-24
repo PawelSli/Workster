@@ -19,7 +19,7 @@ export default function CompanySubPage({admin,subPage,text,recruiters,companyNam
         case 3:
             return <CompanyCandidates candidates={candidates} companyName={companyName}/>
         case 4:
-            return <CompanyEdit/>
+            return <CompanyEdit oldName={companyName}/>
         default:
             <div/>
     }

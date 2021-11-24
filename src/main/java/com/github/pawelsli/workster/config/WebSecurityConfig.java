@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity (prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
@@ -53,15 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-                .antMatchers("/profile/main/**").permitAll()
-                .antMatchers("/profile/upload-photo").permitAll()
-                .antMatchers("/education/public/**").permitAll()
-                .antMatchers("/experience/public/**").permitAll()
-                .antMatchers("/company/public/**").permitAll()
-                .anyRequest().authenticated();
+            .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+            .authorizeRequests().antMatchers("/api/auth/**").permitAll()
+            .antMatchers("/profile/main/**").permitAll()
+            .antMatchers("/profile/upload-photo").permitAll()
+            .antMatchers("/education/public/**").permitAll()
+            .antMatchers("/experience/public/**").permitAll()
+            .antMatchers("/company/public/**").permitAll()
+            .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

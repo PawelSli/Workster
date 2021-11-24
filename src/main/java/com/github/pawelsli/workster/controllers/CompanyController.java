@@ -3,6 +3,7 @@ package com.github.pawelsli.workster.controllers;
 import com.github.pawelsli.workster.domain.CompanyImpl;
 import com.github.pawelsli.workster.entities.Company;
 import com.github.pawelsli.workster.payload.request.CreateCompanyRequest;
+import com.github.pawelsli.workster.payload.request.ModifyCompanyRequest;
 import com.github.pawelsli.workster.payload.response.CompanyDataResponse;
 import com.github.pawelsli.workster.payload.response.MessageResponse;
 import com.github.pawelsli.workster.payload.response.NavigationCompanyListResponse;
@@ -73,5 +74,24 @@ public class CompanyController {
                     "Could not create company with logo: " + multipartFile.getOriginalFilename() + "!");
         }
     }
+
+    @PostMapping (value = "/edit")
+    public ResponseEntity<?> modifyCompany(@RequestParam ("logo") MultipartFile multipartFile,
+                                           @Valid @ModelAttribute ModifyCompanyRequest modifyCompanyRequest) {
+
+        try {
+            companyService.modifyCompanyDate(modifyCompanyRequest, multipartFile);
+
+            log.info("Company: {} modified successfully", modifyCompanyRequest.getTitle());
+            return ResponseEntity.ok("Company: " + modifyCompanyRequest.getTitle() + " modified successfully");
+
+        } catch (Exception exception) {
+            log.error("Could not modify company data. Error: {}", exception.getMessage());
+            return ResponseEntity.badRequest().body(
+                    "Could not modify company. Error: " + exception.getMessage());
+        }
+
+    }
+
 
 }

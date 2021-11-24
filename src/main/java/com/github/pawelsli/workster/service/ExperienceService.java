@@ -27,7 +27,10 @@ public class ExperienceService {
     private final ExperienceMapper experienceMapper;
 
     @Autowired
-    public ExperienceService(ExperienceRepository experienceRepository, UserRepository userRepository, UserMapper userMapper, ExperienceMapper experienceMapper) {
+    public ExperienceService(ExperienceRepository experienceRepository,
+                             UserRepository userRepository,
+                             UserMapper userMapper,
+                             ExperienceMapper experienceMapper) {
         this.experienceRepository = experienceRepository;
         this.userRepository = userRepository;
         this.userMapper = userMapper;
