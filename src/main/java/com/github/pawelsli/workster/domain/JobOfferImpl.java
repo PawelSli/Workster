@@ -15,8 +15,8 @@ public class JobOfferImpl {
     private CompanyImpl company;
     private String title;
     private String location;
-    private String salary_low;
-    private String salary_high;
+    private Integer salary_low;
+    private Integer salary_high;
     private Boolean remote;
     private LocalDateTime createdAt;
     private String description;

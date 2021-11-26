@@ -9,11 +9,11 @@ create table job_offers
         foreign key (id_user) references users (id),
     title       varchar(255)  not null,
     location    varchar(255)  not null,
-    salary_low  varchar(255)  not null,
-    salary_high varchar(255)  not null,
+    salary_low  bigint  not null,
+    salary_high bigint not null,
     remote      bool          not null,
     created_at  timestamp     not null,
-    description varchar(5000) not null
+    description longtext COLLATE utf8mb4_unicode_ci not null
 );
 
 create table favourite_job_offers
