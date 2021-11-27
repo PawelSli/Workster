@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface JobOfferRepository extends JpaRepository<JobOffer,Long> {
+public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
 
     List<JobOffer> findAllByCompany(Company company);
+
+    JobOffer findByTitle(String title);
 }

@@ -4,7 +4,6 @@ import authHeader from "./auth-header";
 const API_URL = "http://localhost:8080/job-offer";
 
 const postJobOffer = (jobOfferInfo, address, companyName) => {
-    console.log(companyName.value)
     let formData = new FormData();
     formData.set("title", jobOfferInfo.title);
     formData.set("location", address);
@@ -19,7 +18,35 @@ const postJobOffer = (jobOfferInfo, address, companyName) => {
     });
 };
 
+const getAllJobOffers = () => {
+    return axios.get(API_URL + '/public', {
+        headers: authHeader()
+    });
+};
+
+const addJobToFavourites = (jobName) => {
+    return axios.post(API_URL + `/favourite/${jobName}`, {}, {
+        headers: authHeader()
+    });
+};
+
+const removeFromFavourites = (jobName) => {
+    return axios.post(API_URL + `/favourite/remove/${jobName}`, {}, {
+        headers: authHeader()
+    });
+};
+
+const deleteJobOffer = (jobName) => {
+    return axios.post(API_URL + `/remove/${jobName}`, {}, {
+        headers: authHeader()
+    });
+};
+
 
 export default {
     postJobOffer,
+    getAllJobOffers,
+    addJobToFavourites,
+    removeFromFavourites,
+    deleteJobOffer,
 }

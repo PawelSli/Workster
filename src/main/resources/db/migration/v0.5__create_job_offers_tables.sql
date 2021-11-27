@@ -25,7 +25,7 @@ create table favourite_job_offers
         foreign key (id_user) references users (id),
     constraint favourite_job_offers_job_offer_id_fk
         foreign key (id_job_offer) references job_offers (id)
-)
+);
 
 create table applied_job_offers
 (

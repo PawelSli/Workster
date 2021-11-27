@@ -1,10 +1,9 @@
 import React from "react";
 import CreatableSelect from "react-select/creatable";
 
-export default function CreatableMultiSearch({valueOptions,text}) {
+export default function CreatableMultiSearch({valueOptions,text,value,setValue}) {
 
-    const handleChange = (newValue, actionMeta) => {
-        console.log("Value:", newValue);
-    }
-    return <CreatableSelect isMulti onChange={handleChange} options={valueOptions} placeholder={text}/>
+
+    return <CreatableSelect isMulti onChange={setValue} options={valueOptions} placeholder={text}
+                value={value} />
 }
