@@ -30,6 +30,9 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Recruiter> recruiters = new HashSet<>();
 
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<JobOffer> jobOffers = new HashSet<>();
+
     @Column(name = "name", nullable = false)
     private String name;
 

@@ -41,10 +41,10 @@ public class JobOffer {
     private String location;
 
     @Column (name = "salary_low", nullable = false)
-    private String salary_low;
+    private Integer salary_low;
 
     @Column (name = "salary_high", nullable = false)
-    private String salary_high;
+    private Integer salary_high;
 
     @Column (name = "remote", nullable = false)
     private Boolean remote;
@@ -52,6 +52,7 @@ public class JobOffer {
     @Column (name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @Lob
     @Column (name = "description", nullable = false)
     private String description;
 }

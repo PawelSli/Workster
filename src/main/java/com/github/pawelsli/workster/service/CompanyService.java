@@ -88,25 +88,32 @@ public class CompanyService {
     public CompanyDataResponse getSpecificCompanyDate(String name) throws Exception {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Company company = companyRepository.findByName(name);
-        List<JobOfferListElementResponse> jobOffers =
-                jobOfferRepository.findAllByCompany(company).stream()
-                                  .map(jobOfferMapper::jobOfferToJobOfferImpl)
-                                  .map(JobOfferListElementResponse::new)
-                                  .collect(Collectors.toList());
+        List<JobOfferListElementResponse> jobOffers = jobOfferRepository.findAllByCompany(company)
+                                                                        .stream()
+                                                                        .map(jobOfferMapper::jobOfferToJobOfferImpl)
+                                                                        .map(JobOfferListElementResponse::new)
+                                                                        .collect(Collectors.toList());
 
         if (principal.toString().equalsIgnoreCase("anonymousUser")) {
-            return new CompanyDataResponse(RecruiterRole.NON_RECRUITER, jobOffers, company.getName(),
-                                           company.getDescription(), company.getImage());
+            return new CompanyDataResponse(RecruiterRole.NON_RECRUITER,
+                    jobOffers,
+                    company.getName(),
+                    company.getDescription(),
+                    company.getImage());
         }
         User user = userMapper.userImplToUser((UserImpl) principal);
-        Optional<Recruiter> companyRecruiter =
-                company.getRecruiters().stream().filter(
-                        recruiter -> recruiter.getUser().getName().equals(user.getName())).findFirst();
+        Optional<Recruiter> companyRecruiter = company.getRecruiters()
+                                                      .stream()
+                                                      .filter(recruiter -> recruiter.getUser().getName().equals(user.getName()))
+                                                      .findFirst();
 
         if (companyRecruiter.isEmpty()) {
 
-            return new CompanyDataResponse(RecruiterRole.NON_RECRUITER, jobOffers, company.getName(),
-                                           company.getDescription(), company.getImage());
+            return new CompanyDataResponse(RecruiterRole.NON_RECRUITER,
+                    jobOffers,
+                    company.getName(),
+                    company.getDescription(),
+                    company.getImage());
 
         } else {
 
@@ -115,24 +122,25 @@ public class CompanyService {
             switch (companyRecruiter.get().getStatus()) {
                 case RECRUITER_BASIC:
                     return new CompanyDataResponse(RecruiterRole.RECRUITER_BASIC,
-                                                   recruiterList,
-                                                   jobOffers,
-                                                   company.getName(),
-                                                   company.getDescription(),
-                                                   company.getImage());
+                            recruiterList,
+                            jobOffers,
+                            company.getName(),
+                            company.getDescription(),
+                            company.getImage());
                 case RECRUITER_ADMIN: {
-                    List<UserImplCandidateDataResponse> candidates = company.getCandidates().stream()
+                    List<UserImplCandidateDataResponse> candidates = company.getCandidates()
+                                                                            .stream()
                                                                             .map(userMapper::userToUserImpl)
                                                                             .map(UserImplCandidateDataResponse::new)
                                                                             .collect(Collectors.toList());
 
                     return new CompanyDataResponse(RecruiterRole.RECRUITER_ADMIN,
-                                                   candidates,
-                                                   recruiterList,
-                                                   jobOffers,
-                                                   company.getName(),
-                                                   company.getDescription(),
-                                                   company.getImage());
+                            candidates,
+                            recruiterList,
+                            jobOffers,
+                            company.getName(),
+                            company.getDescription(),
+                            company.getImage());
                 }
                 default:
                     throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "This type of recruiter is not implemented!");
@@ -141,10 +149,12 @@ public class CompanyService {
     }
 
     private Map<UserImpl, RecruiterImpl> getRecruitersMap(Company company) {
-        List<UserImpl> userList = userRepository.findAllByRecruitersIn(company.getRecruiters()).stream()
+        List<UserImpl> userList = userRepository.findAllByRecruitersIn(company.getRecruiters())
+                                                .stream()
                                                 .map(userMapper::userToUserImpl)
                                                 .collect(Collectors.toList());
-        List<RecruiterImpl> recruiterList = company.getRecruiters().stream()
+        List<RecruiterImpl> recruiterList = company.getRecruiters()
+                                                   .stream()
                                                    .map(recruiterMapper::recruiterToRecruiterImpl)
                                                    .collect(Collectors.toList());
 
@@ -163,10 +173,11 @@ public class CompanyService {
     public NavigationCompanyListResponse getAllCompanies() {
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         List<Recruiter> recruiters = recruiterRepository.findAllByUser(userMapper.userImplToUser(userImpl));
-        List<CompanyImpl> companies = recruiters.stream().map(Recruiter::getCompany).map(
-                companyMapper::companyToCompanyImpl).collect(Collectors.toList());
-        return new NavigationCompanyListResponse(
-                companies.stream().map(CompanyImpl::getName).collect(Collectors.toList()));
+        List<CompanyImpl> companies = recruiters.stream()
+                                                .map(Recruiter::getCompany)
+                                                .map(companyMapper::companyToCompanyImpl)
+                                                .collect(Collectors.toList());
+        return new NavigationCompanyListResponse(companies.stream().map(CompanyImpl::getName).collect(Collectors.toList()));
     }
 
     public void createCompany(CreateCompanyRequest createCompanyRequest, MultipartFile multipartFile) throws Exception {
