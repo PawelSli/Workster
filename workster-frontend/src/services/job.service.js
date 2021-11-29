@@ -24,6 +24,12 @@ const getAllJobOffers = () => {
     });
 };
 
+const getAllFavouriteJobOffers = () => {
+    return axios.get(API_URL+'/favourite/display',{
+        headers: authHeader()
+    });
+};
+
 const addJobToFavourites = (jobName) => {
     return axios.post(API_URL + `/favourite/${jobName}`, {}, {
         headers: authHeader()
@@ -53,6 +59,7 @@ const getSpecificJobOffer = (jobOfferName) => {
 export default {
     postJobOffer,
     getAllJobOffers,
+    getAllFavouriteJobOffers,
     addJobToFavourites,
     removeFromFavourites,
     deleteJobOffer,

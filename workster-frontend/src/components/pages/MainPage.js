@@ -11,8 +11,8 @@ import JobService from "../../services/job.service"
 import PlacesAutocomplete from "react-places-autocomplete";
 
 export default function MainPage() {
-    window.$ = $;
 
+    window.$ = $;
     const [jobOffers, setJobOffers] = useState([]);
     const [displayJobOffers, setDisplayJobOffers] = useState([]);
     const [defaultKeyWords, setDefaultKeyWords] = useState([]);
@@ -31,9 +31,9 @@ export default function MainPage() {
     };
 
     const handlePayGap = (value) => {
-        setGap(value)
+        setGap(value);
         console.log(value);
-    }
+    };
 
     const getJobOffers = () => {
         JobService.getAllJobOffers().then(

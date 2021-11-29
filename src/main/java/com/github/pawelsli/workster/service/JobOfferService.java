@@ -72,6 +72,15 @@ public class JobOfferService {
         return new JobOfferListResponse(jobOfferList, user);
     }
 
+    public JobOfferListResponse getAllFavouriteJobOffers() {
+
+        User user = userRepository.findByEmail(((UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail())
+                                  .orElseThrow(() -> new RuntimeException("There is no such a user!"));
+        List<JobOffer> jobOfferList = jobOfferRepository.findAllByFansContaining(user);
+
+        return new JobOfferListResponse(jobOfferList, user);
+    }
+
     public void addJobOfferToFavourites(String jobOfferName) {
         JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -124,4 +133,6 @@ public class JobOfferService {
                                   .orElseThrow(() -> new RuntimeException("There is no such a user!"));
         return JobOfferListResponse.validateJobOfferListElement(jobOffer, user);
     }
+
+
 }

@@ -61,6 +61,20 @@ public class JobOfferController {
         }
     }
 
+    @GetMapping (value = "/favourite/display")
+    public ResponseEntity<?> showFavouriteJobOffers() {
+        try {
+            JobOfferListResponse jobOfferListResponse = jobOfferService.getAllFavouriteJobOffers();
+
+            log.info("Getting list of all favourite job offers ended successfully");
+            return ResponseEntity.ok(jobOfferListResponse);
+
+        } catch (Exception exception) {
+            log.error("Could not get list of favourite job offers. Error: {}", exception.getMessage());
+            return ResponseEntity.badRequest().body("Could not get list of favourite job offers. Error: " + exception.getMessage());
+        }
+    }
+
     @GetMapping (value = "/public/{name}")
     public ResponseEntity<?> showCertainJobOfferDescription(@PathVariable String name) {
         try {
@@ -85,8 +99,10 @@ public class JobOfferController {
             return ResponseEntity.ok(new MessageResponse("Job offer: " + name + " successfully added to favourites"));
 
         } catch (Exception exception) {
-            log.error("Could not add job offer: {} to list of favourites", name);
-            return ResponseEntity.badRequest().body(new MessageResponse("Could not add job offer: " + name + " to list of favourites."));
+            log.error("Could not add job offer: {} to list of favourites. Exception: {}", name, exception.getMessage());
+            return ResponseEntity.badRequest()
+                                 .body(new MessageResponse("Could not add job offer: " + name + " to list of favourites. Exception: " + exception
+                                         .getMessage()));
         }
     }
 

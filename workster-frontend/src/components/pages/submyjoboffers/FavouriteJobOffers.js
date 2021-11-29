@@ -2,9 +2,31 @@ import {faBars, faDiceThree, faHome, faMapMarker, faMoneyBill, faSearchPlus} fro
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../../../assets/styles/my-job-offers.css"
 import JobOfferListElement from "../../reusable/JobOfferListElement";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import JobService from "../../../services/job.service";
 
 export default function FavouriteJobOffers() {
+
+    const [jobOffers, setJobOffers] = useState([]);
+    const [message, setMessage] = useState('');
+    const [successful, setSuccessful] = useState(false);
+
+    const getFavouriteJobOffers = () => {
+        setMessage('');
+        setSuccessful(false);
+        JobService.getAllFavouriteJobOffers().then(
+            result => {
+                setJobOffers(result.data.jobOffers);
+            },
+            error => {
+                console.log(error);
+            }
+        );
+    };
+
+    useEffect(() => {
+        getFavouriteJobOffers();
+    }, []);
 
     return (
         <main>
@@ -18,22 +40,29 @@ export default function FavouriteJobOffers() {
                 </div>
                 <div className="container  ">
                     <div className="row d-flex justify-content-center ">
-                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022" favourite="fs"/>
-                        <JobOfferListElement image="sabre.jpg" title="Junior Java Developer" company="Sabre" location="Cracow, Mazowieckie, Poland" cash="15.000 $" remote="remote" date="16.02.2017"/>
-                        <JobOfferListElement image="microsoft.png" title="Junior .NET Developer" company="Sabre" location="London, Great Britain" cash="20.000 $" remote="remote" date="10.01.2019"/>
-                        <JobOfferListElement image="ibm.jpg" title="Senior Remote DevOps" company="IBM" location="Boston, USA" cash="23.000 $" remote="remote" date="13.05.2022"/>
-                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022"/>
-                        <JobOfferListElement image="sabre.jpg" title="Junior Java Developer" company="Sabre" location="Cracow, Mazowieckie, Poland" cash="15.000 $" remote="remote" date="16.02.2017"/>
-                        <JobOfferListElement image="microsoft.png" title="Junior .NET Developer" company="Sabre" location="London, Great Britain" cash="20.000 $" remote="remote" date="10.01.2019"/>
-                        <JobOfferListElement image="ibm.jpg" title="Senior Remote DevOps" company="IBM" location="Boston, USA" cash="23.000 $" remote="remote" date="13.05.2022"/>
-                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022"/>
-                        <JobOfferListElement image="sabre.jpg" title="Junior Java Developer" company="Sabre" location="Cracow, Mazowieckie, Poland" cash="15.000 $" remote="remote" date="16.02.2017"/>
-                        <JobOfferListElement image="microsoft.png" title="Junior .NET Developer" company="Sabre" location="London, Great Britain" cash="20.000 $" remote="remote" date="10.01.2019"/>
-                        <JobOfferListElement image="ibm.jpg" title="Senior Remote DevOps" company="IBM" location="Boston, USA" cash="23.000 $" remote="remote" date="13.05.2022"/>
-                        <JobOfferListElement image="red.jpg" title="Level Designer" company="CD Projekt RED" location="Warsaw, Mazowieckie, Poland" cash="10.000 $" remote="remote" date="10.01.2022"/>
-                        <JobOfferListElement image="sabre.jpg" title="Junior Java Developer" company="Sabre" location="Cracow, Mazowieckie, Poland" cash="15.000 $" remote="remote" date="16.02.2017"/>
-                        <JobOfferListElement image="microsoft.png" title="Junior .NET Developer" company="Sabre" location="London, Great Britain" cash="20.000 $" remote="remote" date="10.01.2019"/>
-                        <JobOfferListElement image="ibm.jpg" title="Senior Remote DevOps" company="IBM" location="Boston, USA" cash="23.000 $" remote="remote" date="13.05.2022"/>
+                        {message && (
+                            <div className="form-group">
+                                <div
+                                    className={
+                                        successful ? "alert alert-success" : "alert alert-danger"
+                                    }
+                                    role="alert"
+                                >
+                                    {message}
+                                </div>
+                            </div>
+                        )}
+                        {
+                            jobOffers.map((item) => (
+                                <JobOfferListElement image={item.companyImage} title={item.title}
+                                                     location={item.location}
+                                                     remote={item.remote} higherGap={item.salary_high}
+                                                     lowerGap={item.salary_low}
+                                                     date={item.createdAt} owner={item.owner} applied={item.applied}
+                                                     favourite={item.favourite} setMessage={setMessage}
+                                                     setSuccessfull={setSuccessful}/>
+                            ))
+                        }
                     </div>
                 </div>
             </div>
