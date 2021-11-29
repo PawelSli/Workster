@@ -2,6 +2,7 @@ package com.github.pawelsli.workster.controllers;
 
 import com.github.pawelsli.workster.payload.request.CreateCompanyRequest;
 import com.github.pawelsli.workster.payload.request.CreateJobOfferRequest;
+import com.github.pawelsli.workster.payload.response.JobOfferListElementResponse;
 import com.github.pawelsli.workster.payload.response.JobOfferListResponse;
 import com.github.pawelsli.workster.payload.response.MessageResponse;
 import com.github.pawelsli.workster.service.JobOfferService;
@@ -57,6 +58,21 @@ public class JobOfferController {
         } catch (Exception exception) {
             log.error("Could not get a list of all job offers. Error: {}", exception.getMessage());
             return ResponseEntity.badRequest().body("Could not create job offer. Error: " + exception.getMessage());
+        }
+    }
+
+    @GetMapping (value = "/public/{name}")
+    public ResponseEntity<?> showCertainJobOfferDescription(@PathVariable String name) {
+        try {
+            JobOfferListElementResponse jobOfferListElementResponse = jobOfferService.getSpecificJobOfferDescription(name);
+
+            log.info("Getting job offer: {} ended successfully", name);
+            return ResponseEntity.ok(jobOfferListElementResponse);
+
+        } catch (Exception exception) {
+            log.error("Could not get job offer: {} description. Error: {}", name, exception.getMessage());
+            return ResponseEntity.badRequest()
+                                 .body(new MessageResponse("Could not get a job offer: " + name + " description. Error: " + exception.getMessage()));
         }
     }
 

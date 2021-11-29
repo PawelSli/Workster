@@ -8,6 +8,7 @@ import com.github.pawelsli.workster.entities.User;
 import com.github.pawelsli.workster.mapper.JobOfferMapper;
 import com.github.pawelsli.workster.mapper.UserMapper;
 import com.github.pawelsli.workster.payload.request.CreateJobOfferRequest;
+import com.github.pawelsli.workster.payload.response.JobOfferListElementResponse;
 import com.github.pawelsli.workster.payload.response.JobOfferListResponse;
 import com.github.pawelsli.workster.repositories.CompanyRepository;
 import com.github.pawelsli.workster.repositories.JobOfferRepository;
@@ -111,5 +112,16 @@ public class JobOfferService {
         company.getJobOffers().remove(jobOffer);
         //TODO: REMEMBER ABOUT APPLICATIONS
         jobOfferRepository.delete(jobOffer);
+    }
+
+    public JobOfferListElementResponse getSpecificJobOfferDescription(String jobOfferName) throws Exception {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
+        if (principal.toString().equalsIgnoreCase("anonymousUser")) {
+            return JobOfferListResponse.validateJobOfferListElement(jobOffer, null);
+        }
+        User user = userRepository.findByEmail(((UserImpl) principal).getEmail())
+                                  .orElseThrow(() -> new RuntimeException("There is no such a user!"));
+        return JobOfferListResponse.validateJobOfferListElement(jobOffer, user);
     }
 }

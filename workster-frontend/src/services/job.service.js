@@ -42,6 +42,13 @@ const deleteJobOffer = (jobName) => {
     });
 };
 
+const getSpecificJobOffer = (jobOfferName) => {
+    console.log(API_URL + `/public/${jobOfferName}`);
+    return axios.get(API_URL + `/public/${jobOfferName}`, {
+        headers: authHeader()
+    });
+};
+
 
 export default {
     postJobOffer,
@@ -49,4 +56,5 @@ export default {
     addJobToFavourites,
     removeFromFavourites,
     deleteJobOffer,
+    getSpecificJobOffer,
 }

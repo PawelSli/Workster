@@ -62,6 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/experience/public/**").permitAll()
             .antMatchers("/company/public/**").permitAll()
             .antMatchers("/job-offer/public").permitAll()
+            .antMatchers("/job-offer/public/**").permitAll()
             .anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

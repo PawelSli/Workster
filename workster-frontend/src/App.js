@@ -50,7 +50,7 @@ function App() {
                     <Route exact path="/" component={MainPage}/>
                     <Route exact path="/login" component={LoginPage}/>
                     <Route exact path="/register" component={RegisterPage}/>
-                    <Route exact path="/job-offer" component={JobOfferPage}/>
+                    <Route exact path="/job-offer/*" component={JobOfferPage}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
                     <Route exact path="/company/*" component={Company}/>
                     <PrivateRoute exact path="/apply-for-a-job" component={ApplyForJobPage}/>

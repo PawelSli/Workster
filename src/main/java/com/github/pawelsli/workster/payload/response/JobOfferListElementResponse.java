@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 public class JobOfferListElementResponse {
     private String companyName;
+    private String companyImage;
     private String title;
     private String location;
     private Integer salary_low;
@@ -22,26 +23,31 @@ public class JobOfferListElementResponse {
     private Boolean owner;
     private Boolean favourite;
     private Boolean applied;
+    private String description;
 
 
     public JobOfferListElementResponse(JobOfferImpl jobOffer) {
         this.companyName = jobOffer.getCompany().getName();
+        this.companyImage = jobOffer.getCompany().getImage();
         this.title = jobOffer.getTitle();
         this.location = jobOffer.getLocation();
         this.salary_low = jobOffer.getSalary_low();
         this.salary_high = jobOffer.getSalary_high();
         this.remote = jobOffer.getRemote();
         this.createdAt = jobOffer.getCreatedAt();
+        this.description = jobOffer.getDescription();
     }
 
-    public JobOfferListElementResponse(JobOffer jobOffer){
-        this.companyName = jobOffer.getCompany().getImage();
+    public JobOfferListElementResponse(JobOffer jobOffer) {
+        this.companyName = jobOffer.getCompany().getName();
+        this.companyImage = jobOffer.getCompany().getImage();
         this.title = jobOffer.getTitle();
         this.location = jobOffer.getLocation();
         this.salary_low = jobOffer.getSalary_low();
         this.salary_high = jobOffer.getSalary_high();
         this.remote = jobOffer.getRemote();
         this.createdAt = jobOffer.getCreatedAt();
+        this.description = jobOffer.getDescription();
     }
 
 }
