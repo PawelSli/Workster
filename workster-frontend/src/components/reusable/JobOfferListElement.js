@@ -87,7 +87,7 @@ export default function JobOfferListElement({image, title, company, location, lo
             <div className="container row col-8 col-md-10 col-lg-11 ">
 
                 <div className="col-11 d-flex flex-row row ">
-                    <a href="/job-offer" className="text-dark">
+                    <a href={`/job-offer/${title}`} className="text-dark">
                         <div className="col-12 ">
                             <h5 className="font-weight-bold text-hidden">
                                 {title}

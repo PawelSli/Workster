@@ -1,5 +1,5 @@
 import IonRangeSlider from 'react-ion-slider';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import $ from 'jquery';
 import CreatableMultiSearch from "../reusable/CreatableMultiSearch";
 import List from "@mui/material/List";
@@ -9,107 +9,234 @@ import Avatar from "@mui/material/Avatar";
 import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import ListItemText from "@mui/material/ListItemText";
-import {Event, HomeWork, LocationOn, Payment} from "@mui/icons-material";
+import {Event, HomeWork, LocationOn, Payment, StarBorder} from "@mui/icons-material";
 import "../../assets/styles/my-job-offer.css"
 import CompanyHeader from "../reusable/CompanyHeader";
+import Favorite from '@mui/icons-material/Favorite';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCheck, faPaperPlane} from "@fortawesome/free-solid-svg-icons";
+import AuthService from "../../services/auth.service";
+import JobService from "../../services/job.service";
+import {useHistory} from "react-router";
+
 
 export default function JobOfferPage() {
-    window.$ = $;
 
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'},
-    ];
+    const [jobOffer, setJobOffer] = useState(null);
+    const [message, setMessage] = useState('');
+    const [successful, setSuccessful] = useState(false);
+    const [favouriteText, setFavouriteText] = useState('Add this job offer to your favourites');
+    const [appliedText, setAppliedText] = useState('Apply for this job');
+    const [disabledFavourite,setDisabledFavourite] = useState(false);
+    const [disabledApplied,setDisabledApplied] = useState(false);
+    const history = useHistory();
 
     useEffect(() => {
-        const script = document.createElement('script');
-        script.innerHTML = "$('#demo_1').ionRangeSlider({type: 'double',grid: true,min: 0,max: 1000,from: 200,to: 800,prefix: '$'})"
-        document.body.appendChild(script);
-        return () => {
-            document.body.removeChild(script);
-        }
+        setMessage('');
+        JobService.getSpecificJobOffer(window.location.href.split('/')[4]).then(
+            result => {
+                setJobOffer(result.data)
+                if (result.data.favourite) {
+                    setFavouriteText("This is one of your favourite job offers.")
+                    setDisabledFavourite(true);
+                }
+                if (result.data.applied) {
+                    setAppliedText("You already applied for this job.")
+                    setDisabledApplied(true);
+                }
+            },
+            error => {
+                let resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                setMessage(resMessage);
+            }
+        )
     }, []);
 
+    const handleApplyForThisJob = (event) => {
+        if (!AuthService.isLogged()) {
+            window.location.replace('http://localhost:3000/login');
+        }else{
+            window.location.replace('http://localhost:3000/apply-for-a-job');
+        }
+    };
+
+    const handleAddJobToFavourites = (event) => {
+        if (!AuthService.isLogged()) {
+            window.location.replace('http://localhost:3000/login');
+        }else{
+            event.preventDefault();
+            setMessage("");
+            setSuccessful(false);
+            JobService.addJobToFavourites(jobOffer.title).then(
+                result => {
+                    setMessage(result.data.message);
+                    setSuccessful(true);
+                    setDisabledFavourite(true)
+                },
+                error => {
+                    let resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    setMessage(resMessage);
+                    setSuccessful(false);
+                }
+            )
+        }
+    }
+
+
     return (
-        <main className="  ">
-            <CompanyHeader image="star-sky.jpg" name="Atos Poland Global Services Sp. z o.o."/>
+        <main>
+            <a href={`/company/${jobOffer ? jobOffer.companyName : ''}`} className="text-dark">
+                <CompanyHeader image={jobOffer ? jobOffer.companyImage : ''}
+                               name={jobOffer ? jobOffer.companyName : ''}/>
+            </a>
+            <div className="row mt-2 d-flex justify-content-center">
+                <div className="col-12 col-md-8 card bg-dark">
+                    <nav className="navbar navbar-light navbar-expand-xl  shadow-lg">
+                        <div className="container-fluid">
+                            <button data-bs-toggle="collapse" className="navbar-toggler bg-light"
+                                    data-bs-target="#navcol-3">
+                                <span className="visually-hidden">Toggle navigation</span><span
+                                className="navbar-toggler-icon"/>
+                            </button>
+                            <div className="collapse navbar-collapse" id="navcol-3">
+                                {
+                                    jobOffer ? (
+                                            jobOffer.owner ? (
+                                                <ul className="navbar-nav">
+                                                    <li className="nav-item">
+                                                        <a className="nav-link active text-white" href="#">
+                                                            See applications
+                                                        </a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link text-white" href="#">
+                                                            Edit job offer
+                                                        </a>
+                                                    </li>
+                                                    <li className="nav-item">
+                                                        <a className="nav-link text-white" href="#">
+                                                            Remove job offer
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            ) : null
+                                        )
+                                        : null
+                                }
+                                {
+                                    jobOffer ? (
+                                        !jobOffer.owner ? (
+                                            <ul className="navbar-nav ">
+
+                                                <li className="nav-item">
+                                                    <a className="nav-link active"
+                                                       href="#">
+                                                        <button disabled={disabledApplied}
+                                                                className="btn btn-outline-primary swing animated"
+                                                                type="button" onClick={handleApplyForThisJob}>
+                                                            {appliedText} <FontAwesomeIcon
+                                                            icon={!jobOffer.applied ? faPaperPlane : faCheck}/>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <li className="nav-item">
+                                                    <a className="nav-link active"
+                                                       href="#">
+                                                        <button disabled={disabledFavourite}
+                                                                className="btn btn-outline-success swing animated"
+                                                                type="button" onClick={handleAddJobToFavourites}>
+                                                            {favouriteText} <FontAwesomeIcon
+                                                            icon={!jobOffer.favourite ? faPaperPlane : faCheck}/>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        ) : null
+                                    ) : null
+                                }
+                                {message && (
+                                    <div className="form-group">
+                                        <div
+                                            className={
+                                                successful ? "alert alert-success" : "alert alert-danger"
+                                            }
+                                            role="alert"
+                                        >
+                                            {message}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
             <div className="row mt-2 d-flex justify-content-center">
                 <div className="col-12 col-md-8 card d-flex flex-column shadow-lg p-4">
-                    <h4 className="display-6 m-company mt-1 text-center">Junior Java Developer</h4>
-                    <List sx={{ width: '100%',  bgcolor: 'background.paper' }}>
+                    <div className="d-flex flex-row justify-content-center ">
+                        <h4 className="display-6  mt-1 ">
+                            {jobOffer ?
+                                jobOffer.title
+                                : null}
+                        </h4>
+                    </div>
+                    <List sx={{width: '100%', bgcolor: 'background.paper'}}>
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>
-                                    <LocationOn />
+                                    <LocationOn/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary="Location" secondary="Cracow, Lesser Poland, Poland" />
+                            <ListItemText primary="Location" secondary={jobOffer ? jobOffer.location : null}/>
                         </ListItem>
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>
-                                    <Payment />
+                                    <Payment/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary="Salary" secondary="10 000 $ monthly" />
+                            <ListItemText primary="Salary"
+                                          secondary={((jobOffer ? jobOffer.salary_low : null) + "$ — " + (jobOffer ? jobOffer.salary_high : null) + "$").toString()}/>
                         </ListItem>
+                        {
+                            jobOffer ?
+                                jobOffer.remote === true ?
+                                    <ListItem>
+                                        <ListItemAvatar>
+                                            <Avatar>
+                                                <HomeWork/>
+                                            </Avatar>
+                                        </ListItemAvatar>
+                                        <ListItemText primary="Remote job"/>
+                                    </ListItem> : null
+                                : null
+                        }
+
                         <ListItem>
                             <ListItemAvatar>
                                 <Avatar>
-                                    <HomeWork />
+                                    <Event/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary="Remote job"  />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemAvatar>
-                                <Avatar>
-                                    <Event  />
-                                </Avatar>
-                            </ListItemAvatar>
-                            <ListItemText primary="Published" secondary="01.02.2022"  />
+                            <ListItemText primary="Published" secondary={jobOffer ? jobOffer.createdAt : null}/>
                         </ListItem>
                     </List>
-                    <div className="d-flex flex-row  mt-2 ">
-                        <button type="button" className="btn btn-dark  ">Apply for a job</button>
-                        <button type="button" className="btn btn-secondary  apply-buttons ">Save a post</button>
-                    </div>
                     <div className="mt-4">
-                        At Transporeon we embrace transformation and change in total sync with one another. We rethink, reinvent and rework ideas from one moment to the next – as many times as is necessary to get the job done right. That’s how we respond to the new challenges that we face each and every day. And regardless of whether you are just starting your career or are already a pro – we believe you can be the transformation. Are you ready?
-
-
-                        You are ready, if you ...
-
-
-                        are willing to participate on our mission to digitize logistics world by bringing modern solutions to the users, which significantly improve their daily work
-                        have the ability to transfer ideas or customer wishes into solutions and features
-                        the stubbornness not to give up till it works and you can be proud of your work
-                        have at least first professional experience in full-stack software development
-                        can bring one year of experience in following technologies: Java, Spring Boot, Hibernate, SQL Database
-                        enjoy a combination of a team work with individual responsibility for given tasks
-                        like working in an international team speaking English on daily basis, Polish is as well spoken within the offices
-                        prefer a hybrid working model with the combination of office time and remote work
-
-                        Team Snow is ready and waiting with ...
-
-
-                        responsibility for the Rate Management application within Transporeon platform. Rate Management uses defined criteria to find the most suitable forwarding agent and calculates the transport prices for a transport. For this purpose, customers can flexibly define their rate structures and store associated rates in the system. In addition, users can perform pricing based on various transport parameters within the user interface.
-                        cross-functional team working in an agile way using Jira as a project management tool
-                        the possibility to participate on meaningful projects in close cooperation with colleagues from product management, other software development teams, UX/UI and quality management
-                        security of a permanent contract within successful IT company with the chance to develop our own product
-                        friendly recruitment process which gives you the chance to get to know us as well as to show your attitude and your coding skills
-
-                        Some tech-stack information for you ...
-
-
-                        Back- end: Java 11, Framework: Spring, Spring-Boot
-                        Front-end: Angular 11
-                        Database: PostgreSQL, Database framework: Hibernate
-                        Project management tool: JIRA
-                        Version control tool: Git
-                        Build management tool: Jenkins
-                        Docker
+                        {jobOffer ?
+                            <small dangerouslySetInnerHTML={{__html: jobOffer.description}}>
+                            </small>
+                            :
+                            null}
                     </div>
                 </div>
             </div>

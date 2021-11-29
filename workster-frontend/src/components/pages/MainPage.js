@@ -13,12 +13,6 @@ import PlacesAutocomplete from "react-places-autocomplete";
 export default function MainPage() {
     window.$ = $;
 
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'},
-    ];
-
     const [jobOffers, setJobOffers] = useState([]);
     const [displayJobOffers, setDisplayJobOffers] = useState([]);
     const [defaultKeyWords, setDefaultKeyWords] = useState([]);
@@ -176,7 +170,7 @@ export default function MainPage() {
                     )}
                     {
                         displayJobOffers.map((item) => (
-                            <JobOfferListElement image={item.companyName} title={item.title} location={item.location}
+                            <JobOfferListElement image={item.companyImage} title={item.title} location={item.location}
                                                  remote={item.remote} higherGap={item.salary_high}
                                                  lowerGap={item.salary_low}
                                                  date={item.createdAt} owner={item.owner} applied={item.applied}

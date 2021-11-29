@@ -21,7 +21,7 @@ public class JobOfferListResponse {
         }).collect(Collectors.toList());
     }
 
-    private static JobOfferListElementResponse validateJobOfferListElement(JobOffer jobOffer, User user) {
+    public static JobOfferListElementResponse validateJobOfferListElement(JobOffer jobOffer, User user) {
         JobOfferListElementResponse jobOfferListElementResponse = new JobOfferListElementResponse(jobOffer);
         if (user == null) {
             return jobOfferListElementResponse;
