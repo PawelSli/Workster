@@ -12,21 +12,21 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "files")
+@Table (name = "files")
 public class File {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "files")
+    @ManyToMany (mappedBy = "files")
     private Set<JobRequest> jobRequests = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_user", nullable = false)
+    @ManyToOne (fetch = FetchType.LAZY, optional = false)
+    @JoinColumn (name = "id_user", nullable = false)
     private User user;
 
-    @Column(name = "name", nullable = false)
+    @Column (name = "name", nullable = false)
     private String name;
 
 }

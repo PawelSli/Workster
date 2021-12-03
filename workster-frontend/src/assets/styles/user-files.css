@@ -70,3 +70,8 @@ h5 {
 .margin-left-input{
     margin-left: 10px;
 }
+
+.icon {
+    width: 24px;
+    margin: 16px;
+}
