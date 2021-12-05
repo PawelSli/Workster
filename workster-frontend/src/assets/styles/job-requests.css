@@ -4,28 +4,51 @@
     resize: none;
 }
 
-.job-offer-icons{
+.job-offer-icons {
     margin-left: 0px;
 }
 
-.text-decoration-files{
-    text-decoration: none!important;
+.text-decoration-files {
+    text-decoration: none !important;
 }
 
-.input-name-of-applicant{
+.input-name-of-applicant {
     width: 30%;
 }
 
-.input-key-words{
+.input-key-words {
     width: 70%;
 }
 
-.text-hidden-requests{
+.text-hidden-requests {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.job-card-application-heigth{
+.job-card-application-heigth {
     height: 650px;
+}
+
+.job-request-text-hidden-class {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.static-height {
+    height: 600px;
+}
+
+.card-height {
+    height: 50%;
+}
+
+.margin-text-left {
+    margin-left: 0.4em;
+}
+
+.list-files-request {
+    overflow-y: auto;
+    overflow-x: hidden;
 }

@@ -40,7 +40,7 @@ public class DocumentService {
         this.jobRequestRepository = jobRequestRepository;
     }
 
-    public void createFile(MultipartFile multipartFile) throws Exception {
+    public String createFile(MultipartFile multipartFile) throws Exception {
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (! checkIfExist(root + "/" + userImpl.getUsername())) {
             Files.createDirectory(Paths.get(root + "/" + userImpl.getUsername()));
@@ -52,10 +52,10 @@ public class DocumentService {
         file.setName(multipartFile.getOriginalFilename());
         User user = userRepository.findByEmail(userImpl.getEmail()).orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
         file.setUser(user);
-        Set<File> fileSet = user.getFiles();
         user.getFiles().add(file);
         fileRepository.save(file);
         Files.copy(multipartFile.getInputStream(), Paths.get(root + "/" + userImpl.getUsername()).resolve(multipartFile.getOriginalFilename()));
+        return multipartFile.getOriginalFilename();
     }
 
     private boolean checkIfExist(String fileRoot) {

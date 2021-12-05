@@ -170,7 +170,7 @@ export default function MainPage() {
                     )}
                     {
                         displayJobOffers.map((item) => (
-                            <JobOfferListElement image={item.companyImage} title={item.title} location={item.location}
+                            <JobOfferListElement id={item.id}  image={item.companyImage} title={item.title} location={item.location}
                                                  remote={item.remote} higherGap={item.salary_high}
                                                  lowerGap={item.salary_low}
                                                  date={item.createdAt} owner={item.owner} applied={item.applied}

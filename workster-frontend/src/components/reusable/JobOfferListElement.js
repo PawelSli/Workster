@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import AuthService from "../../services/auth.service"
 import JobService from "../../services/job.service"
 
-export default function JobOfferListElement({image, title, company, location, lowerGap, higherGap, remote, date, favourite, applied, owner, setMessage, setSuccessfull}) {
+export default function JobOfferListElement({id, image, title, company, location, lowerGap, higherGap, remote, date, favourite, applied, owner, setMessage, setSuccessfull}) {
 
     const [addDropdownElementAction, setAddDropdownElementAction] = useState(false);
 
@@ -13,7 +13,7 @@ export default function JobOfferListElement({image, title, company, location, lo
         event.preventDefault();
         setMessage("");
         setSuccessfull(false);
-        JobService.addJobToFavourites(title).then(
+        JobService.addJobToFavourites(id).then(
             result => {
                 setMessage(result.data.message);
                 setSuccessfull(true);
@@ -31,11 +31,11 @@ export default function JobOfferListElement({image, title, company, location, lo
         )
     };
 
-    const handleRemoveFromFavourites = (event)=> {
+    const handleRemoveFromFavourites = (event) => {
         event.preventDefault();
         setMessage("");
         setSuccessfull(false);
-        JobService.removeFromFavourites(title).then(
+        JobService.removeFromFavourites(id).then(
             result => {
                 setMessage(result.data.message);
                 setSuccessfull(true);
@@ -53,11 +53,11 @@ export default function JobOfferListElement({image, title, company, location, lo
         )
     };
 
-    const handleDeleteJobOffer = (event)=> {
+    const handleDeleteJobOffer = (event) => {
         event.preventDefault();
         setMessage("");
         setSuccessfull(false);
-        JobService.deleteJobOffer(title).then(
+        JobService.deleteJobOffer(id).then(
             result => {
                 setMessage(result.data.message);
                 setSuccessfull(true);
@@ -87,7 +87,7 @@ export default function JobOfferListElement({image, title, company, location, lo
             <div className="container row col-8 col-md-10 col-lg-11 ">
 
                 <div className="col-11 d-flex flex-row row ">
-                    <a href={`/job-offer/${title}`} className="text-dark">
+                    <a href={`/job-offer/${id}`} className="text-dark">
                         <div className="col-12 ">
                             <h5 className="font-weight-bold text-hidden">
                                 {title}
@@ -125,25 +125,52 @@ export default function JobOfferListElement({image, title, company, location, lo
                                 aria-labelledby="dropdownMenuLink">
                                 {owner ?
                                     <div>
-                                        <a className="dropdown-item " href="/job-requests">See applications</a>
+                                        <a className="dropdown-item " href={`/job-requests/${id}`}>See applications</a>
                                         <div className="dropdown-divider"/>
-                                        <a className="dropdown-item " href="#" onClick={handleDeleteJobOffer}>Remove job offer</a>
+                                        <a className="dropdown-item " href="#" onClick={handleDeleteJobOffer}>Remove job
+                                            offer</a>
                                     </div>
                                     :
                                     applied ?
-                                        <a className="dropdown-item " href="/show-my-job-request">See your
-                                            application</a>
-                                        :
-                                        <div>
-                                            {!favourite ?
-                                                <a className="dropdown-item " href="#" onClick={handleAddToFavourites}>Add
-                                                    to favourites</a> :
-                                                <a className="dropdown-item " href="#" onClick={handleRemoveFromFavourites}>Remove from favourites</a>}
-                                            {(!favourite && !applied) ? <div className="dropdown-divider"/> : <div/>}
-                                            {!applied ?
-                                                <a className="dropdown-item " href="/apply-for-a-job">Apply for a
-                                                    job</a> : <div/>}
-                                        </div>
+                                        (!favourite ?
+                                                <div>
+                                                    <a className="dropdown-item " href="/show-my-job-request">See your
+                                                        application</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#">Remove your application</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#"
+                                                       onClick={handleAddToFavourites}>Add to favourites</a>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <a className="dropdown-item " href="/show-my-job-request">See your
+                                                        application</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#">Remove your application</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#"
+                                                       onClick={handleRemoveFromFavourites}>Remove from favourites</a>
+                                                </div>
+                                        )
+                                        : (
+                                            !favourite ?
+                                                <div>
+                                                    <a className="dropdown-item " href={`/apply-for-a-job/${id}`}>Apply for
+                                                        a job</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#" onClick={handleAddToFavourites}>Add
+                                                        to favourites</a>
+                                                </div>
+                                                :
+                                                <div>
+                                                    <a className="dropdown-item " href={`/apply-for-a-job/${id}`}>Apply for
+                                                        a job</a>
+                                                    <div className="dropdown-divider"/>
+                                                    <a className="dropdown-item " href="#"
+                                                       onClick={handleRemoveFromFavourites}>Remove from favourites</a>
+                                                </div>
+                                        )
                                 }
                             </div>
                         </div>

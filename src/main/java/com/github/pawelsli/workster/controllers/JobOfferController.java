@@ -75,63 +75,63 @@ public class JobOfferController {
         }
     }
 
-    @GetMapping (value = "/public/{name}")
-    public ResponseEntity<?> showCertainJobOfferDescription(@PathVariable String name) {
+    @GetMapping (value = "/public/{id}")
+    public ResponseEntity<?> showCertainJobOfferDescription(@PathVariable Long id) {
         try {
-            JobOfferListElementResponse jobOfferListElementResponse = jobOfferService.getSpecificJobOfferDescription(name);
+            JobOfferListElementResponse jobOfferListElementResponse = jobOfferService.getSpecificJobOfferDescription(id);
 
-            log.info("Getting job offer: {} ended successfully", name);
+            log.info("Getting job offer: {} ended successfully", id);
             return ResponseEntity.ok(jobOfferListElementResponse);
 
         } catch (Exception exception) {
-            log.error("Could not get job offer: {} description. Error: {}", name, exception.getMessage());
+            log.error("Could not get job offer: {} description. Error: {}", id, exception.getMessage());
             return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Could not get a job offer: " + name + " description. Error: " + exception.getMessage()));
+                                 .body(new MessageResponse("Could not get a job offer: " + id + " description. Error: " + exception.getMessage()));
         }
     }
 
-    @PostMapping (value = "/favourite/{name}")
-    public ResponseEntity<?> addJobOfferToFavourites(@PathVariable String name) {
+    @PostMapping (value = "/favourite/{id}")
+    public ResponseEntity<?> addJobOfferToFavourites(@PathVariable Long id) {
         try {
-            jobOfferService.addJobOfferToFavourites(name);
+            jobOfferService.addJobOfferToFavourites(id);
 
-            log.info("Job offer: {} successfully added to favourites", name);
-            return ResponseEntity.ok(new MessageResponse("Job offer: " + name + " successfully added to favourites"));
+            log.info("Job offer: {} successfully added to favourites", id);
+            return ResponseEntity.ok(new MessageResponse("Job offer: " + id + " successfully added to favourites"));
 
         } catch (Exception exception) {
-            log.error("Could not add job offer: {} to list of favourites. Exception: {}", name, exception.getMessage());
+            log.error("Could not add job offer: {} to list of favourites. Exception: {}", id, exception.getMessage());
             return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Could not add job offer: " + name + " to list of favourites. Exception: " + exception
+                                 .body(new MessageResponse("Could not add job offer: " + id + " to list of favourites. Exception: " + exception
                                          .getMessage()));
         }
     }
 
-    @PostMapping (value = "/favourite/remove/{name}")
-    public ResponseEntity<?> removeJobOfferFromFavourites(@PathVariable String name) {
+    @PostMapping (value = "/favourite/remove/{id}")
+    public ResponseEntity<?> removeJobOfferFromFavourites(@PathVariable Long id) {
         try {
-            jobOfferService.removeJobOfferFromFavourite(name);
+            jobOfferService.removeJobOfferFromFavourite(id);
 
-            log.info("Job offer: {} successfully removed from favourites", name);
-            return ResponseEntity.ok(new MessageResponse("Job offer: " + name + " successfully removed from favourites"));
+            log.info("Job offer: {} successfully removed from favourites", id);
+            return ResponseEntity.ok(new MessageResponse("Job offer: " + id + " successfully removed from favourites"));
 
         } catch (Exception exception) {
-            log.error("Could not remove job offer: {} from favourites. Error: {}", name, exception.getMessage());
+            log.error("Could not remove job offer: {} from favourites. Error: {}", id, exception.getMessage());
             return ResponseEntity.badRequest()
-                                 .body(new MessageResponse("Could not remove job offer: " + name + " from favourites." + "Error: " + exception.getMessage()));
+                                 .body(new MessageResponse("Could not remove job offer: " + id + " from favourites." + "Error: " + exception.getMessage()));
         }
     }
 
-    @PostMapping (value = "/remove/{name}")
-    public ResponseEntity<?> deleteJobOffer(@PathVariable String name) {
+    @PostMapping (value = "/remove/{id}")
+    public ResponseEntity<?> deleteJobOffer(@PathVariable Long id) {
         try {
-            jobOfferService.deleteJobOffer(name);
+            jobOfferService.deleteJobOffer(id);
 
-            log.info("Job offer: {} successfully deleted.", name);
-            return ResponseEntity.ok(new MessageResponse("Job offer: " + name + " successfully deleted."));
+            log.info("Job offer: {} successfully deleted.", id);
+            return ResponseEntity.ok(new MessageResponse("Job offer: " + id + " successfully deleted."));
 
         } catch (Exception exception) {
-            log.error("Could not delete job offer: {}. Exception: {}", name, exception.getMessage());
-            return ResponseEntity.badRequest().body("Could not delete job offer: " + name + ". Exception: " + exception.getMessage());
+            log.error("Could not delete job offer: {}. Exception: {}", id, exception.getMessage());
+            return ResponseEntity.badRequest().body("Could not delete job offer: " + id + ". Exception: " + exception.getMessage());
         }
     }
 

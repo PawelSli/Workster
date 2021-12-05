@@ -51,6 +51,8 @@ export default function UserFiles() {
                 () => window.location.reload(),
                 (error) => {
                     setSuccessful(false);
+                    console.log(error.response.data)
+                    console.log(error.response.data.message)
                     const resMessage =
                         (error.response &&
                             error.response.data &&
