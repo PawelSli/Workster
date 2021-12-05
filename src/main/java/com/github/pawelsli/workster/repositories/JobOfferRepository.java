@@ -11,6 +11,8 @@ import java.util.List;
 @Repository
 public interface JobOfferRepository extends JpaRepository<JobOffer, Long> {
 
+    List<JobOffer> findAllByUser(User user);
+
     List<JobOffer> findAllByCompany(Company company);
 
     List<JobOffer> findAllByFansContaining(User user);

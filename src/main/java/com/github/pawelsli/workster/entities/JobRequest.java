@@ -35,6 +35,7 @@ public class JobRequest {
     @JoinColumn(name = "id_job_offer", nullable = false)
     private JobOffer jobOffer;
 
+    @Lob
     @Column(name = "description", nullable = false)
     private String description;
 }

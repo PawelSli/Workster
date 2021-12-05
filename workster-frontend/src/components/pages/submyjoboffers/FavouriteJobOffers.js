@@ -54,7 +54,7 @@ export default function FavouriteJobOffers() {
                         )}
                         {
                             jobOffers.map((item) => (
-                                <JobOfferListElement image={item.companyImage} title={item.title}
+                                <JobOfferListElement id={item.id} image={item.companyImage} title={item.title}
                                                      location={item.location}
                                                      remote={item.remote} higherGap={item.salary_high}
                                                      lowerGap={item.salary_low}

@@ -7,7 +7,7 @@ create table job_requests
     id_user      bigint        not null,
     constraint job_requests_user_id_fk
         foreign key (id_user) references users (id),
-    description  varchar(5000) not null
+    description  text not null
 );
 
 create table files

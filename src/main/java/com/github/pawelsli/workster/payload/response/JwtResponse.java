@@ -15,4 +15,5 @@ public class JwtResponse {
     private final String username;
     private final String email;
     private final List<String> roles;
+    private final List<Long> userJobOffersIds;
 }

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class JobOfferListElementResponse {
+    private Long id;
     private String companyName;
     private String companyImage;
     private String title;
@@ -27,6 +28,7 @@ public class JobOfferListElementResponse {
 
 
     public JobOfferListElementResponse(JobOfferImpl jobOffer) {
+        this.id = jobOffer.getJobOfferId();
         this.companyName = jobOffer.getCompany().getName();
         this.companyImage = jobOffer.getCompany().getImage();
         this.title = jobOffer.getTitle();
@@ -39,6 +41,7 @@ public class JobOfferListElementResponse {
     }
 
     public JobOfferListElementResponse(JobOffer jobOffer) {
+        this.id = jobOffer.getId();
         this.companyName = jobOffer.getCompany().getName();
         this.companyImage = jobOffer.getCompany().getImage();
         this.title = jobOffer.getTitle();

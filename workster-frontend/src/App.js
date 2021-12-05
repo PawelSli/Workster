@@ -53,14 +53,14 @@ function App() {
                     <Route exact path="/job-offer/*" component={JobOfferPage}/>
                     <Route exact path="/contact-us" component={ContactUs}/>
                     <Route exact path="/company/*" component={Company}/>
-                    <PrivateRoute exact path="/apply-for-a-job" component={ApplyForJobPage}/>
+                    <PrivateRoute exact path="/apply-for-a-job/*" component={ApplyForJobPage}/>
                     <PrivateRoute exact path="/add-job-offer" component={AddJobOffer} />
                     <PrivateRoute exact path="/add-company" component={AddCompany} />
                     <PrivateRoute exact path="/profile/*" component={Profile}/>
                     <PrivateRoute exact path="/favourite-job-offers" component={FavouriteJobOffers}/>
                     <PrivateRoute exact path="/posted-job-offers" component={PostedJobOffers}/>
                     <PrivateRoute exact path="/applied-job-offers" component={AppliedJobOffers}/>
-                    <PrivateRoute exact path="/job-requests" component={JobRequests}/>
+                    <PrivateRoute exact path="/job-requests/*" component={JobRequests}/>
                     <PrivateRoute exact path="/edit-experience" component={EditExperience}/>
                     <PrivateRoute exact path="/edit-education" component={EditEducation}/>
                     <PrivateRoute exact path="/delete-user" component={DeleteUser}/>

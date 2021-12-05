@@ -28,19 +28,16 @@ public class JobOfferService {
     private final CompanyRepository companyRepository;
     private final UserRepository userRepository;
     private final JobOfferMapper jobOfferMapper;
-    private final UserMapper userMapper;
 
     @Autowired
     public JobOfferService(JobOfferRepository jobOfferRepository,
                            CompanyRepository companyRepository,
                            UserRepository userRepository,
-                           JobOfferMapper jobOfferMapper,
-                           UserMapper userMapper) {
+                           JobOfferMapper jobOfferMapper) {
         this.jobOfferRepository = jobOfferRepository;
         this.companyRepository = companyRepository;
         this.userRepository = userRepository;
         this.jobOfferMapper = jobOfferMapper;
-        this.userMapper = userMapper;
     }
 
     public void createJobOffer(CreateJobOfferRequest createJobOfferRequest) throws Exception {
@@ -81,8 +78,8 @@ public class JobOfferService {
         return new JobOfferListResponse(jobOfferList, user);
     }
 
-    public void addJobOfferToFavourites(String jobOfferName) {
-        JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
+    public void addJobOfferToFavourites(Long id) {
+        JobOffer jobOffer = jobOfferRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a job offer!"));
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByEmail(userImpl.getEmail()).orElseThrow(() -> new RuntimeException("There is no such a user!"));
         if (jobOffer.getUser().equals(user)) {
@@ -93,8 +90,8 @@ public class JobOfferService {
         jobOfferRepository.save(jobOffer);
     }
 
-    public void removeJobOfferFromFavourite(String jobOfferName) {
-        JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
+    public void removeJobOfferFromFavourite(Long id) {
+        JobOffer jobOffer = jobOfferRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a job offer!"));
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByEmail(userImpl.getEmail()).orElseThrow(() -> new RuntimeException("There is no such a user!"));
         if ((! jobOffer.getFans().contains(user)) || (! user.getFavouriteJobOffers().contains(jobOffer))) {
@@ -108,8 +105,8 @@ public class JobOfferService {
         jobOfferRepository.save(jobOffer);
     }
 
-    public void deleteJobOffer(String jobOfferName) {
-        JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
+    public void deleteJobOffer(Long id) {
+        JobOffer jobOffer = jobOfferRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a job offer!"));
         UserImpl userImpl = (UserImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByEmail(userImpl.getEmail()).orElseThrow(() -> new RuntimeException("There is no such a user!"));
         if (! jobOffer.getUser().equals(user)) {
@@ -123,9 +120,9 @@ public class JobOfferService {
         jobOfferRepository.delete(jobOffer);
     }
 
-    public JobOfferListElementResponse getSpecificJobOfferDescription(String jobOfferName) throws Exception {
+    public JobOfferListElementResponse getSpecificJobOfferDescription(Long id) throws Exception {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        JobOffer jobOffer = jobOfferRepository.findByTitle(jobOfferName);
+        JobOffer jobOffer = jobOfferRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such job offer!"));
         if (principal.toString().equalsIgnoreCase("anonymousUser")) {
             return JobOfferListResponse.validateJobOfferListElement(jobOffer, null);
         }

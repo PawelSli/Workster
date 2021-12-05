@@ -17,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Arrays;
+
 @CrossOrigin (origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping ("/document")
 @Slf4j
 class DocumentController {
     private final DocumentService documentService;
+    private String[] enabledTypes = {"application/doc", "application/docx","application/msword", "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"};
 
     @Autowired
     public DocumentController(DocumentService documentService) {
@@ -31,14 +34,19 @@ class DocumentController {
 
     @PostMapping
     public ResponseEntity<?> uploadUserDocument(@RequestParam ("document") MultipartFile multipartFile) {
+        if (Arrays.stream(enabledTypes).noneMatch(type -> type.equalsIgnoreCase(multipartFile.getContentType()))) {
+            String documentType = multipartFile.getContentType();
+            return ResponseEntity.badRequest().body(new MessageResponse("You can only upload documents with doc,docx or pdf extension."));
+        }
+
         try {
             documentService.createFile(multipartFile);
 
             log.info("User document saved successfully");
-            return ResponseEntity.ok("User document saved successfully");
+            return ResponseEntity.ok(new MessageResponse("User document saved successfully"));
         } catch (Exception exception) {
             log.error("Could not save user document. Error: {}", exception.getMessage());
-            return ResponseEntity.badRequest().body("Could not save user document. Error: " + exception.getMessage());
+            return ResponseEntity.badRequest().body(new MessageResponse("Could not save user document. Error: " + exception.getMessage()));
         }
     }
 

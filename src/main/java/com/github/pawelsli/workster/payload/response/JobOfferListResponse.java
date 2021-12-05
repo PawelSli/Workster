@@ -16,9 +16,7 @@ public class JobOfferListResponse {
     private List<JobOfferListElementResponse> jobOffers;
 
     public JobOfferListResponse(List<JobOffer> jobOffers, User user) {
-        this.jobOffers = jobOffers.stream().map(jobOffer -> {
-            return validateJobOfferListElement(jobOffer, user);
-        }).collect(Collectors.toList());
+        this.jobOffers = jobOffers.stream().map(jobOffer -> validateJobOfferListElement(jobOffer, user)).collect(Collectors.toList());
     }
 
     public static JobOfferListElementResponse validateJobOfferListElement(JobOffer jobOffer, User user) {

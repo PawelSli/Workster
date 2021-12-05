@@ -37,6 +37,9 @@ public class JobOffer {
     @ManyToMany (mappedBy = "appliedJobOffers")
     private Set<User> candidates = new HashSet<>();
 
+    @OneToMany(mappedBy = "jobOffer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<JobRequest> jobRequests = new HashSet<>();
+
     @Column (name = "location", nullable = false)
     private String location;
 

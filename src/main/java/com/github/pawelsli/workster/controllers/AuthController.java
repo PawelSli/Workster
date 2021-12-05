@@ -2,6 +2,7 @@ package com.github.pawelsli.workster.controllers;
 
 import com.github.pawelsli.workster.config.JwtUtils;
 import com.github.pawelsli.workster.domain.UserImpl;
+import com.github.pawelsli.workster.entities.JobOffer;
 import com.github.pawelsli.workster.entities.Role;
 import com.github.pawelsli.workster.entities.User;
 import com.github.pawelsli.workster.enums.UserRole;
@@ -10,6 +11,7 @@ import com.github.pawelsli.workster.payload.request.LoginRequest;
 import com.github.pawelsli.workster.payload.request.SignUpRequest;
 import com.github.pawelsli.workster.payload.response.JwtResponse;
 import com.github.pawelsli.workster.payload.response.MessageResponse;
+import com.github.pawelsli.workster.repositories.JobOfferRepository;
 import com.github.pawelsli.workster.repositories.RoleRepository;
 import com.github.pawelsli.workster.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -30,59 +32,68 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin (origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping ("/api/auth")
 @Slf4j
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final JobOfferRepository jobOfferRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtils jwtUtils;
     private final UserMapper userMapper;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, JwtUtils jwtUtils, UserMapper userMapper) {
+    public AuthController(AuthenticationManager authenticationManager,
+                          UserRepository userRepository,
+                          RoleRepository roleRepository,
+                          JobOfferRepository jobOfferRepository,
+                          PasswordEncoder passwordEncoder,
+                          JwtUtils jwtUtils,
+                          UserMapper userMapper) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
+        this.jobOfferRepository = jobOfferRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtils = jwtUtils;
         this.userMapper = userMapper;
     }
 
-    @PostMapping("/signin")
+    @PostMapping ("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
+                loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserImpl userImpl = (UserImpl) authentication.getPrincipal();
-        List<String> roles = userImpl.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+        List<String> roles = userImpl.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        User user = userRepository.findByEmail(userImpl.getEmail()).orElseThrow(() -> new RuntimeException("Such user doesn't exist!"));
+        List<Long> userJobOffersIds = jobOfferRepository.findAllByUser(user).stream().map(JobOffer::getId).collect(Collectors.toList());
 
-        log.info("User: {} has successfully logged in",userImpl.getUsername());
-        return ResponseEntity.ok(new JwtResponse(jwt, userImpl.getUserId(), userImpl.getUsername(), userImpl.getEmail(), roles));
+        log.info("User: {} has successfully logged in", userImpl.getUsername());
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userImpl.getUserId(),
+                userImpl.getUsername(),
+                userImpl.getEmail(),
+                roles,
+                userJobOffersIds));
     }
 
-    @PostMapping("/signup")
+    @PostMapping ("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if (userRepository.existsByName(signUpRequest.getUsername())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
         User user = userMapper.userImplToUser(signUpRequest.convertToUserImpl());
@@ -99,15 +110,18 @@ public class AuthController {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleRepository.findByName(UserRole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        Role adminRole = roleRepository.findByName(UserRole.ROLE_ADMIN)
+                                                       .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
                         break;
                     case "mod":
-                        Role modRole = roleRepository.findByName(UserRole.ROLE_MODERATOR).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        Role modRole = roleRepository.findByName(UserRole.ROLE_MODERATOR)
+                                                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(UserRole.ROLE_USER).orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        Role userRole = roleRepository.findByName(UserRole.ROLE_USER)
+                                                      .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
             });
@@ -117,7 +131,7 @@ public class AuthController {
         user.setCreatedAt(LocalDateTime.now());
         userRepository.save(user);
 
-        log.info("User {} has successfully registered",user.getName());
+        log.info("User {} has successfully registered", user.getName());
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

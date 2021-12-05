@@ -61,7 +61,7 @@ export default function JobOfferPage() {
         if (!AuthService.isLogged()) {
             window.location.replace('http://localhost:3000/login');
         }else{
-            window.location.replace('http://localhost:3000/apply-for-a-job');
+            window.location.replace(`http://localhost:3000/apply-for-a-job/${jobOffer.id}`);
         }
     };
 
@@ -72,7 +72,7 @@ export default function JobOfferPage() {
             event.preventDefault();
             setMessage("");
             setSuccessful(false);
-            JobService.addJobToFavourites(jobOffer.title).then(
+            JobService.addJobToFavourites(jobOffer.id).then(
                 result => {
                     setMessage(result.data.message);
                     setSuccessful(true);

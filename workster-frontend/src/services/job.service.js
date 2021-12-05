@@ -30,27 +30,26 @@ const getAllFavouriteJobOffers = () => {
     });
 };
 
-const addJobToFavourites = (jobName) => {
-    return axios.post(API_URL + `/favourite/${jobName}`, {}, {
+const addJobToFavourites = (jobOfferId) => {
+    return axios.post(API_URL + `/favourite/${jobOfferId}`, {}, {
         headers: authHeader()
     });
 };
 
-const removeFromFavourites = (jobName) => {
-    return axios.post(API_URL + `/favourite/remove/${jobName}`, {}, {
+const removeFromFavourites = (jobOfferId) => {
+    return axios.post(API_URL + `/favourite/remove/${jobOfferId}`, {}, {
         headers: authHeader()
     });
 };
 
-const deleteJobOffer = (jobName) => {
-    return axios.post(API_URL + `/remove/${jobName}`, {}, {
+const deleteJobOffer = (jobOfferId) => {
+    return axios.post(API_URL + `/remove/${jobOfferId}`, {}, {
         headers: authHeader()
     });
 };
 
-const getSpecificJobOffer = (jobOfferName) => {
-    console.log(API_URL + `/public/${jobOfferName}`);
-    return axios.get(API_URL + `/public/${jobOfferName}`, {
+const getSpecificJobOffer = (jobOfferId) => {
+    return axios.get(API_URL + `/public/${jobOfferId}`, {
         headers: authHeader()
     });
 };
